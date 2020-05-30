@@ -6,7 +6,7 @@ try{
     $db = new PDO($connection_string, $dbuser, $dbpass);
     $stmt = $db->prepare("SELECT * from Users");
     $r = $stmt->execute();
-    $results = $stmt->setFetchAll(PDO::FETCH ASSOC);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo var_export($stmt->errorInfo(), true);
     echo var_export($r, true);
