@@ -6,7 +6,7 @@ echo "You have been logged out";
 echo var_export($_SESSION, true);
 //get session cookie and delete/clear for this session.
 if(ini_get("session.use_cookies"){
-	$params = $session_get_cookie_params();
+	$params = session_get_cookie_params();
 	//clones then destroys since it makes its lifetime
 	set_cookie(session_name(), '', time() - 42000,
 		$params["path"], $params["domain"],
