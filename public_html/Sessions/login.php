@@ -36,7 +36,7 @@ if(isset($_POST["login"])){
 						if(password_verify($password, $rpassword)){
 							echo"<div>Passwords Matched! You are logged in!</div>";
 							$_SESSION["user"] = array(
-								"id=>$result["id"],
+								"id"=>$result["id"],
 								"email"=>$result["email"],
 								"first_name"=>$result["first_name"],
 								"last_name"=>$result["last_name"]
