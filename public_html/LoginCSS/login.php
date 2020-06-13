@@ -2,20 +2,21 @@
 include("header.php");
 ?>
     <h4>Login</h4>
-    <form method="POST" name="form">
-        <div>
-            <label for="email">Email</label><br>
-            <input type="email" id="email" name="email" autocomplete="off" placeholder="Email" required/>
-        </div>
-        <div>
-            <label for="p">Password</label><br>
-            <input type="password" id="p" name="password" autocomplete="off" placeholder="Password" required/>
-        </div>
-        <div>
-            <input class="submit" type="submit" name="login" value="Login"/>
-        </div>
-    </form>
-
+    <div class="wrapper">
+        <form method="POST" name="form">
+            <div>
+                <label for="email">Email</label><br>
+                <input type="email" id="email" name="email" autocomplete="off" placeholder="Email" required/>
+            </div>
+            <div>
+                <label for="p">Password</label><br>
+                <input type="password" id="p" name="password" autocomplete="off" placeholder="Password" required/>
+            </div>
+            <div>
+                <input class="submit" type="submit" name="login" value="Login"/>
+            </div>
+        </form>
+    </div>
 <?php
 
 //echo var_export($_GET, true);

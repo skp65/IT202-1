@@ -1,11 +1,15 @@
-form label{
+.wrapper{
+    padding-left: 40%;
+    padding-top: 10%;
+}
+.wrapper form label{
     color: purple;
     text-align: justify;
     font-weight: bold;
-    padding-bottom: 10px
+
 }
-form input{
-    width: 20%;
+.wrapper form input{
+    width: 40%;
     height: 20px;
     margin-bottom: 5px;
     padding: 0px 5px;
@@ -14,36 +18,35 @@ form input{
     background: whitesmoke;
     border-radius: 3px;
 }
-input.submit{
-    width: 10% ;
+.wrapper input.submit{
+    width: 15%;
     cursor: pointer;
 
 }
 input.submit:hover{
-    background-color:gray;
+    background-color:lightgray;
 }
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: whitesmoke;
+.nav{
+    margin:0;
+    padding:0;
+    text-align:center;
 }
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: mediumpurple;
-    text-align: center;
-    padding: 14px 16px;
+a{
+    color: darkorchid;
     text-decoration: none;
+    font-weight:bold;
+}
+.nav li{
+    display:inline;
+}
+.nav a{
+    display:inline-block;
+    padding:10px;
 }
 
-li a:hover {
-    background-color: whitesmoke;
+.nav li a:hover {
+    background-color: lightseagreen;
+    text-decoration: underline;
 }
 h4{
     color: darkorchid;
