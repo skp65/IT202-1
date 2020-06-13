@@ -9,7 +9,11 @@
         <li><a href="logout.php">Logout</a></li>
     </ul>
 </nav>
-
+<style>
+    body {
+        background-image: url('images/1.jpg');
+    }
+</style>
 <?php
 require("config.php");
 session_start();

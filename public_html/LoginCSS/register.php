@@ -1,11 +1,7 @@
 <?php
 include("header.php");
 ?>
-    <style>
-        body {
-            background-image: url('images/1.jpg');
-        }
-    </style>
+
     <div class="register">
         <form method="POST">
             <div>

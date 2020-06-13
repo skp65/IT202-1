@@ -1,11 +1,7 @@
 <?php
 include("header.php");
 ?>
-    <style>
-        body {
-            background-image: url('images/1.jpg');
-        }
-    </style>
+
     <h4>Login to your Account</h4>
     <div class="wrapper">
         <form method="POST" name="form">
