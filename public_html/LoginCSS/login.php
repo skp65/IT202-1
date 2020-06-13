@@ -12,7 +12,7 @@ include("header.php");
             <input type="password" id="p" name="password" autocomplete="off" placeholder="Password" required/>
         </div>
         <div>
-            <input type="submit" name="login" value="Login"/>
+            <input class="submit" type="submit" name="login" value="Login"/>
         </div>
     </form>
 

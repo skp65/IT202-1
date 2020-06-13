@@ -4,18 +4,18 @@ include("header.php");
     <form method="POST">
         <div>
             <label for="email">Email</label><br>
-            <input type="email" id="email" name="email"/>
+            <input type="email" id="email" name="email" placeholder="Email" required/>
         </div>
         <div>
             <label for="pass">Password</label><br>
-            <input type="password" id="pass" name="password"/>
+            <input type="password" id="pass" name="password" placeholder="Password" required/>
         </div>
         <div>
             <label for="cpass">Confirm Password</label><br>
-            <input type="password" id="cpasss" name="cpassword"/>
+            <input type="password" id="cpasss" name="cpassword" placeholder="Confirm Password" required/>
         </div>
         <div>
-            <input type="submit" name="register" value="Register"/>
+            <input class="submit" type="submit" name="register" value="Register"/>
         </div>
     </form>
 

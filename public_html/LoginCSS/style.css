@@ -1,14 +1,50 @@
-form {
-    color: mediumpurple;
-    text-align: center;
+form label{
+    color: purple;
+    text-align: justify;
     font-weight: bold;
-    border: 1px solid darkcyan;
+    padding-bottom: 10px
+}
+form input{
+    width: 20%;
+    height: 20px;
+    margin-bottom: 5px;
+    padding: 0px 5px;
+    border: 1px solid darkorchid;
+    color: darkorchid;
     background: whitesmoke;
     border-radius: 3px;
+}
+input.submit{
+    width: 10% ;
+    cursor: pointer;
 
 }
+input.submit:hover{
+    background-color:gray;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: whitesmoke;
+}
 
-input.login .register{
-    width: 6%;
-    cursor: pointer;
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: mediumpurple;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: whitesmoke;
+}
+h4{
+    color: darkorchid;
 }
