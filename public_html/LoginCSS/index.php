@@ -1,3 +1,3 @@
 <?php
 include("header.php");
-echo "test";?>
+echo "Welcome, It seems to be working.";?>
