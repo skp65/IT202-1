@@ -3,15 +3,15 @@ include("header.php");
 ?>
     <form method="POST">
         <div>
-            <label for="email">Email</label>
+            <label for="email">Email</label><br>
             <input type="email" id="email" name="email"/>
         </div>
         <div>
-            <label for="pass">Password</label>
+            <label for="pass">Password</label><br>
             <input type="password" id="pass" name="password"/>
         </div>
         <div>
-            <label for="cpass">Confirm Password</label>
+            <label for="cpass">Confirm Password</label><br>
             <input type="password" id="cpasss" name="cpassword"/>
         </div>
         <div>
