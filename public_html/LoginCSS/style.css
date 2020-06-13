@@ -1,0 +1,11 @@
+input{
+    background-color: cadetblue;
+}
+label{
+    border: 0.8px dotted black;
+}
+form {
+    color: mediumpurple;
+    text-align: center;
+    font-weight: bold;
+}
