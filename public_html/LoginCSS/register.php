@@ -1,8 +1,8 @@
 <?php
 include("header.php");
 ?>
-    <div class="wrapper">
-        <form action="login.php" method="POST">
+    <div class="register">
+        <form method="POST">
             <div>
                 <label for="email">Email</label><br>
                 <input type="email" id="email" name="email" placeholder="Email" required/>
