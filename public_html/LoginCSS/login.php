@@ -2,16 +2,14 @@
 include("header.php");
 ?>
     <h4>Login</h4>
-    <form method="POST">
+    <form method="POST" name="form">
         <div>
-            <label for="email">Email
-                <input type="email" id="email" name="email" autocomplete="off" placeholder="Email" required/>
-            </label>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="off" placeholder="Email" required/>
         </div>
         <div>
-            <label for="p">Password
-                <input type="password" id="p" name="password" autocomplete="off" placeholder="Password" required/>
-            </label>
+            <label for="p">Password</label>
+            <input type="password" id="p" name="password" autocomplete="off" placeholder="Password" required/>
         </div>
         <div>
             <input type="submit" name="login" value="Login"/>

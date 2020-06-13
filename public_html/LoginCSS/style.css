@@ -1,11 +1,18 @@
-input{
-    background-color: cadetblue;
-}
-label{
-    border: 0.8px dotted black;
-}
 form {
     color: mediumpurple;
     text-align: center;
     font-weight: bold;
+    width: 20%;
+    height: 20px;
+    margin-bottom: 5px;
+    padding: 0px 5px;
+    border: 1px solid darkcyan;
+    background: whitesmoke;
+    border-radius: 3px;
+
+}
+
+input.submit{
+    width: 6%;
+    cursor: pointer;
 }
