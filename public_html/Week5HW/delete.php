@@ -39,7 +39,7 @@ if (isset($_POST["delete"])) {
     $description = $_POST["description"];
     if (!empty($name) && !empty($quantity) && !empty($price) && !empty($description)) {
         try{
-            if($thingId > 0) {
+            if($product_id > 0) {
                 if($delete){
                     $stmt = $db->prepare("DELETE from Products where id=:id");
                     $result = $stmt->execute(array(
