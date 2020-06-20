@@ -52,22 +52,19 @@ if (isset($_POST["delete"])) {
         $e = $stmt->errorInfo();
         if ($e[0] != "00000") {
             echo var_export($e, true);
-        }
-        else {
+        } else {
             echo var_export($result, true);
             if ($result) {
                 echo "Successfully interacted with product: " . $name;
-            }
-            else {
+            } else {
                 echo "Error updating record";
             }
         }
     }
-catch
-    (Exception $e) {
+}
+    catch (Exception $e) {
         echo $e->getMessage();
     }
-}
 else {
     echo "Name, quantity, price and description  must not be empty.";
 }
