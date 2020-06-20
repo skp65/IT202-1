@@ -64,7 +64,7 @@ if (isset($_POST["updated"])) {
         }
     }
     else{
-        echo "Name and quantity must not be empty.";
+        echo "Name, quantity, price and description  must not be empty.";
     }
 }
 ?>
