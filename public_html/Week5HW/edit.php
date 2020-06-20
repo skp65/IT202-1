@@ -3,6 +3,7 @@ require("common.inc.php");
 $db = getDB();
 //example usage, change/move as needed
 $product_id = -1;
+$result = array();
 if (isset($_GET["product_id"])) {
     $product_id = $_GET["product_id"];
     $stmt = $db->prepare("SELECT * FROM Products where id = :id");
