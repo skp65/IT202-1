@@ -15,7 +15,7 @@
 if (isset($_POST["created"])) {
     $name = $_POST["name"];
     $quantity = $_POST["quantity"];
-    $quantity = $_POST["price"];
+    $price = $_POST["price"];
     if (!empty($name) && !empty($quantity) && !empty($price)) {
         require("config.php");
         $connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
