@@ -20,7 +20,7 @@ if (isset($_POST["created"])) {
     $quantity = $_POST["quantity"];
     $price = $_POST["price"];
     $description = $_POST["description"];
-    if (!empty($name) && !empty($quantity) && !empty($price) && !empty($description)){
+    if (!empty($name) && !empty($quantity) && !empty($price) && !empty($description)) {
         require("config.php");
         $connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
         try {
@@ -37,7 +37,7 @@ if (isset($_POST["created"])) {
             if ($e[0] != "00000") {
                 echo var_export($e, true);
             } else {
-                echo var_export($result, true);
+               // echo var_export($result, true);
                 if ($result) {
                     echo "Successfully inserted new product: " . $name;
                 } else {

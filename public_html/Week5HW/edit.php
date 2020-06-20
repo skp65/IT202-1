@@ -50,7 +50,7 @@ if (isset($_POST["updated"])) {
                 echo var_export($e, true);
             }
             else{
-                echo var_export($result, true);
+               // echo var_export($result, true);
                 if ($result){
                     echo "Successfully updated Product: " . $name;
                 }
