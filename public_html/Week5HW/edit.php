@@ -1,15 +1,9 @@
 <?php
-require("config.php");
-$connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
-$db = new PDO($connection_string, $dbuser, $dbpass);
+require("common.inc.php");
+$db = getDB();
+//example usage, change/move as needed
 $product_id = -1;
 $result = array();
-function get($arr, $key){
-    if(isset($arr[$key])){
-        return $arr[$key];
-    }
-    return "";
-}
 if (isset($_GET["product_id"])) {
     $product_id = $_GET["product_id"];
     $stmt = $db->prepare("SELECT * FROM Products where id = :id");
@@ -35,7 +29,7 @@ if (isset($_GET["product_id"])) {
         <input type="submit" name="created" value="Update Product"/>
     </form>
 <?php
-if (isset($_POST["created"])) {
+if (isset($_POST["updated"])) {
     $name = $_POST["name"];
     $quantity = $_POST["quantity"];
     $price = $_POST["price"];
