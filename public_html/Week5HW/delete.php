@@ -31,7 +31,7 @@ if (isset($_GET["product_id"])) {
         <?php endif; ?>
     </form>
 <?php
-if (isset($_POST["updated"]) || isset($_POST["created"]) || isset($_POST["delete"])) {
+if (isset($_POST["delete"])) {
     $delete = isset($_POST["delete"]);
     $name = $_POST["name"];
     $quantity = $_POST["quantity"];
