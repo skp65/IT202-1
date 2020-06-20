@@ -5,9 +5,6 @@
     <label for="q">Quantity
         <input type="number" id="q" name="quantity"/>
     </label>
-    <label for="p">Price
-        <input type="number" id="p" name="price"/>
-    </label>
     <input type="submit" name="created" value="Create Product"/>
 </form>
 
@@ -15,17 +12,16 @@
 if (isset($_POST["created"])) {
     $name = $_POST["name"];
     $quantity = $_POST["quantity"];
-    $price = $_POST["price"];
-    if (!empty($name) && !empty($quantity) && !empty($price)) {
+   // $price = $_POST["price"];
+    if (!empty($name) && !empty($quantity)) {
         require("config.php");
         $connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
         try {
             $db = new PDO($connection_string, $dbuser, $dbpass);
-            $stmt = $db->prepare("INSERT INTO Products (Name, quantity, price) VALUES (:Name, :quantity, :price)");
+            $stmt = $db->prepare("INSERT INTO Products (Name, quantity) VALUES (:Name, :quantity)");
             $result = $stmt->execute(array(
                 ":name" => $name,
                 ":quantity" => $quantity,
-                ":price" => $price
             ));
             $e = $stmt->errorInfo();
             if ($e[0] != "00000") {
@@ -42,7 +38,7 @@ if (isset($_POST["created"])) {
             echo $e->getMessage();
         }
     } else {
-        echo "Name, quantity and price must not be empty.";
+        echo "Name and quantity must not be empty.";
     }
 }
 ?>
