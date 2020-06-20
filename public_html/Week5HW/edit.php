@@ -1,0 +1,69 @@
+<?php
+require("common.inc.php");
+$db = getDB();
+//example usage, change/move as needed
+$product_id = -1;
+if (isset($_GET["product_id"])) {
+    $product_id = $_GET["product_id"];
+    $stmt = $db->prepare("SELECT * FROM Products where id = :id");
+    $stmt->execute([":id" => $product_id]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+} else {
+    echo "No product_id provided in url, don't forget this or it won't edit.";
+}
+?>
+    <form method="POST">
+        <label for="products">Product Name
+            <input type="text" id="products" name="name"/>
+        </label>
+        <label for="q">Quantity
+            <input type="number" id="q" name="quantity"/>
+        </label>
+        <label for="p">Price
+            <input type="number" id="p" name="price"/>
+        </label>
+        <label for="d">Description
+            <input type="text" id="d" name="description"/>
+        </label>
+        <input type="submit" name="created" value="Create Product"/>
+    </form>
+<?php
+if (isset($_POST["created"])) {
+    $name = $_POST["name"];
+    $quantity = $_POST["quantity"];
+    $price = $_POST["price"];
+    $description = $_POST["description"];
+    if (!empty($name) && !empty($quantity) && !empty($price) && !empty($description)) {
+        try {
+            $stmt = $db->prepare("UPDATE Products set name = :name, quantity = :quantity, price = :price, 
+                description = :description, where id=:id");
+            $result = $stmt->execute(array(
+                ":name" => $name,
+                ":quantity" => $quantity,
+                ":price" => $price,
+                ":description" => $description,
+                ":id" => $product_id
+            ));
+            $e = $stmt->errorInfo();
+            if($e[0] != "00000"){
+                echo var_export($e, true);
+            }
+            else{
+                echo var_export($result, true);
+                if ($result){
+                    echo "Successfully updated thing: " . $name;
+                }
+                else{
+                    echo "Error updating record";
+                }
+            }
+        }
+        catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    else{
+        echo "Name and quantity must not be empty.";
+    }
+}
+?>
