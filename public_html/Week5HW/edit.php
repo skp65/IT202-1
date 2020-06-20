@@ -1,9 +1,15 @@
 <?php
-require("common.inc.php");
-$db = getDB();
-//example usage, change/move as needed
+require("config.php");
+$connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
+$db = new PDO($connection_string, $dbuser, $dbpass);
 $product_id = -1;
 $result = array();
+function get($arr, $key){
+    if(isset($arr[$key])){
+        return $arr[$key];
+    }
+    return "";
+}
 if (isset($_GET["product_id"])) {
     $product_id = $_GET["product_id"];
     $stmt = $db->prepare("SELECT * FROM Products where id = :id");
