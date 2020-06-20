@@ -39,35 +39,36 @@ if (isset($_POST["delete"])) {
     $description = $_POST["description"];
     if (!empty($name) && !empty($quantity) && !empty($price) && !empty($description)) {
         try {
-            if($thingId > 0) {
+            if ($thingId > 0) {
                 if ($delete) {
                     $stmt = $db->prepare("DELETE from Products where id= :id");
                     $result = $stmt->execute(
-                        array(":id" => $product_id));
+                        array(":id" => $product_id)
+                    );
                 }
             }
         }
 
-            $e = $stmt->errorInfo();
-            if ($e[0] != "00000") {
-                echo var_export($e, true);
+        $e = $stmt->errorInfo();
+        if ($e[0] != "00000") {
+            echo var_export($e, true);
+        }
+        else {
+            //echo var_export($result, true);
+            if ($result) {
+                echo "Successfully interacted with product: " . $name;
             }
             else {
-                //echo var_export($result, true);
-                if ($result) {
-                    echo "Successfully interacted with product: " . $name;
-                }
-                else {
-                    echo "Error updating record";
-                }
+                echo "Error updating record";
             }
         }
-        catch (Exception $e) {
-            echo $e->getMessage();
-        }
     }
-    else {
-        echo "Name, quantity, price and description  must not be empty.";
+catch
+    (Exception $e) {
+        echo $e->getMessage();
     }
+}
+else {
+    echo "Name, quantity, price and description  must not be empty.";
 }
 ?>
