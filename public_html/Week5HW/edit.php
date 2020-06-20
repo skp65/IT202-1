@@ -52,7 +52,7 @@ if (isset($_POST["updated"])) {
             else{
                 echo var_export($result, true);
                 if ($result){
-                    echo "Successfully updated thing: " . $name;
+                    echo "Successfully updated Product: " . $name;
                 }
                 else{
                     echo "Error updating record";
