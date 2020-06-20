@@ -26,7 +26,7 @@ if (isset($_GET["product_id"])) {
         <label for="d">Description
             <input type="text" id="d" name="description"  value="<?php echo get($result, "description");?>"/>
         </label>
-        <input type="submit" name="created" value="Update Product"/>
+        <input type="submit" name="updated" value="Update Product"/>
     </form>
 <?php
 if (isset($_POST["updated"])) {
