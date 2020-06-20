@@ -14,18 +14,18 @@ if (isset($_GET["product_id"])) {
 ?>
     <form method="POST">
         <label for="products">Product Name
-            <input type="text" id="products" name="name"/>
+            <input type="text" id="products" name="name" value="<?php echo get($result, "name");?>"/>
         </label>
         <label for="q">Quantity
-            <input type="number" id="q" name="quantity"/>
+            <input type="number" id="q" name="quantity"  value="<?php echo get($result, "quantity");?>"/>
         </label>
         <label for="p">Price
-            <input type="number" id="p" name="price"/>
+            <input type="number" id="p" name="price"  value="<?php echo get($result, "price");?>"/>
         </label>
         <label for="d">Description
-            <input type="text" id="d" name="description"/>
+            <input type="text" id="d" name="description"  value="<?php echo get($result, "description");?>"/>
         </label>
-        <input type="submit" name="created" value="Create Product"/>
+        <input type="submit" name="created" value="Update Product"/>
     </form>
 <?php
 if (isset($_POST["created"])) {
