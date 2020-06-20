@@ -21,7 +21,7 @@ if (isset($_POST["created"])) {
         $connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
         try {
             $db = new PDO($connection_string, $dbuser, $dbpass);
-            $stmt = $db->prepare("INSERT INTO Products (name, quantity, price) VALUES (:name, :quantity, :price)");
+            $stmt = $db->prepare("INSERT INTO Products (Name, quantity, price) VALUES (:Name, :quantity, :price)");
             $result = $stmt->execute(array(
                 ":name" => $name,
                 ":quantity" => $quantity,
