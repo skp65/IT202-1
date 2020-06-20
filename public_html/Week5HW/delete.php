@@ -33,11 +33,8 @@ if (isset($_GET["product_id"])) {
             <input type="text" id="d" name="description" value="<?php echo get($result, "description"); ?>"/>
         </label>
         <?php if ($product_id > 0): ?>
-            <input type="submit" name="updated" value="Update Product"/>
             <input type="submit" name="delete" value="Delete Product"/>
-        <?php elseif ($product_id < 0): ?>
-            <input type="submit" name="created" value="Create Product"/>
-        <?php endif; ?>
+
     </form>
 <?php
 if (isset($_POST["updated"]) || isset($_POST["created"]) || isset($_POST["delete"])) {
@@ -55,28 +52,8 @@ if (isset($_POST["updated"]) || isset($_POST["created"]) || isset($_POST["delete
                         ":id" => $product_id
                     ));
                 }
-                else {
-                    $stmt = $db->prepare("UPDATE Products set name = :name, quantity = :quantity, price = :price, 
-                    description = :description, where id=:id");
-                    $result = $stmt->execute(array(
-                        ":name" => $name,
-                        ":quantity" => $quantity,
-                        ":price" => $price,
-                        ":description" => $description,
-                        ":id" => $product_id
-                    ));
-                }
             }
-            else {
-                $stmt = $db->prepare("INSERT INTO Products (name, quantity, price, description)
-                    VALUES (:name, :quantity, :price, :description)");
-                $result = $stmt->execute(array(
-                    ":name" => $name,
-                    ":quantity" => $quantity,
-                    ":price" => $price,
-                    ":description" => $description
-                ));
-            }
+
             $e = $stmt->errorInfo();
             if ($e[0] != "00000") {
                 echo var_export($e, true);
