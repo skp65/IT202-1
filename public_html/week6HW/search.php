@@ -11,7 +11,6 @@ if(isset($_POST["search"])){
     </form>
 <?php
 if(isset($search)) {
-
     require("common.inc.php");
     $query = file_get_contents(__DIR__ . "/query/search.sql");
     if (isset($query) && !empty($query)) {
