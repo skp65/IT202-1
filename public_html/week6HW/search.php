@@ -34,7 +34,7 @@ if(isset($search)) {
                 <?php echo get($row, "quantity");?>
                 <?php echo get($row, "price");?>
                 <?php echo get($row, "description");?>
-                <a href="delete.php?thingId=<?php echo get($row, "id");?>">Delete</a>
+                <a href="delete.php?product_id=<?php echo get($row, "id");?>">Delete</a>
             </li>
         <?php endforeach;?>
     </ul>
