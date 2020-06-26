@@ -13,9 +13,10 @@ if(isset($_POST["search"])){
 if(isset($search)) {
 
     require("common.inc.php");
-    if (isset($name) && !empty($name)) {
+    $query = file_get_contents(__DIR__ . "/query/search.sql");
+    if (isset($query) && !empty($query)) {
         try {
-            $stmt = getDB()->prepare("SELECT * FROM Products where name like CONCAT('%', :name, '%')");
+            $stmt = getDB()->prepare($query);
             $stmt->execute([":name"=>$search]);
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
