@@ -26,22 +26,22 @@ if (isset($search)) {
 ?>
 
 <?php if (isset($results) && count($results) > 0): ?>
-    echo"<table border="1" cellspacing="2" cellpadding="2">";
-        echo"<tr>";
-            echo"<th>Product Name</th>";
-            echo"<th>Quantity</th>";
-            echo"<th>Price</th>";
-            echo"<th>Description</th>";
-        echo"</tr>";
+    <table border="1" cellspacing="2" cellpadding="2">
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>
     <?php foreach($results as $row):?>
-            echo"<tr>";
-                echo"<td><?php echo get($row, "name") ?></td>";
-                echo"<td><?php echo get($row, "quantity"); ?></td>";
-                echo"<td><?php echo get($row, "price"); ?></td>";
-                echo"<td><?php echo get($row, "description");?></td>";
-            echo"</tr>";
+            <tr>";
+                <td><?php echo get($row, "name") ?></td>
+                <td><?php echo get($row, "quantity"); ?></td>
+                <td><?php echo get($row, "price"); ?></td>
+                <td><?php echo get($row, "description");?></td>
+            </tr>
     <?php endforeach;?>
-    echo"</table>";
+    </table>
 <?php else: ?>
     <p>No Match Found.</p>
 <?php endif; ?>
