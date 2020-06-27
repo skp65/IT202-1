@@ -12,7 +12,7 @@ if (isset($_POST["search"])) {
 <?php
 if (isset($search)) {
     require("common.inc.php");
-    $query = file_get_contents(__DIR__ . "/query/orderby.sql");
+    $query = file_get_contents(__DIR__ . "/query/search.sql");
     if (isset($query) && !empty($query)) {
         try {
             $stmt = getDB()->prepare($query);
@@ -23,17 +23,12 @@ if (isset($search)) {
         }
     }
 }
-if(isset($order) and $order=="asc"){
-    $by="desc";
-}else{
-    $by="asc";
-}
 ?>
 
 <?php if (isset($results) && count($results) > 0): ?>
     <table border="1" cellspacing="2" cellpadding="2">
         <tr>
-            <th><a href="search.php?by=$by">Product Name</a></th>
+            <th>Product Name</th>
             <th>Quantity</th>
             <th>Price</th>
             <th>Description</th>
