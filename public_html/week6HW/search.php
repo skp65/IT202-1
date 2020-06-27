@@ -24,30 +24,16 @@ if (isset($search)) {
     }
 }
 ?>
-<?php
-    if ($results->num_rows > 0){
-    echo "
-    <table>
-        <tr>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Description</th>
-        </tr>";
-        while($row = $results->fetch_assoc()) {
-        echo "
-        <tr>
-            <td>" . $row["name"]. "</td>
-            <td>" . $row["quantity"]. "</td>
-            <td>" . $row["price"]. "</td>
-            <td>" . $row["description"]. "</td>
-        </tr>;"
-        }
-        echo "</table>";
-    } else {
-    echo "0 results";
-    }
-?>
+<?php if (isset($results) && count($results) > 0): ?>
+    <p>The results are displayed.</p>
+    <ul>
+                <?php echo get($row, "name") ?>
+                <?php echo get($row, "quantity"); ?>
+                <?php echo get($row, "price"); ?>
+                <?php echo get($row, "description");?>
+                <a href="delete.php?product_id=<?php echo get($row, "id");?>">Delete</a>
+        <?php endforeach; ?>
+    </ul>
 <?php else: ?>
     <p>No Match Found.</p>
 <?php endif; ?>
