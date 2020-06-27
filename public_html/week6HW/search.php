@@ -34,7 +34,7 @@ if (isset($search)) {
             <th>Description</th>
         </tr>
     <?php foreach($results as $row):?>
-            <tr>";
+            <tr>
                 <td><?php echo get($row, "name") ?></td>
                 <td><?php echo get($row, "quantity"); ?></td>
                 <td><?php echo get($row, "price"); ?></td>
