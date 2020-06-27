@@ -4,7 +4,6 @@ if (isset($_POST["search"])) {
     $search = $_POST["search"];
 }
 ?>
-    <button onclick="sort()">Sort</button>
     <form method="POST">
         <input type="text" name="search" placeholder="Search for Product Name"
                value="<?php echo $search;?>"/>
@@ -13,7 +12,7 @@ if (isset($_POST["search"])) {
 <?php
 if (isset($search)) {
     require("common.inc.php");
-    $query = file_get_contents(__DIR__ . "/query/search.sql");
+    $query = file_get_contents(__DIR__ . "/query/orderby.sql");
     if (isset($query) && !empty($query)) {
         try {
             $stmt = getDB()->prepare($query);
@@ -24,12 +23,24 @@ if (isset($search)) {
         }
     }
 }
+if(isset($_GET['order'])){
+    $order = $_GET['order']
+} else{
+    $order = 'name';
+}
+if(isset($_GET['sort'])){
+    $sort = $_GET['sort']
+}
+else{
+    $sort = 'ASC'
+}
 ?>
 
 <?php if (isset($results) && count($results) > 0): ?>
-    <table border="1" cellspacing="2" cellpadding="2" id="table">
+    $sort == 'DESC' ? $sort = 'ASC : $sort = 'DESC';
+    <table border="1" cellspacing="2" cellpadding="2">
         <tr>
-            <th>Product Name</th>
+            <th><a href="?order=name&&sort=$sort">Product Name</a></th>
             <th>Quantity</th>
             <th>Price</th>
             <th>Description</th>
@@ -47,39 +58,4 @@ if (isset($search)) {
     <p>No Match Found.</p>
 <?php endif; ?>
 
-<script>
-    function sort() {
-        var list, i, switch, b, shouldSwitch, dir, switchcount = 0;
-        list = document.getElementById("table");
-        switch = true;
-        dir = "asc";
-        while (switch) {
-            switch = false;
-            b = list.getElementsByTagName("td");
-            for (i = 0; i < (b.length - 1); i++) {
-                shouldSwitch = false;
-                if (dir == "asc") {
-                    if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else if (dir == "desc") {
-                    if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
-                        shouldSwitch= true;
-                        break;
-                    }
-                }
-            }
-            if (shouldSwitch) {
-                b[i].parentNode.insertBefore(b[i + 1], b[i]);
-                switch = true;
-                switchcount ++;
-            } else {
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switch = true;
-                }
-            }
-        }
-    }
-</script>
+
