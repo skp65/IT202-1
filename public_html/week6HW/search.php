@@ -4,6 +4,7 @@ if (isset($_POST["search"])) {
     $search = $_POST["search"];
 }
 ?>
+    <button onclick="sort()">Sort</button>
     <form method="POST">
         <input type="text" name="search" placeholder="Search for Product Name"
                value="<?php echo $search;?>"/>
@@ -26,7 +27,7 @@ if (isset($search)) {
 ?>
 
 <?php if (isset($results) && count($results) > 0): ?>
-    <table border="1" cellspacing="2" cellpadding="2">
+    <table border="1" cellspacing="2" cellpadding="2" id="table">
         <tr>
             <th>Product Name</th>
             <th>Quantity</th>
@@ -45,3 +46,40 @@ if (isset($search)) {
 <?php else: ?>
     <p>No Match Found.</p>
 <?php endif; ?>
+
+<script>
+    function sort() {
+        var list, i, switch, b, shouldSwitch, dir, switchcount = 0;
+        list = document.getElementById("table");
+        switch = true;
+        dir = "asc";
+        while (switch) {
+            switch = false;
+            b = list.getElementsByTagName("td");
+            for (i = 0; i < (b.length - 1); i++) {
+                shouldSwitch = false;
+                if (dir == "asc") {
+                    if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
+                        shouldSwitch= true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                switch = true;
+                switchcount ++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switch = true;
+                }
+            }
+        }
+    }
+</script>
