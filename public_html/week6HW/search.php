@@ -1,12 +1,12 @@
 <?php
-$search = "";
+#$search = "";
 if (isset($_POST["search"])) {
     $search = $_POST["search"];
 }
 ?>
     <form method="POST">
         <input type="text" name="search" placeholder="Search for Product Name"
-               value="<?php echo $search; ?>"/>
+               value="<?php echo $search;?>"/>
         <input type="submit" value="Search"/>
     </form>
 <?php
@@ -25,14 +25,16 @@ if (isset($search)) {
 }
 ?>
 <?php if (isset($results) && count($results) > 0): ?>
-    <p>The results are displayed.</p>
     <ul>
         <?php foreach($results as $row):?>
-                <?php echo get($row, "name") ?>
-                <?php echo get($row, "quantity"); ?>
-                <?php echo get($row, "price"); ?>
-                <?php echo get($row, "description");?>
-                <a href="delete.php?product_id=<?php echo get($row, "id");?>">Delete</a>
+            <table border="1" cellspacing="2" cellpadding="2">
+                <tr>
+                    <td><?php echo get($row, "name") ?></td>
+                    <td><?php echo get($row, "quantity"); ?></td>
+                    <td><?php echo get($row, "price"); ?></td>
+                    <td><?php echo get($row, "description");?></td>
+                </tr>
+            </table>
         <?php endforeach;?>
     </ul>
 <?php else: ?>
