@@ -29,6 +29,12 @@ if (isset($search)) {
         <?php foreach($results as $row):?>
             <table border="1" cellspacing="2" cellpadding="2">
                 <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
                     <td><?php echo get($row, "name") ?></td>
                     <td><?php echo get($row, "quantity"); ?></td>
                     <td><?php echo get($row, "price"); ?></td>
