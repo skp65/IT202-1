@@ -31,7 +31,6 @@ if(isset($order) and $order=="asc"){
 ?>
 
 <?php if (isset($results) && count($results) > 0): ?>
-    $sort == 'DESC' ? $sort = 'ASC : $sort = 'DESC';
     <table border="1" cellspacing="2" cellpadding="2">
         <tr>
             <th><a href="search.php?by=$by">Product Name</a></th>
