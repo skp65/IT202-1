@@ -9,11 +9,15 @@ if (isset($_POST["search"])) {
                value="<?php echo $search;?>"/>
         <input type="submit" value="Search"/>
     </form>
+    <form method="POST">
+        <input type="text" name="sort"
+               value="<?php echo $search;?>"/>
+        <input type="submit" value="sort"/>
+    </form>
 <?php
 if (isset($search)) {
     require("common.inc.php");
-    $sort = $_GET['search'];
-    $query = 'SELECT * FROM Products where name like CONCAT('%', :name, '%') ORDER BY $sort';
+        $query = 'SELECT * FROM Products where name like CONCAT('%', :name, '%')ORDER BY name DESC';
     if (isset($query) && !empty($query)) {
         try {
             $stmt = getDB()->prepare($query);
@@ -25,7 +29,6 @@ if (isset($search)) {
     }
 }
 ?>
-
 <?php if (isset($results) && count($results) > 0): ?>
     <table border="1" cellspacing="2" cellpadding="2">
         <tr>
