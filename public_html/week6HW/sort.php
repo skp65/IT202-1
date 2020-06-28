@@ -12,7 +12,20 @@ if (isset($_POST["search"])) {
 <?php
 if (isset($search)) {
     require("common.inc.php");
-    $query = file_get_contents(__DIR__ . "/query/orderby.sql");
+    $order="asc";
+    if($_GET['orderby']=="name" && $_GET['order']=="asc")
+    {
+        $order="desc";
+    }
+    if($_GET['orderby'])
+    {
+        $orderby="order by ".$_GET['orderby'];
+    }
+    if($_GET['order'])
+    {
+        $sort_order= $_GET['order'];
+    }
+    $query = "SELECT * FROM Products where name like CONCAT('%', :name, '%') ."$orderby." ."$sort_order."";
     if (isset($query) && !empty($query)) {
         try {
             $stmt = getDB()->prepare($query);
@@ -23,11 +36,12 @@ if (isset($search)) {
         }
     }
 }
+
 ?>
 <?php if (isset($results) && count($results) > 0): ?>
     <table border="1" cellspacing="2" cellpadding="2">
         <tr>
-            <th><a href="search.php?search=name">Product Name</a></th>
+            <th><a href="?orderby=name&order=".$order."">Product Name</a></th>
             <th>Quantity</th>
             <th>Price</th>
             <th>Description</th>
