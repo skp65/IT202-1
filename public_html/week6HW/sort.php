@@ -9,11 +9,6 @@ if (isset($_POST["search"])) {
                value="<?php echo $search;?>"/>
         <input type="submit" value="Search"/>
     </form>
-    <form method="POST">
-        <input type="text" name="sort"
-               value="<?php echo $search;?>"/>
-        <input type="submit" value="sort"/>
-    </form>
 <?php
 if (isset($search)) {
     require("common.inc.php");
