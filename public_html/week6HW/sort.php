@@ -12,7 +12,7 @@ if (isset($_POST["search"])) {
 <?php
 if (isset($search)) {
     require("common.inc.php");
-        $query = 'SELECT * FROM Products where name like CONCAT('%', :name, '%')ORDER BY name DESC';
+    $query = file_get_contents(__DIR__ . "/query/orderby.sql");
     if (isset($query) && !empty($query)) {
         try {
             $stmt = getDB()->prepare($query);
