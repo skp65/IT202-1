@@ -25,7 +25,7 @@ if (isset($search)) {
     {
         $sort_order= $_GET['order'];
     }
-    $query = "SELECT * FROM Products where name like CONCAT('%', :name, '%') ."$orderby." ."$sort_order."";
+    $query = file_get_contents(__DIR__ . "/query/orderby.sql");
     if (isset($query) && !empty($query)) {
         try {
             $stmt = getDB()->prepare($query);

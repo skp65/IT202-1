@@ -1,2 +1,2 @@
 SELECT * FROM Products where name like CONCAT('%', :name, '%')
-$orderby $sort_order.
+ORDER BY $orderby $sort_order
