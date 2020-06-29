@@ -8,11 +8,14 @@ if (isset($_POST["search"])) {
         <input type="text" name="search" placeholder="Search for Product Name"
                value="<?php echo $search;?>"/>
         <input type="submit" value="Search"/>
-        <input type="button" name="asc" value="Ascending">
-        <input type="button" name="dsc" value="Descending">
+        <label for="order">Sort By:</label>
+        <select name="order" id="order">
+            <option value="Ascending">Ascending</option>
+            <option value="Descending">Descending</option>
+        </select>
     </form>
 <?php
-if ($_POST['asc'] == 'Ascending') {
+if ($_POST['order'] == 'Ascending') {
     require("common.inc.php");
     $query = file_get_contents(__DIR__ . "/query/asc.sql");
     if (isset($query) && !empty($query)) {
@@ -25,7 +28,7 @@ if ($_POST['asc'] == 'Ascending') {
         }
     }
 }
-elseif ($_POST['dsc']=='Descending') {
+elseif ($_POST['order']=='Descending') {
     require("common.inc.php");
     $query = file_get_contents(__DIR__ . "/query/desc.sql");
     if (isset($query) && !empty($query)) {
