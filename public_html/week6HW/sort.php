@@ -7,25 +7,16 @@ if (isset($_POST["search"])) {
     <form method="POST">
         <input type="text" name="search" placeholder="Search for Product Name"
                value="<?php echo $search;?>"/>
+        <input type="button" name="button" value="asc">
+        <label for="asc">Ascending</label>
+        <input type="button" name="button" value="desc">
+        <label for="desc">Descending</label>
         <input type="submit" value="Search"/>
     </form>
 <?php
 if (isset($search)) {
     require("common.inc.php");
-    $order="asc";
-    if($_GET['orderby']=="name" && $_GET['order']=="asc")
-    {
-        $order="desc";
-    }
-    if($_GET['orderby'])
-    {
-        $orderby="order by ".$_GET['orderby'];
-    }
-    if($_GET['order'])
-    {
-        $sort_order= $_GET['order'];
-    }
-    $query = file_get_contents(__DIR__ . "/query/orderby.sql");
+    $query = file_get_contents(__DIR__ . "/query/search.sql");
     if (isset($query) && !empty($query)) {
         try {
             $stmt = getDB()->prepare($query);
@@ -36,8 +27,34 @@ if (isset($search)) {
         }
     }
 }
-
+elseif ($_POST['button']== 'asc') {
+    require("common.inc.php");
+    $query = file_get_contents(__DIR__ . "/query/asc.sql");
+    if (isset($query) && !empty($query)) {
+        try {
+            $stmt = getDB()->prepare($query);
+            $stmt->execute([":name" => $search]);
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+}
+elseif ($_POST['button']=='desc') {
+    require("common.inc.php");
+    $query = file_get_contents(__DIR__ . "/query/desc.sql");
+    if (isset($query) && !empty($query)) {
+        try {
+            $stmt = getDB()->prepare($query);
+            $stmt->execute([":name" => $search]);
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+}
 ?>
+
 <?php if (isset($results) && count($results) > 0): ?>
     <table border="1" cellspacing="2" cellpadding="2">
         <tr>

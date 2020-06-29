@@ -1,0 +1,2 @@
+SELECT * FROM Products
+ORDER BY name ASC
