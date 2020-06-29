@@ -12,19 +12,6 @@ if (isset($_POST["search"])) {
         <input type="button" name="dsc" value="Descending">
     </form>
 <?php
-if(isset($search)) {
-    require("common.inc.php");
-    $query = file_get_contents(__DIR__ . "/query/search.sql");
-    if (isset($query) && !empty($query)) {
-        try {
-            $stmt = getDB()->prepare($query);
-            $stmt->execute([":name" => $search]);
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    }
-}
 if ($_POST['asc'] == 'Ascending') {
     require("common.inc.php");
     $query = file_get_contents(__DIR__ . "/query/asc.sql");
@@ -41,6 +28,19 @@ if ($_POST['asc'] == 'Ascending') {
 elseif ($_POST['dsc']=='Descending') {
     require("common.inc.php");
     $query = file_get_contents(__DIR__ . "/query/desc.sql");
+    if (isset($query) && !empty($query)) {
+        try {
+            $stmt = getDB()->prepare($query);
+            $stmt->execute([":name" => $search]);
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+}
+else {
+    require("common.inc.php");
+    $query = file_get_contents(__DIR__ . "/query/search.sql");
     if (isset($query) && !empty($query)) {
         try {
             $stmt = getDB()->prepare($query);
