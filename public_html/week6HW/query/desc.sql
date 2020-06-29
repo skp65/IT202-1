@@ -1,2 +1,1 @@
-SELECT * FROM Products
-ORDER BY name DESC
+SELECT * FROM Products ORDER BY name DESC
