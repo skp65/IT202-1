@@ -1,1 +1,2 @@
-SELECT * FROM Products ORDER BY name DESC
+SELECT * FROM Products where name like CONCAT('%', :name, '%')
+ORDER BY name DESC
