@@ -41,7 +41,7 @@ elseif ($_POST['order']=='Descending') {
         }
     }
 }
-else {
+elseif (isset($search)) {
     require("common.inc.php");
     $query = file_get_contents(__DIR__ . "/query/search.sql");
     if (isset($query) && !empty($query)) {
