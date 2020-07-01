@@ -48,7 +48,7 @@
                 context = canvas.getContext("2d");
                 leftPaddle = makeRect(25, canvas.height / 2 - paddleHeight / 2, paddleWidth, paddleHeight, 5, '#BC0000');
                 rightPaddle = makeRect(canvas.width - paddleWidth - 25, canvas.height / 2 - paddleHeight / 2, paddleWidth, paddleHeight, 5, '#0000BC');
-                ball = makeRect(0, 0, ballSize, ballSize, ballSpeed, '#000000');
+                ball = makeRect(0, 0, ballSize, ballSize, ballSpeed, '#FFFFFF');
                 drawables.push(leftPaddle);
                 drawables.push(rightPaddle);
                 drawables.push(ball);
@@ -137,7 +137,7 @@
         // Create a rectangle object - for paddles, ball, etc
         function makeRect(x, y, width, height, speed, color) {
             if (!color)
-                color = '#FF0000';  //minor changes
+                color = '#FFFFFF';
             return {
                 x: x,
                 y: y,
