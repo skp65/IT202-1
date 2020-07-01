@@ -192,6 +192,7 @@
             // Bounce the ball off the top/bottom
             if (ball.y < 0 || ball.y + ball.h > canvas.height) {
                 ball.sY *= -1;
+                soundFx.play();
             }
         }
         function checkPaddleCollision() {
@@ -252,7 +253,8 @@
 <body onload="init();">
 <a href="http://bencentra.com/2017-07-11-basic-html5-canvas-games.html">Collection of Canvas based games by Ben Centra</a>
 <main>
-    <canvas id="board" width="600px" height="600px" style="border: 1px solid black;"></canvas>
+    //changed size of board
+    <canvas id="board" width="1000px" height="1000px" style="border: 1px solid white;"></canvas>
     //1st
     <audio id="soundFx" src="sounds/pop.mp3" style="display: none;"></audio>
 </main>
