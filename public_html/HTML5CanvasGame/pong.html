@@ -220,9 +220,9 @@
             // Draw the scores
             context.fillStyle = '#FFFFFF';  //some minor changes
             context.font = '24px Arial';
-            context.textAlign = 'left';
+            context.textAlign = 'justify';
             context.fillText('Score: ' + leftScore, 5, 24);
-            context.textAlign = 'right';
+            context.textAlign = 'left';
             context.fillText('Score: ' + rightScore, canvas.width - 5, 24);
         }
         function erase() {
@@ -248,8 +248,9 @@
 </head>
 <body onload="init();">
 <a href="http://bencentra.com/2017-07-11-basic-html5-canvas-games.html">Collection of Canvas based games by Ben Centra</a>
+<br><br><br>
 <main>
-    <canvas id="board" width="1000px" height="1000px" style="border: 1px solid white;"></canvas>
+    <canvas id="board" width="1000px" height="300px" style="border: 1px solid red;"></canvas>
     <audio id="soundFx" src="sounds/pop.mp3" style="display: none;"></audio>
 </main>
 </body>
