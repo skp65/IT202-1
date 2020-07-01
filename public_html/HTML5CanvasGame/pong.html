@@ -36,6 +36,7 @@
         // Keep track of the score
         var leftScore = 0;
         var rightScore = 0;
+
         function init() {
             canvas = document.getElementById("board");
             //1st
@@ -55,6 +56,7 @@
                 canvas.focus();
             }
         }
+
         function resetBall() {
             ball.x = canvas.width / 2 - ball.w / 2;
             ball.y = canvas.height / 2 - ball.w / 2;
@@ -71,6 +73,7 @@
                 ball.sY *= -1;
             }
         }
+
         // Bounce the ball off of a paddle
         function bounceBall() {
             // Increase and reverse the X speed
@@ -95,6 +98,7 @@
             }
             ball.sX *= -1;
         }
+
         function attachKeyListeners() {
             // Listen for keydown events
             window.addEventListener('keydown', function (e) {
@@ -130,6 +134,7 @@
                 console.log(keys);
             });
         }
+
         // Create a rectangle object - for paddles, ball, etc
         function makeRect(x, y, width, height, speed, color) {
             if (!color)
@@ -147,6 +152,7 @@
                 }
             };
         }
+
         function doAI() {
             if (ball.x >= canvas.width * .6) {
                 let paddleHalf = paddleHeight / 2;
@@ -158,6 +164,7 @@
             }
             clampToCanvas(rightPaddle);
         }
+
         function movePaddle() {
             if (keys.W) {
                 leftPaddle.y -= leftPaddle.s;
@@ -173,6 +180,7 @@
             }
             clampToCanvas(leftPaddle);
         }
+
         function clampToCanvas(paddle) {
             if (paddle.y < 0) {
                 paddle.y = 0;
@@ -181,6 +189,7 @@
                 paddle.y = canvas.height - paddle.h;
             }
         }
+
         function moveBall() {
             // Move the ball
             ball.x += ball.sX;
@@ -191,6 +200,7 @@
                 soundFx.play();
             }
         }
+
         function checkPaddleCollision() {
             // Bounce the ball off the paddles
             if (ball.y + ball.h / 2 >= leftPaddle.y && ball.y + ball.h / 2 <= leftPaddle.y + leftPaddle.h) {
@@ -204,6 +214,7 @@
                 }
             }
         }
+
         function checkScore() {
             // Score if the ball goes past a paddle
             if (ball.x < leftPaddle.x) {
@@ -216,15 +227,17 @@
                 ball.sX *= -1;
             }
         }
+
         function drawScores() {
             // Draw the scores
             context.fillStyle = '#FFFFFF';  //some minor changes
             context.font = '24px Arial';
-            context.textAlign = 'center';
+            context.textAlign = 'left';
             context.fillText('Score: ' + leftScore, 5, 24);
-            context.textAlign = 'center';
+            context.textAlign = 'right';
             context.fillText('Score: ' + rightScore, canvas.width - 5, 24);
         }
+
         function erase() {
             context.fillStyle = '#000000';  //some minor changes
             context.fillRect(0, 0, canvas.width, canvas.height);
@@ -247,7 +260,8 @@
     </script>
 </head>
 <body onload="init();">
-<a href="http://bencentra.com/2017-07-11-basic-html5-canvas-games.html">Collection of Canvas based games by Ben Centra</a>
+<a style="text-align: center" href="http://bencentra.com/2017-07-11-basic-html5-canvas-games.html">Collection of Canvas
+    based games by Ben Centra</a>
 <br><br><br>
 <main>
     <canvas id="board" width="1000px" height="300px" style="border: 1px solid red;"></canvas>
