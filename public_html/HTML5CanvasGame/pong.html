@@ -12,7 +12,7 @@
         var paddleWidth = 25;
         var paddleHeight = 100;
         var ballSize = 10;
-        var ballSpeed = 5;
+        var ballSpeed = 5;  //2nd change - changed ball speed
         var paddleSpeed = 3;
         var drawables = [];
         // Key Codes
@@ -44,7 +44,8 @@
             if (canvas.getContext) {
                 context = canvas.getContext("2d");
                 leftPaddle = makeRect(25, canvas.height / 2 - paddleHeight / 2, paddleWidth, paddleHeight, 5, '#BC0000');
-                rightPaddle = makeRect(canvas.width - paddleWidth - 25, canvas.height / 2 - paddleHeight / 2, paddleWidth, paddleHeight, 5, '#0000BC');
+                rightPaddle = makeRect(canvas.width - paddleWidth - 25, canvas.height / 2 - paddleHeight / 2, paddleWidth,
+                              paddleHeight, 5, '#0000BC');
                 ball = makeRect(0, 0, ballSize, ballSize, ballSpeed, '#FFFFFF');
                 drawables.push(leftPaddle);
                 drawables.push(rightPaddle);
@@ -243,6 +244,18 @@
             context.fillRect(0, 0, canvas.width, canvas.height);
         }
 
+        function pauseGame() {
+            if (!gamePaused) {
+                game = clearTimeout(game);
+                gamePaused = true;
+            } else if (gamePaused) {
+                game = setTimeout(gameLoop, 1000 / 30);
+                gamePaused = false;
+            }
+        }
+        function keyDown(p) {
+            if (e.keyCode === 80) pauseGame();
+        }
         function gameLoop() {
             erase();
             movePaddle();
@@ -260,7 +273,7 @@
     </script>
 </head>
 <body onload="init();">
-<a style="text-align: center" href="http://bencentra.com/2017-07-11-basic-html5-canvas-games.html">Collection of Canvas
+<a href="http://bencentra.com/2017-07-11-basic-html5-canvas-games.html">Collection of Canvas
     based games by Ben Centra</a>
 <br><br><br>
 <main>
