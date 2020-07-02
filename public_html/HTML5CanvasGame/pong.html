@@ -11,15 +11,32 @@
             height: 50px;
             font-size: 20px;
         }
+        #header{
+            text-align: center; /*minor changes*/
+        }
+        #bgm{
+            position: absolute;
+            width: 100px;
+            top: 400px;
+            left: 400px;
+            height: 40px;
+            font-size: 15px;
+        }
     </style>
 </head>
 <body>
-<a href="http://bencentra.com/2017-07-11-basic-html5-canvas-games.html">Collection of Canvas
-    based games by Ben Centra</a>
+<h1 id="header"><a href="http://bencentra.com/2017-07-11-basic-html5-canvas-games.html">Collection of Canvas
+    based games by Ben Centra</a></h1> <!--minor changes-->
 <br><br>
     <canvas id="board" width="1000px" height="300px" style="border: 1px solid lightgray;"></canvas>
+    <!-- 1st change-->
     <audio id="soundFx" src="sounds/pop.mp3"></audio>
+    <!-- 2nd change-->
     <button type="button" id="start" onclick="init()">START</button>
+
+    <button type ="button" id="bgm" onclick="play()">Pause Music</button>
+    <!--https://soundcloud.com/ashamaluevmusic/sets/music-for-gaming-videos# - bgm music link
+     3rd change-->
     <audio id="bgm" src="sounds/bgm.mp3"></audio>
 <script>
     //modified from http://jsfiddle.net/bencentra/q1s8gmqv/?utm_source=website&utm_medium=embed&utm_campaign=q1s8gmqv
@@ -59,7 +76,7 @@
     //2nd change - start button
     var start = document.getElementById("start");
 
-    //3rd change
+    //3rd change & 4th change
     var bgm = document.getElementById('bgm');
 
     function init() {
@@ -85,6 +102,16 @@
             attachKeyListeners();
             loop = window.setInterval(gameLoop, 16); //16ms
             canvas.focus();
+        }
+    }
+
+    function play() {
+        if (bgm.paused){
+            bgm.play();
+            bgm.style.display="Play";
+        }else{
+            bgm.pause();
+            bgm.style.display="Pause";
         }
     }
 
