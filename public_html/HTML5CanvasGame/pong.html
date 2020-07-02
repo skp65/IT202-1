@@ -18,8 +18,9 @@
     based games by Ben Centra</a>
 <br><br>
     <canvas id="board" width="1000px" height="300px" style="border: 1px solid lightgray;"></canvas>
-    <audio id="soundFx" src="sounds/pop.mp3" style="display: none;"></audio>
+    <audio id="soundFx" src="sounds/pop.mp3"></audio>
     <button type="button" id="start" onclick="init()">START</button>
+    <audio id="bgm" src="sounds/bgm.mp3"></audio>
 <script>
     //modified from http://jsfiddle.net/bencentra/q1s8gmqv/?utm_source=website&utm_medium=embed&utm_campaign=q1s8gmqv
     var canvas;
@@ -58,12 +59,17 @@
     //2nd change - start button
     var start = document.getElementById("start");
 
+    //3rd change
+    var bgm = document.getElementById('bgm');;
+
     function init() {
         canvas = document.getElementById("board");
         //1st
         soundFx = document.getElementById("soundFx");
         //2nd
         start.style.display = "none";
+        //3rd
+        bgm.play();
 
         if (canvas.getContext) {
             context = canvas.getContext("2d");
