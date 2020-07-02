@@ -37,6 +37,9 @@
         var leftScore = 0;
         var rightScore = 0;
 
+        //for pause
+        var pause = document.getElementById("board");
+
         function init() {
             canvas = document.getElementById("board");
             //1st
@@ -244,17 +247,8 @@
             context.fillRect(0, 0, canvas.width, canvas.height);
         }
 
-        function pauseGame() {
-            if (!gamePaused) {
-                game = clearTimeout(game);
-                gamePaused = true;
-            } else if (gamePaused) {
-                game = setTimeout(gameLoop, 1000 / 30);
-                gamePaused = false;
-            }
-        }
-        function keyDown(p) {
-            if (p.keyCode === 80) pauseGame();
+        function pausegame() {
+            pause.pause();
         }
         function gameLoop() {
             erase();
@@ -277,7 +271,9 @@
     based games by Ben Centra</a>
 <br><br><br>
 <main>
-    <canvas id="board" width="1000px" height="300px" style="border: 1px solid red;"></canvas>
+    <canvas id="board" width="1000px" height="300px" style="border: 1px solid red;">
+        <button onclick="pausegame()" type="button">Pause</button><br>
+    </canvas>
     <audio id="soundFx" src="sounds/pop.mp3" style="display: none;"></audio>
 </main>
 </body>
