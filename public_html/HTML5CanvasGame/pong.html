@@ -21,10 +21,6 @@
         var UP = 38;
         var DOWN = 40;
 
-        //1st change
-        var soundFx; // 1st change - For Sound Effects
-
-
         // Keep track of pressed keys
         var keys = {
             W: false,
@@ -37,13 +33,19 @@
         var leftScore = 0;
         var rightScore = 0;
 
-        //for pause
-        var pause = document.getElementById("board");
+        //1st change
+        var soundFx; // 1st change - For Sound Effects
+
+        //2nd change - start button
+        var start document.getElementById("start");
 
         function init() {
             canvas = document.getElementById("board");
             //1st
             soundFx = document.getElementById("soundFx");
+            //2nd
+            start.style.display = "none";
+
             if (canvas.getContext) {
                 context = canvas.getContext("2d");
                 leftPaddle = makeRect(25, canvas.height / 2 - paddleHeight / 2, paddleWidth, paddleHeight, 5, '#BC0000');
@@ -247,9 +249,6 @@
             context.fillRect(0, 0, canvas.width, canvas.height);
         }
 
-        function pausegame() {
-            pause.pause();
-        }
         function gameLoop() {
             erase();
             movePaddle();
@@ -265,16 +264,27 @@
             }
         }
     </script>
+    <style>
+        #start{
+            position: absolute;
+            width: 200px;
+            top: 300px;
+            left: 150px;
+            height: 50px;
+            font-size: 20px;
+        }
+    </style>
 </head>
-<body onload="init();">
+<body>
 <a href="http://bencentra.com/2017-07-11-basic-html5-canvas-games.html">Collection of Canvas
     based games by Ben Centra</a>
 <br><br>
-<button onclick="pausegame()" type="button">Pause</button><br>
 <br>
 <main>
     <canvas id="board" width="1000px" height="300px" style="border: 1px solid red;"></canvas>
     <audio id="soundFx" src="sounds/pop.mp3" style="display: none;"></audio>
+    <button type="button" id="start" onclick="init()">START</button>
 </main>
+
 </body>
 </html>
