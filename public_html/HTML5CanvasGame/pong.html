@@ -68,8 +68,7 @@
         soundFx = document.getElementById("soundFx");
         //2nd
         start.style.display = "none";
-        //3rd
-        bgm.play();
+
 
         if (canvas.getContext) {
             context = canvas.getContext("2d");
@@ -287,6 +286,8 @@
         for (let i = 0; i < drawables.length; i++) {
             drawables[i].draw();
         }
+        //3rd
+        bgm.play();
     }
 </script>
 </body>
