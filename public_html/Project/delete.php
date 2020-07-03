@@ -17,6 +17,9 @@ if (isset($_GET["product_id"])) {
         <label for="products">Product Name
             <input type="text" id="products" name="name" value="<?php echo get($result, "name"); ?>"/>
         </label>
+        <label for="code">Code
+            <input type="number" id="code" name="code" value="<?php echo get($result, "code"); ?>"/>
+        </label>
         <label for="q">Quantity
             <input type="number" id="q" name="quantity" value="<?php echo get($result, "quantity"); ?>"/>
         </label>
@@ -34,10 +37,11 @@ if (isset($_GET["product_id"])) {
 if (isset($_POST["delete"])) {
     $delete = isset($_POST["delete"]);
     $name = $_POST["name"];
+    $code = $_POST["code"];
     $quantity = $_POST["quantity"];
     $price = $_POST["price"];
     $description = $_POST["description"];
-    if (!empty($name) && !empty($quantity) && !empty($price) && !empty($description)) {
+    if (!empty($name) && !empty($code) && !empty($quantity) && !empty($price) && !empty($description)) {
         try{
             if($product_id > 0) {
                 if($delete){
@@ -67,7 +71,7 @@ if (isset($_POST["delete"])) {
         }
     }
     else{
-        echo "Name, quantity, price and description must not be empty.";
+        echo "Name, code, quantity, price and description must not be empty.";
     }
 }
 ?>
