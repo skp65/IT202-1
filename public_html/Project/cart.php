@@ -4,7 +4,7 @@ include('common.inc.php');
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
-    $result = mysqli_query($con, "SELECT * FROM `products` WHERE `code`='$code'");
+    $result = mysqli_query($con, "SELECT * FROM `Products` WHERE `code`='$code'");
     $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $code = $row['code'];
@@ -31,23 +31,30 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             $_SESSION["shopping_cart"] = array_merge(
                 $_SESSION["shopping_cart"], $cartArray
             );
-            $status = "<div class='box'>Product is added to your cart!</div>";
+            $status = "<div class='box'>Product is added to your cart</div>";
         }
     }
 }
 ?>
+<html>
+<head>
+    <link rel='stylesheet' href='css/style.css' type='text/css'/>
+</head>
+<body>
 <?php
 if (!empty($_SESSION["shopping_cart"])) {
-    $cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
+    $cart_count = count(array_keys($_SESSION["shopping_cart"]));?>
+
     <div class="cart_div">
         <a href="cart.php"><img src="images/cart.jpg"/> Cart<span>
     <?php echo $cart_count; ?></span></a>
     </div>
-    <?php
+<?php
 }
 ?>
+
 <?php
-$result = mysqli_query($con, "SELECT * FROM `products`");
+$result = mysqli_query($con, "SELECT * FROM `Products`");
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<div class='product-wrapper'>
     <form method='post' action=''>
@@ -67,3 +74,5 @@ mysqli_close($con);
 <div class="message_box" style="margin:10px 0px;">
     <?php echo $status; ?>
 </div>
+</body>
+</html>
