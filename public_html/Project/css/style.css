@@ -1,0 +1,79 @@
+.wrapper{
+    padding-left: 40%;
+    padding-top: 5px;
+}
+.wrapper form label{
+    color: purple;
+    text-align: justify;
+    font-weight: bold;
+
+}
+.wrapper form input{
+    width: 40%;
+    height: 20px;
+    margin-bottom: 5px;
+    padding: 0px 5px;
+    border: 1px solid darkorchid;
+    color: darkorchid;
+    background: whitesmoke;
+    border-radius: 3px;
+}
+.wrapper input.submit{
+    width: 15%;
+    cursor: pointer;
+
+}
+.register{
+    padding-left: 40%;
+    padding-top: 5%;
+}
+.register form label{
+    color: purple;
+    text-align: justify;
+    font-weight: bold;
+
+}
+.register form input{
+    width: 40%;
+    height: 20px;
+    margin-bottom: 5px;
+    padding: 0px 5px;
+    border: 1px solid darkorchid;
+    color: darkorchid;
+    background: whitesmoke;
+    border-radius: 3px;
+}
+.register input.submit{
+    width: 15%;
+    cursor: pointer;
+
+}
+input.submit:hover{
+    background-color:lightgray;
+}
+.nav{
+    margin:0;
+    padding:0;
+    text-align:center;
+}
+a{
+    color: darkorchid;
+    text-decoration: none;
+    font-weight:bold;
+}
+.nav li{
+    display:inline;
+}
+.nav a{
+    display:inline-block;
+    padding:10px;
+}
+
+.nav li a:hover {
+    background-color: lightseagreen;
+    text-decoration: underline;
+}
+h4{
+    color: darkorchid;
+    text-align: center;
+}
