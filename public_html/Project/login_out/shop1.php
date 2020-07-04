@@ -1,11 +1,6 @@
 <?php
 session_start();
 include("header.php");
-$connect = mysqli_connect("localhost", "root", "", "aqbqrs7b7dbmq659");
-if(!$connect)
-{
-    die("Connection failed".mysqli_connect_error());
-}
 if(isset($_POST["add_to_cart"]))
 {
     if(isset($_SESSION["shopping_cart"]))
@@ -72,7 +67,7 @@ if(isset($_GET["action"]))
     <br /><br />
     <?php
     $query = "SELECT * FROM Products ORDER BY id ASC";
-    $result = mysqli_query($connect, $query);
+    $result = mysqli_query($db, $query);
     if(mysqli_num_rows($result) > 0)
     {
         while($row = mysqli_fetch_array($result))
