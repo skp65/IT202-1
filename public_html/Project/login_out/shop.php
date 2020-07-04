@@ -1,7 +1,7 @@
 <?php
 session_start();
-echo var_export($database,true);
-include('../config1.php');
+echo var_export($dbdatabase,true);
+include('config.php');
 include("header.php");
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
