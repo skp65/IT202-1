@@ -5,7 +5,7 @@ include("header.php");
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
-    $result = file_get_contents(__DIR__ . "/query/shop.sql");
+    $result = mysqli_query($db,"SELECT * FROM `products` WHERE `code`='$code'");
     $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $code = $row['code'];
