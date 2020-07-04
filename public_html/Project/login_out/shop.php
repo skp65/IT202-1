@@ -2,7 +2,6 @@
 session_start();
 include("header.php");
 include('config.php');
-echo "Welcome, " . $_SESSION["user"]["first_name"];
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];

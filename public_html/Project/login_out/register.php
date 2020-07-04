@@ -26,7 +26,9 @@ include("header.php");
             </div>
             <div>
                 <input class="submit" type="submit" name="register" value="Register"/>
-                <input type="button" onclick="window.location.href='https://it202-2020.herokuapp.com/public_html/Project/login_out/login.php' "/>
+                <input type="button"
+                onclick="window.location.href='https://it202-2020.herokuapp.com/public_html/Project/login_out/login.php'"
+                value="Go to Login"/>
             </div>
         </form>
     </div>
