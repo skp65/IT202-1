@@ -6,7 +6,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
     $stmt = getDB()->prepare ("select * from Products where code= '$code'");
     $stmt->execute ();
-    $results = $stmt-fetchAll(PDO::FETCH_ASSOC);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $name = $results['name'];
     $code = $results['code'];
     $image = $results['image'];
@@ -53,8 +53,9 @@ $cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
 ?>
 <?php
 $stmt = getDB()->prepare ("select * from Products");
-$stmt->execute ();
-foreach ($results as $row) {
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach ($result as $row) {
     echo "<div class='product-wrapper'>
         <form method='post' action=''>
             <input type='hidden' name='code' value=" . $row['code'] . " />
@@ -83,4 +84,3 @@ $stmt = null;   //close connection.
 </div>
 </body>
 </html>
-
