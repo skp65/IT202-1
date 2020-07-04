@@ -4,7 +4,7 @@ include('../config1.php');
 $status="";
 if (isset($_POST['code']) && $_POST['code']!=""){
     $code = $_POST['code'];
-    $result = mysqli_query($db,"SELECT * FROM `products` WHERE `code`='$code'");
+    $result = mysqli_query($db,"SELECT * FROM `Products` WHERE `code`='$code'");
     $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $code = $row['code'];
@@ -73,7 +73,7 @@ if(isset($_REQUEST['Logout']) && $_REQUEST['Logout']=="logout")
         echo "<BR><BR>";
     }
 
-    $result = mysqli_query($db,"SELECT * FROM `products`");
+    $result = mysqli_query($db,"SELECT * FROM `Products`");
     while($row = mysqli_fetch_assoc($result)){
         echo "<div class='product_wrapper'>
 			  <form method='post' action=''>
