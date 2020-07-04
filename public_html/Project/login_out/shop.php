@@ -5,12 +5,13 @@ include("header.php");
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
-    $result = mysqli_query($db,"SELECT * FROM `products` WHERE `code`='$code'");
-    $row = mysqli_fetch_assoc($result);
-    $name = $row['name'];
-    $code = $row['code'];
-    $image = $row['image'];
-    $price = $row['price'];
+    $stmt = getDB()->prepare ("select * from Products where code= '$code'");
+    $stmt->execute ();
+    $results = $stmt-fetchAll(PDO::FETCH_ASSOC);
+    $name = $results['name'];
+    $code = $results['code'];
+    $image = $results['image'];
+    $price = $results['price'];
 
     $cartArray = array(
         $code => array(
@@ -52,8 +53,9 @@ $cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
 }
 ?>
 <?php
-$result = mysqli_query($db, "SELECT * FROM `Products`");
-while ($row = mysqli_fetch_assoc($result)) {
+$stmt = getDB()->prepare ("select * from Products");
+$stmt->execute ();
+while ($row = $stmt-fetchAll(PDO::FETCH_ASSOC)) {
     echo "<div class='product-wrapper'>
         <form method='post' action=''>
             <input type='hidden' name='code' value=" . $row['code'] . " />
@@ -64,7 +66,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         </form>
         </div>";
 }
-mysqli_close($db);
+
 ?>
 <div style="clear:both;"></div>
 <!DOCTYPE html>
