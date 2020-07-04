@@ -15,6 +15,6 @@
     }
 </style>
 <?php
-require("config.php");
+require("../common.inc.php");
 session_start();
 ?>
