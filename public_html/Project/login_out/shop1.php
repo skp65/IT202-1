@@ -3,6 +3,9 @@
 session_start();
 include("header.php");
 $connect = mysqli_connect("localhost", "root", "", "aqbqrs7b7dbmq659");
+if(!$connect){
+    die("Connection failed".mysqli_connect_error());
+}
 if(isset($_POST["add_to_cart"]))
 {
     if(isset($_SESSION["shopping_cart"]))
