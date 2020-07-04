@@ -1,5 +1,6 @@
 <?php
 session_start();
+echo var_export($database,true);
 include('../config1.php');
 include("header.php");
 $status = "";
