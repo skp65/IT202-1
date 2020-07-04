@@ -5,7 +5,7 @@ include("header.php");
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
-    $result = mysqli_query($connect, "SELECT * FROM `Products` WHERE `code`='$code'");
+    $result = mysqli_query($db, "SELECT * FROM `Products` WHERE `code`='$code'");
     $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $code = $row['code'];
@@ -54,7 +54,7 @@ $cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
 ?>
 
 <?php
-$result = mysqli_query($connect, "SELECT * FROM `Products`");
+$result = mysqli_query($db, "SELECT * FROM `Products`");
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<div class='product-wrapper'>
         <form method='post' action=''>
@@ -66,7 +66,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         </form>
         </div>";
 }
-mysqli_close($connect);
+mysqli_close($db);
 ?>
 <div style="clear:both;"></div>
 <!DOCTYPE html>
