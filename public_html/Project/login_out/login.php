@@ -47,14 +47,13 @@ if (isset($_POST["login"])) {
                             "last_name" => $result["last_name"]
                         );
                         echo var_export($_SESSION, true);
-                        header("Location: home.php");   //redirects to home.php
+                        header("Location: shop.php");   //redirects to shop.php
                     } else {
                         echo "<div>Invalid password!</div>";
                     }
                 } else {
                     echo "<div>Invalid user</div>";
                 }
-                //echo "<div>Successfully registered!</div>";
             }
         } catch (Exception $e) {
             echo $e->getMessage();

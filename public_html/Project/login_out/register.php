@@ -50,13 +50,16 @@ if (isset($_POST["register"])) {
                                      VALUES(:email, :fname, :lname, :password)");
                 $stmt->execute(array(
                     ":email" => $email,
-                    ":password" => $hash //Don't save the raw password $password
+                    ":password" => $hash, //Don't save the raw password $password
+                    ":fname" => $fname;
+                    ":lname" => $lname;
                 ));
                 $e = $stmt->errorInfo();
                 if ($e[0] != "00000") {
                     echo var_export($e, true);
                 } else {
-                    echo "<div>Successfully registered! </div>";
+                    header("Location: login.php?Msg=Successfully Registered");
+                    //echo "<div>Successfully registered! </div>";
                 }
             } catch (Exception $e) {
                 echo $e->getMessage();

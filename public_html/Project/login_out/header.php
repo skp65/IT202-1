@@ -11,7 +11,7 @@
 </nav>
 <style>
     body {
-        background-image: url('images/1.jpg');
+        background-image: url('../images/1.jpg');
     }
 </style>
 <?php
