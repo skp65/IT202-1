@@ -1,11 +1,11 @@
 <?php
 session_start();
 include("header.php");
-include('../common.inc.php');
+include('../config1.php');
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
-    $result = mysqli_query($con, "SELECT * FROM `Products` WHERE `code`='$code'");
+    $result = mysqli_query($connect, "SELECT * FROM `Products` WHERE `code`='$code'");
     $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $code = $row['code'];
@@ -39,10 +39,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 
 ?>
 <html>
-<?php
-if (isset($_SESSION['Logged']))
-{
-    ?>
     <?php
     if (!empty($_SESSION["shopping_cart"])) {
         $cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
@@ -56,7 +52,7 @@ if (isset($_SESSION['Logged']))
     ?>
 
     <?php
-    $result = mysqli_query($con, "SELECT * FROM Products");
+    $result = mysqli_query($connect, "SELECT * FROM Products");
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<div class='product-wrapper'>
         <form method='post' action=''>
@@ -68,7 +64,7 @@ if (isset($_SESSION['Logged']))
         </form>
         </div>";
     }
-    mysqli_close($con);
+    mysqli_close($connect);
     ?>
     <?php
 }else{
