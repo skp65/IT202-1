@@ -40,6 +40,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 ?>
 <!DOCTYPE html>
 <html>
+<body>
     <?php
     if (!empty($_SESSION["shopping_cart"])) {
         $cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
