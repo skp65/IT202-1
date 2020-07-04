@@ -3,11 +3,10 @@ session_start();
 echo var_export($dbdatabase,true);
 include("header.php");
 $status = "";
-file_get_contents(__DIR__."../sort.php")
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
     $result = file_get_contents(__DIR__ . "/query/shop.sql");
-    $row = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+    $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $code = $row['code'];
     $image = $row['image'];
