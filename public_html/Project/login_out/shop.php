@@ -38,6 +38,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 }
 
 ?>
+<!DOCTYPE html>
 <html>
     <?php
     if (!empty($_SESSION["shopping_cart"])) {
