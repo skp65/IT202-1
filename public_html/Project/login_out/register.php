@@ -58,8 +58,7 @@ if (isset($_POST["register"])) {
                 if ($e[0] != "00000") {
                     echo var_export($e, true);
                 } else {
-                    header("Location: login.php?Msg=Successfully Registered");
-                    //echo "<div>Successfully registered! </div>";
+                    echo "<div>Successfully registered! </div>";
                 }
             } catch (Exception $e) {
                 echo $e->getMessage();

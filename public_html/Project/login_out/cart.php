@@ -28,9 +28,6 @@ if (isset($_REQUEST['Logout']) && $_REQUEST['Logout'] == "logout") {
 }
 ?>
 <html>
-<head>
-    <link rel='stylesheet' href='../css/style.css' type='text/css'/>
-</head>
 <body>
 <h2>Shopping Cart</h2>
 <a href="shop.php">

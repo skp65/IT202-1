@@ -2,7 +2,6 @@
 session_start();
 include("header.php");
 include('config.php');
-echo "Welcome, " . $_SESSION["user"]["fname"];
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
@@ -43,10 +42,6 @@ if (isset($_REQUEST['Logout']) && $_REQUEST['Logout'] == "logout") {
 }
 ?>
 <html>
-<head>
-    <link rel='stylesheet' href='../css/style.css' type='text/css'/>
-</head>
-<>
 <?php
 if (isset($_SESSION['Logged']))
 {
@@ -56,7 +51,7 @@ if (isset($_SESSION['Logged']))
         $cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
 
         <div class="cart_div">
-            <a href="shop.php"><img src="../images/cart.jpg"/> Cart<span>
+            <a href="shop.php"><img src="../images/cart.jpg" alt="cart"/> Cart<span>
     <?php echo $cart_count; ?></span></a>
         </div>
         <?php
