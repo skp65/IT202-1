@@ -33,11 +33,10 @@
     <audio id="soundFx" src="sounds/pop.mp3"></audio>
     <!-- 2nd change-->
     <button type="button" id="start" onclick="init()">START</button>
-
-    <button type ="button" id="bgm" onclick="play()">Pause Music</button>
     <!--https://soundcloud.com/ashamaluevmusic/sets/music-for-gaming-videos# - bgm music link
      3rd change-->
     <audio id="bgm" src="sounds/bgm.mp3"></audio>
+
 <script>
     //modified from http://jsfiddle.net/bencentra/q1s8gmqv/?utm_source=website&utm_medium=embed&utm_campaign=q1s8gmqv
     var canvas;
@@ -46,11 +45,11 @@
     var leftPaddle;
     var rightPaddle;
     var ball;
-    var paddleWidth = 25;
-    var paddleHeight = 100;
-    var ballSize = 10;
-    var ballSpeed = 5;  //2nd change - changed ball speed
-    var paddleSpeed = 3;
+    var paddleWidth = 20;   //4th change
+    var paddleHeight = 60;  //4th
+    var ballSize = 20;  //4th
+    var ballSpeed = 5;  //4nd change - changed ball speed
+    var paddleSpeed = 4;//4th
     var drawables = [];
     // Key Codes
     var W = 87;
@@ -76,7 +75,7 @@
     //2nd change - start button
     var start = document.getElementById("start");
 
-    //3rd change & 4th change
+    //3rd change
     var bgm = document.getElementById('bgm');
 
     function init() {
@@ -102,16 +101,6 @@
             attachKeyListeners();
             loop = window.setInterval(gameLoop, 16); //16ms
             canvas.focus();
-        }
-    }
-
-    function play() {
-        if (bgm.paused){
-            bgm.play();
-            bgm.style.display="Play";
-        }else{
-            bgm.pause();
-            bgm.style.display="Pause";
         }
     }
 
@@ -255,7 +244,7 @@
         // Bounce the ball off the top/bottom
         if (ball.y < 0 || ball.y + ball.h > canvas.height) {
             ball.sY *= -1;
-            soundFx.play();
+            soundFx.play(); //1st change
         }
     }
 
