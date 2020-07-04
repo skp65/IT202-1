@@ -1,6 +1,5 @@
 <?php
 session_start();
-echo var_export($db,true);
 include("header.php");
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
@@ -55,7 +54,7 @@ $cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
 <?php
 $stmt = getDB()->prepare ("select * from Products");
 $stmt->execute ();
-while ($row = $stmt-fetchAll(PDO::FETCH_ASSOC)) {
+foreach ($results as $row) {
     echo "<div class='product-wrapper'>
         <form method='post' action=''>
             <input type='hidden' name='code' value=" . $row['code'] . " />
@@ -66,7 +65,7 @@ while ($row = $stmt-fetchAll(PDO::FETCH_ASSOC)) {
         </form>
         </div>";
 }
-
+$stmt = null;   //close connection.
 ?>
 <div style="clear:both;"></div>
 <!DOCTYPE html>
