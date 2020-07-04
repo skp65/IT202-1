@@ -1,6 +1,8 @@
 <?php
 session_start();
-include('common.inc.php');
+include("header.php");
+include('config.php');
+echo "Welcome, " . $_SESSION["user"]["fname"];
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
@@ -9,15 +11,15 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $name = $row['name'];
     $code = $row['code'];
     $price = $row['price'];
-    $image = $row['image'];
+    //$image = $row['image'];
 
     $cartArray = array(
         $code => array(
             'name' => $name,
             'code' => $code,
             'price' => $price,
-            'quantity' => 1,
-            'image' => $image)
+            'quantity' => 1)
+        //'image' => $image)
     );
 
     if (empty($_SESSION["shopping_cart"])) {
@@ -35,28 +37,36 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         }
     }
 }
+if (isset($_REQUEST['Logout']) && $_REQUEST['Logout'] == "logout") {
+    unset($_SESSION['Logged']);
+    header("location:index.php?Msg=You are successfully Logout ");
+}
 ?>
 <html>
 <head>
-    <link rel='stylesheet' href='css/style.css' type='text/css'/>
+    <link rel='stylesheet' href='../css/style.css' type='text/css'/>
 </head>
-<body>
+<>
 <?php
-if (!empty($_SESSION["shopping_cart"])) {
-    $cart_count = count(array_keys($_SESSION["shopping_cart"]));?>
+if (isset($_SESSION['Logged']))
+{
+    ?>
+    <?php
+    if (!empty($_SESSION["shopping_cart"])) {
+        $cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
 
-    <div class="cart_div">
-        <a href="cart.php"><img src="images/cart.jpg"/> Cart<span>
+        <div class="cart_div">
+            <a href="shop.php"><img src="../images/cart.jpg"/> Cart<span>
     <?php echo $cart_count; ?></span></a>
-    </div>
-<?php
-}
-?>
+        </div>
+        <?php
+    }
+    ?>
 
-<?php
-$result = mysqli_query($con, "SELECT * FROM `Products`");
-while ($row = mysqli_fetch_assoc($result)) {
-    echo "<div class='product-wrapper'>
+    <?php
+    $result = mysqli_query($con, "SELECT * FROM Products");
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<div class='product-wrapper'>
     <form method='post' action=''>
     <input type='hidden' name='code' value=" . $row['code'] . " />
     <div class='image'><img src='" . $row['image'] . "' /></div>
@@ -66,13 +76,28 @@ while ($row = mysqli_fetch_assoc($result)) {
     </form>
     </div>";
     }
-mysqli_close($con);
+    mysqli_close($con);
+    ?>
+    <?php
+}else{
 ?>
-
-<div style="clear:both;"></div>
-
-<div class="message_box" style="margin:10px 0px;">
-    <?php echo $status; ?>
+<div>
+    <h1>
+    <?php
+        if (isset($_REQUEST['Msg'])) {
+            echo "<font color='red'>" . $_REQUEST['Msg'] . "</font>";
+        }
+        ?>
+    </h1>
 </div>
+<?php
+    }
+    ?>
+        <div style="clear:both;"></div>
+
+        <div class="message_box" style="margin:10px 0px;">
+            <?php echo $status; ?>
+        </div>
+
 </body>
 </html>

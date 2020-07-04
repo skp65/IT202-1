@@ -3,7 +3,7 @@
         <input type="text" id="products" name="name"/>
     </label>
     <label for="code">Code
-        <input type="number" id="code" name="code"/>
+        <input type="text" id="code" name="code"/>
     </label>
     <label for="q">Quantity
         <input type="number" id="q" name="quantity"/>

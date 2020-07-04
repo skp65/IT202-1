@@ -18,7 +18,7 @@ if (isset($_GET["product_id"])) {
             <input type="text" id="products" name="name" value="<?php echo get($result, "name"); ?>"/>
         </label>
         <label for="code">Code
-            <input type="number" id="code" name="code" value="<?php echo get($result, "code"); ?>"/>
+            <input type="text" id="code" name="code" value="<?php echo get($result, "code"); ?>"/>
         </label>
         <label for="q">Quantity
             <input type="number" id="q" name="quantity" value="<?php echo get($result, "quantity"); ?>"/>
