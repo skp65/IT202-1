@@ -2,6 +2,7 @@
 session_start();
 include("header.php");
 include('config.php');
+echo "Welcome, " . $_SESSION["user"]["first_name"];
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
@@ -10,7 +11,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $name = $row['name'];
     $code = $row['code'];
     $price = $row['price'];
-    //$image = $row['image'];
+    $image = $row['image'];
 
     $cartArray = array(
         $code => array(
@@ -18,7 +19,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             'code' => $code,
             'price' => $price,
             'quantity' => 1)
-        //'image' => $image)
+            'image' => $image)
     );
 
     if (empty($_SESSION["shopping_cart"])) {
@@ -38,7 +39,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 }
 if (isset($_REQUEST['Logout']) && $_REQUEST['Logout'] == "logout") {
     unset($_SESSION['Logged']);
-    header("location:index.php?Msg=You are successfully Logout ");
+    header("location:login.php?Msg=You are successfully Logout ");
 }
 ?>
 <html>
@@ -62,14 +63,14 @@ if (isset($_SESSION['Logged']))
     $result = mysqli_query($con, "SELECT * FROM Products");
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<div class='product-wrapper'>
-    <form method='post' action=''>
-    <input type='hidden' name='code' value=" . $row['code'] . " />
-    <div class='image'><img src='" . $row['image'] . "' /></div>
-    <div class='name'>" . $row['name'] . "</div>
-    <div class='price'>$" . $row['price'] . "</div>
-    <button type='submit' class='buy'>Add to Cart</button>
-    </form>
-    </div>";
+        <form method='post' action=''>
+            <input type='hidden' name='code' value=" . $row['code'] . " />
+            <div class='image'><img src='" . $row['image'] . "' /></div>
+            <div class='name'>" . $row['name'] . "</div>
+            <div class='price'>$" . $row['price'] . "</div>
+            <button type='submit' class='buy'>Add to Cart</button>
+        </form>
+        </div>";
     }
     mysqli_close($con);
     ?>

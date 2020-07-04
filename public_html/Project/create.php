@@ -5,6 +5,9 @@
     <label for="code">Code
         <input type="text" id="code" name="code"/>
     </label>
+    <label for="img">Image
+        <input type="image" id="img" name="image" alt="img"/>
+    </label>
     <label for="q">Quantity
         <input type="number" id="q" name="quantity"/>
     </label>
@@ -21,19 +24,21 @@
 if (isset($_POST["created"])) {
     $name = $_POST["name"];
     $code = $_POST["code"];
+    $image = $_POST["img"];
     $quantity = $_POST["quantity"];
     $price = $_POST["price"];
     $description = $_POST["description"];
-    if (!empty($name) && !empty($code) && !empty($quantity) && !empty($price) && !empty($description)) {
+    if (!empty($name) && !empty($code) && !empty($image) && !empty($quantity) && !empty($price) && !empty($description)) {
         require("config.php");
         $connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
         try {
             $db = new PDO($connection_string, $dbuser, $dbpass);
-            $stmt = $db->prepare("INSERT INTO Products (name, code, quantity, price, description)   
-                VALUES (:name, :code, :quantity, :price, :description)");
+            $stmt = $db->prepare("INSERT INTO Products (name, code, image, quantity, price, description)   
+                VALUES (:name, :code, :image, :quantity, :price, :description)");
             $result = $stmt->execute(array(
                 ":name" => $name,
                 ":code" => $code,
+                ":image" => $image,
                 ":quantity" => $quantity,
                 ":price" => $price,
                 ":description" => $description
@@ -53,7 +58,7 @@ if (isset($_POST["created"])) {
             echo $e->getMessage();
         }
     } else {
-        echo "Name, code, quantity, price and description must not be empty.";
+        echo "Name, code, image, quantity, price and description must not be empty.";
     }
 }
 ?>

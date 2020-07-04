@@ -42,9 +42,7 @@ if (isset($_POST["login"])) {
                         echo "<div>Passwords matched! You are technically logged in!</div>";
                         $_SESSION["user"] = array(
                             "id" => $result["id"],
-                            "email" => $result["email"],
-                            "first_name" => $result["first_name"],
-                            "last_name" => $result["last_name"]
+                            "first_name" => $result["first_name"]
                         );
                         echo var_export($_SESSION, true);
                         header("Location: shop.php");   //redirects to shop.php
