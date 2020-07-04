@@ -68,12 +68,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 mysqli_close($connect);
 ?>
-<?php
-else{
-?>
-<?php
-}
-?>
 <div style="clear:both;"></div>
 <!DOCTYPE html>
 <html>
