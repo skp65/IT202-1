@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("header.php");
-include('config.php');
+include('../common.inc.php');
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
@@ -9,16 +9,16 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $code = $row['code'];
-    $price = $row['price'];
     $image = $row['image'];
+    $price = $row['price'];
 
     $cartArray = array(
         $code => array(
             'name' => $name,
             'code' => $code,
+            'image' => $image,
             'price' => $price,
-            'quantity' => 1,
-            'image' => $image)
+            'quantity' => 1)
     );
 
     if (empty($_SESSION["shopping_cart"])) {
@@ -36,10 +36,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         }
     }
 }
-if (isset($_REQUEST['Logout']) && $_REQUEST['Logout'] == "logout") {
-    unset($_SESSION['Logged']);
-    header("location:login.php?Msg=You are successfully Logout ");
-}
+
 ?>
 <html>
 <?php

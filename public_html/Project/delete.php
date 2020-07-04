@@ -13,22 +13,22 @@ if (isset($_GET["product_id"])) {
     echo "No product_id provided in url, don't forget this or it won't edit.";
 }
 ?>
-    <form method="POST">
+    <form method="POST" class="wrapper">
         <label for="products">Product Name
             <input type="text" id="products" name="name" value="<?php echo get($result, "name"); ?>"/>
-        </label>
+        </label><br>
         <label for="code">Code
             <input type="text" id="code" name="code" value="<?php echo get($result, "code"); ?>"/>
-        </label>
+        </label><br>
         <label for="q">Quantity
             <input type="number" id="q" name="quantity" value="<?php echo get($result, "quantity"); ?>"/>
-        </label>
+        </label><br>
         <label for="p">Price
             <input type="number" id="p" name="price" value="<?php echo get($result, "price"); ?>"/>
-        </label>
+        </label><br>
         <label for="d">Description
             <input type="text" id="d" name="description" value="<?php echo get($result, "description"); ?>"/>
-        </label>
+        </label><br>
         <?php if ($product_id > 0): ?>
             <input type="submit" name="delete" value="Delete Product"/>
         <?php endif; ?>

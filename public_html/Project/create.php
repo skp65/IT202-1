@@ -1,4 +1,4 @@
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" class="wrapper">
     <label for="products">Product Name
         <input type="text" id="products" name="name"/>
     </label><br>

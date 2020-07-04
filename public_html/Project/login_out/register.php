@@ -2,7 +2,7 @@
 include("header.php");
 ?>
 
-    <div class="register">
+    <div class="wrapper">
         <form method="POST">
             <div>
                 <label for="fname">First Name</label><br>

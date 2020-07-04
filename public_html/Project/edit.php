@@ -13,38 +13,43 @@ if (isset($_GET["product_id"])) {
     echo "No product_id provided in url, don't forget this or it won't edit.";
 }
 ?>
-    <form method="POST">
+    <form method="POST" class="wrapper">
         <label for="products">Product Name
             <input type="text" id="products" name="name" value="<?php echo get($result, "name"); ?>"/>
-        </label>
+        </label><br>
         <label for="code">Code
             <input type="text" id="code" name="code" value="<?php echo get($result, "code"); ?>"/>
-        </label>
+        </label><br>
+        <label for="img"> Choose an Image
+            <input type="file" id="image" name="image"/>
+        </label><br>
         <label for="q">Quantity
             <input type="number" id="q" name="quantity" value="<?php echo get($result, "quantity"); ?>"/>
-        </label>
+        </label><br>
         <label for="p">Price
             <input type="number" id="p" name="price" value="<?php echo get($result, "price"); ?>"/>
-        </label>
+        </label><br>
         <label for="d">Description
             <input type="text" id="d" name="description" value="<?php echo get($result, "description"); ?>"/>
-        </label>
+        </label><br>
         <input type="submit" name="updated" value="Update Product"/>
     </form>
 <?php
 if (isset($_POST["updated"])) {
     $name = $_POST["name"];
     $code = $_POST["code"];
+    $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
     $quantity = $_POST["quantity"];
     $price = $_POST["price"];
     $description = $_POST["description"];
-    if (!empty($name) && !empty($code) && !empty($quantity) && !empty($price) && !empty($description)) {
+    if (!empty($name) && !empty($code) && !empty($file) && !empty($quantity) && !empty($price) && !empty($description)) {
         try {
-            $stmt = $db->prepare("UPDATE Products set name = :name, code = :code, quantity = :quantity,
+            $stmt = $db->prepare("UPDATE Products set name = :name, code = :code, image= :image, quantity = :quantity,
             price = :price, description = :description where id= :id");
             $result = $stmt->execute(array(
                 ":name" => $name,
                 ":code" => $code,
+                ":image" => $file,
                 ":quantity" => $quantity,
                 ":price" => $price,
                 ":description" => $description,
@@ -65,7 +70,7 @@ if (isset($_POST["updated"])) {
             echo $e->getMessage();
         }
     } else {
-        echo "Name, code, quantity, price and description  must not be empty.";
+        echo "Name, code, image, quantity, price and description  must not be empty.";
     }
 }
 ?>

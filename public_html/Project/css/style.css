@@ -23,30 +23,6 @@
     cursor: pointer;
 
 }
-.register{
-    padding-left: 40%;
-    padding-top: 5%;
-}
-.register form label{
-    color: purple;
-    text-align: justify;
-    font-weight: bold;
-
-}
-.register form input{
-    width: 40%;
-    height: 20px;
-    margin-bottom: 5px;
-    padding: 0px 5px;
-    border: 1px solid darkorchid;
-    color: darkorchid;
-    background: whitesmoke;
-    border-radius: 3px;
-}
-.register input.submit{
-    width: 15%;
-    cursor: pointer;
-}
 input.submit:hover{
     background-color:lightgray;
 }
