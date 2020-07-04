@@ -69,7 +69,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 mysqli_close($connect);
 ?>
 <?php
-}else{
+else{
 ?>
 <?php
 }
@@ -90,3 +90,4 @@ mysqli_close($connect);
 </div>
 </body>
 </html>
+
