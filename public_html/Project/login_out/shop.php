@@ -18,7 +18,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             'name' => $name,
             'code' => $code,
             'price' => $price,
-            'quantity' => 1)
+            'quantity' => 1),
             'image' => $image)
     );
 
