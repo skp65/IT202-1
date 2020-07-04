@@ -46,10 +46,16 @@
 .register input.submit{
     width: 15%;
     cursor: pointer;
-
 }
 input.submit:hover{
     background-color:lightgray;
+}
+.button{
+    width: 15%;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: lightgray;
 }
 .nav{
     margin:0;
