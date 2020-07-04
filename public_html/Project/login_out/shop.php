@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("header.php");
 include('../config1.php');
+include("header.php");
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
@@ -52,7 +52,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     ?>
 
     <?php
-    $result = mysqli_query($connect, "SELECT * FROM Products");
+    $result = mysqli_query($connect, "SELECT * FROM `Products`");
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<div class='product-wrapper'>
         <form method='post' action=''>
