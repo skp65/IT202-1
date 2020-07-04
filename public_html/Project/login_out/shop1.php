@@ -1,144 +1,108 @@
 <?php
 session_start();
-include("header.php");
-if(isset($_POST["add_to_cart"]))
-{
-    if(isset($_SESSION["shopping_cart"]))
-    {
-        $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
-        if(!in_array($_GET["id"], $item_array_id))
-        {
-            $count = count($_SESSION["shopping_cart"]);
-            $item_array = array(
-                'item_id' => $_GET["id"],
-                'item_name' => $_POST["hidden_name"],
-                'item_price' => $_POST["hidden_price"],
-                'item_quantity' => $_POST["quantity"]
-            );
-            $_SESSION["shopping_cart"][$count] = $item_array;
+include('../config1.php');
+$status="";
+if (isset($_POST['code']) && $_POST['code']!=""){
+    $code = $_POST['code'];
+    $result = mysqli_query($db,"SELECT * FROM `products` WHERE `code`='$code'");
+    $row = mysqli_fetch_assoc($result);
+    $name = $row['name'];
+    $code = $row['code'];
+    $price = $row['price'];
+    $image = $row['image'];
+
+//echo "<BR> " . $name . "<BR>" . $code . "<BR>" . $prince . "<Br>" . $image;
+    $cartArray = array(
+        $code=>array(
+            'name'=>$name,
+            'code'=>$code,
+            'price'=>$price,
+            'quantity'=>1,
+            'image'=>$image)
+    );
+
+    if(empty($_SESSION["shopping_cart"])) {
+        $_SESSION["shopping_cart"] = $cartArray;
+        $status = "<div class='box'  style='color:green; border:1px solid green;padding:15px'>Product is added to your cart!</div>";
+    }else{
+        $array_keys = array_keys($_SESSION["shopping_cart"]);
+        if(in_array($code,$array_keys)) {
+            $status = "<div class='box' style='color:red;border:1px solid red; padding:15px'>
+		Product is already added to your cart!</div>";
+        } else {
+            $_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"],$cartArray);
+            $status = "<div class='box' style='color:green;border: 1px solid green;padding:15px'>Product is added to your cart!</div>";
         }
-        else
-        {
-            echo '<script>alert("Item Already Added")</script>';
-        }
-    }
-    else
-    {
-        $item_array = array(
-            'item_id' => $_GET["id"],
-            'item_name' => $_POST["hidden_name"],
-            'item_price' => $_POST["hidden_price"],
-            'item_quantity' => $_POST["quantity"]
-        );
-        $_SESSION["shopping_cart"][0] = $item_array;
+
     }
 }
 
-if(isset($_GET["action"]))
+
+if(isset($_REQUEST['Logout']) && $_REQUEST['Logout']=="logout")
 {
-    if($_GET["action"] == "delete")
-    {
-        foreach($_SESSION["shopping_cart"] as $keys => $values)
-        {
-            if($values["item_id"] == $_GET["id"])
-            {
-                unset($_SESSION["shopping_cart"][$keys]);
-                echo '<script>alert("Item Removed")</script>';
-                echo '<script>window.location="index.php"</script>';
-            }
-        }
-    }
+    unset($_SESSION['Logged']);
+    header("location:index.php?Msg=You are successfully Logout ");
 }
+
 
 ?>
-<!DOCTYPE html>
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='style.css' type='text/css' media='all' />
 </head>
-<body>
-<br />
-<div class="container">
-    <br />
-    <br />
-    <br />
-    <br /><br />
+<body >
+<div style="width:700px; margin:50 auto;">
     <?php
-    $query = "SELECT * FROM Products ORDER BY id ASC";
-    $result = mysqli_query($db, $query);
-    if(mysqli_num_rows($result) > 0)
-    {
-        while($row = mysqli_fetch_array($result))
-        {
-            ?>
-            <div class="col-md-4">
-                <form method="post" action="index.php?action=add&id=<?php echo $row["id"]; ?>">
-                    <div style="border:3px solid #5cb85c; background-color:whitesmoke; border-radius:5px; padding:16px;" align="center">
-                        <img src="images/<?php echo $row["image"]; ?>" class="img-responsive" /><br />
 
-                        <h4 class="text-info"><?php echo $row["name"]; ?></h4>
-
-                        <h4 class="text-danger">$ <?php echo $row["price"]; ?></h4>
-
-                        <input type="text" name="quantity" value="1" class="form-control" />
-
-                        <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>" />
-
-                        <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>" />
-
-                        <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
-
-                    </div>
-                </form>
-            </div>
-            <?php
-        }
-    }
     ?>
-    <div style="clear:both"></div>
-    <br />
-    <h3>Order Details</h3>
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <tr>
-                <th width="40%">Product Name</th>
-                <th width="10%">Quantity</th>
-                <th width="20%">Price</th>
-                <th width="15%">Total</th>
-                <th width="5%">Action</th>
-            </tr>
-            <?php
-            if(!empty($_SESSION["shopping_cart"]))
-            {
-                $total = 0;
-                foreach($_SESSION["shopping_cart"] as $keys => $values)
-                {
-                    ?>
-                    <tr>
-                        <td><?php echo $values["item_name"]; ?></td>
-                        <td><?php echo $values["item_quantity"]; ?></td>
-                        <td>$ <?php echo $values["item_price"]; ?></td>
-                        <td>$ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
-                        <td><a href="index.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
-                    </tr>
-                    <?php
-                    $total = $total + ($values["item_quantity"] * $values["item_price"]);
-                }
-                ?>
-                <tr>
-                    <td colspan="3" align="right">Total</td>
-                    <td align="right">$ <?php echo number_format($total, 2); ?></td>
-                    <td></td>
-                </tr>
-                <?php
-            }
-            ?>
-        </table>
+    <form>
+        <button type='submit' name="Logout" value="logout" name="logout" class='logout'>Logout</button>
+    </form>
+    <?php
+    if(!empty($_SESSION["shopping_cart"])) {
+        $cart_count = count(array_keys($_SESSION["shopping_cart"]));
+        ?>
+        <div class="cart_div">
+            <a href="cart.php"><meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                <button style="font-size:24px"><i class="fa fa-shopping-cart"></i></button>
+            </a>
+        </div>
+
+        <?php
+        echo "<BR><BR>";
+    }
+
+    $result = mysqli_query($db,"SELECT * FROM `products`");
+    while($row = mysqli_fetch_assoc($result)){
+        echo "<div class='product_wrapper'>
+			  <form method='post' action=''>
+			  <input type='hidden' name='code' value=".$row['code']." />
+			  <div class='image'><img src='".$row['image']."' /></div>
+			  <div class='name'>".$row['name']."</div>
+		   	  <div class='price'>$".$row['price']."</div>
+			  <button type='submit' class='buy'>Buy Now</button>
+			  </form>
+		   	  </div>";
+    }
+    mysqli_close($db);
+    ?>
+
+    <div style="clear:both;"></div>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <div class="message_box" style="margin:10px 0px;">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <button style="font-size:24px"><i class="fa fa-shopping-cart"></i></button>
+            </head>
+    </html>
+
+    <div class="message_box" style="margin:10px 0px;">
+        <?php echo $status; ?>
     </div>
+
 </div>
-</div>
-<br />
 </body>
 </html>
