@@ -1,12 +1,13 @@
 <?php
 session_start();
-//echo var_export($dbdatabase,true);
+echo var_export($dbdatabase,true);
 include("header.php");
 $status = "";
+file_get_contents(__DIR__."../sort.php")
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
-    $result = mysqli_query($db, "SELECT * FROM `Products` WHERE `code`='$code'");
-    $row = mysqli_fetch_assoc($result);
+    $result = file_get_contents(__DIR__ . "/query/shop.sql");
+    $row = $stmt ->fetchAll(PDO::FETCH_ASSOC);
     $name = $row['name'];
     $code = $row['code'];
     $image = $row['image'];
@@ -36,7 +37,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         }
     }
 }
-
 ?>
 <html>
 <body>
@@ -46,13 +46,12 @@ if (!empty($_SESSION["shopping_cart"])) {
 $cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
 
 <div class="cart_div">
-    <a href="shop.php"><img src="../images/cart.jpg" alt="cart"/> Cart<span>
+    <a href="cart.php"><img src="../images/cart.jpg" alt="cart"/> Cart<span>
     <?php echo $cart_count; ?></span></a>
 </div>
 <?php
 }
 ?>
-
 <?php
 $result = mysqli_query($db, "SELECT * FROM `Products`");
 while ($row = mysqli_fetch_assoc($result)) {

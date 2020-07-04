@@ -59,6 +59,7 @@ elseif (isset($search)) {
 <?php if (isset($results) && count($results) > 0): ?>
     <table border="1" cellspacing="2" cellpadding="2">
         <tr>
+            <th>Image</th>
             <th>Product Name</th>
             <th>Quantity</th>
             <th>Price</th>
@@ -66,6 +67,7 @@ elseif (isset($search)) {
         </tr>
     <?php foreach($results as $row):?>
             <tr>
+                <td><?php echo get($row, "image") ?></td>
                 <td><?php echo get($row, "name") ?></td>
                 <td><?php echo get($row, "quantity"); ?></td>
                 <td><?php echo get($row, "price"); ?></td>
