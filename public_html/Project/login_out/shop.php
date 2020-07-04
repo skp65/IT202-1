@@ -76,15 +76,6 @@ if (isset($_SESSION['Logged']))
     <?php
 }else{
 ?>
-<div>
-    <h1>
-    <?php
-        if (isset($_REQUEST['Msg'])) {
-            echo "<font color='red'>" . $_REQUEST['Msg'] . "</font>";
-        }
-        ?>
-    </h1>
-</div>
 <?php
     }
     ?>
