@@ -40,7 +40,7 @@ if (isset($_POST["updated"])) {
     $description = $_POST["description"];
     if (!empty($name) && !empty($code) && !empty($file) && !empty($price) && !empty($description)) {
         try {
-            $stmt = $db->prepare("UPDATE products set name = :name, , code = :code, image= :image,
+            $stmt = $db->prepare("UPDATE Products set name = :name, code = :code, image= :image,
             price = :price, description = :description where id= :id");
             $result = $stmt->execute(array(
                 ":name" => $name,

@@ -6,7 +6,7 @@ $product_id = -1;
 $result = array();
 if (isset($_GET["product_id"])) {
     $product_id = $_GET["product_id"];
-    $stmt = $db->prepare("SELECT * FROM products where id = :id");
+    $stmt = $db->prepare("SELECT * FROM Products where id = :id");
     $stmt->execute([":id" => $product_id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 } else {
@@ -41,7 +41,7 @@ if (isset($_POST["delete"])) {
         try{
             if($product_id > 0) {
                 if($delete){
-                    $stmt = $db->prepare("DELETE from products where id=:id");
+                    $stmt = $db->prepare("DELETE from Products where id=:id");
                     $result = $stmt->execute(array(
                         ":id" => $product_id
                     ));

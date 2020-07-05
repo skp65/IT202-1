@@ -52,8 +52,6 @@ if (isset($_POST["register"])) {
                 $stmt->execute(array(
                     ":email" => $email,
                     ":password" => $hash, //Don't save the raw password $password
-                    ":fname" => $fname,
-                    ":lname" => $lname
                 ));
                 $e = $stmt->errorInfo();
                 if ($e[0] != "00000") {
