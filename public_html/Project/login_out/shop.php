@@ -9,14 +9,14 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
     $code = $results['code'];
     $name = $results['name'];
-    $image = $results['image'];
+    //$image = $results['image'];
     $price = $results['price'];
 
     $cartArray = array(
         $code => array(
             'name' => $name,
             'code' => $code,
-            'image' => $image,
+            //'image' => $image,
             'price' => $price,
             'quantity' => 1)
     );
@@ -51,7 +51,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<div class='product-wrapper'>
         <form method='post' action=''>
             <input type='hidden' name='code' value=" . $row['code'] . " />
-            <div class='image'><img src='" . $row['image'] ."'/></div>
+            <!--<div class='image'><img src='" . $row['image'] ."'/></div>-->
             <div class='name'>" . $row['name'] . "</div>
             <div class='price'>$" . $row['price'] . "</div>
             <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>

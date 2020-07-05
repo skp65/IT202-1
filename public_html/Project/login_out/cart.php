@@ -24,7 +24,7 @@ if (isset($_POST['action']) && $_POST['action'] == "change") {
 }
 if (isset($_REQUEST['Logout']) && $_REQUEST['Logout'] == "logout") {
     unset($_SESSION['Logged']);
-    header("location:index.php?Msg=You are successfully Logout ");
+    header("location:login.php?Msg=You are successfully Logout ");
 }
 ?>
 <html>
@@ -49,7 +49,7 @@ if (!empty($_SESSION["shopping_cart"])) {
             <td colspan=5 align="right">
                 <div class="cart_div">
                     <a href="shop.php">
-                        <img src="../images/cart.jpg"/> Cart
+                        <img src="../images/cart.jpg" style="width: 100px"/> Cart
                         <span><?php echo $cart_count; ?></span></a>
                 </div>
             </td>
@@ -64,7 +64,7 @@ if (!empty($_SESSION["shopping_cart"])) {
             foreach ($_SESSION["shopping_cart"] as $product) {
                 ?>
                 <tr>
-                    <td><img src='<?php echo $product["image"]; ?>' width="50" height="40"/></td>
+                    <!--<td><img src='<?php /*echo $product["image"];*/ ?>' width="50" height="40"/></td>-->
                     <td><?php echo $product["name"]; ?><br/>
                         <form method='post' action=''>
                             <input type='hidden' name='code' value="<?php echo $product["code"]; ?>"/>
