@@ -1,5 +1,5 @@
 <?php
-include ("header.php");
+include("header.php");
 #$search = "";
 if (isset($_POST["search"])) {
     $search = $_POST["search"];
@@ -17,7 +17,7 @@ if (isset($_POST["search"])) {
     </form>
 <?php
 if ($_POST['order'] == 'Ascending') {
-    require("common.inc.php");
+    //require("common.inc.php");
     $query = file_get_contents(__DIR__ . "/query/asc.sql");
     if (isset($query) && !empty($query)) {
         try {
@@ -30,7 +30,7 @@ if ($_POST['order'] == 'Ascending') {
     }
 }
 elseif ($_POST['order']=='Descending') {
-    require("common.inc.php");
+    //require("common.inc.php");
     $query = file_get_contents(__DIR__ . "/query/desc.sql");
     if (isset($query) && !empty($query)) {
         try {
@@ -43,7 +43,7 @@ elseif ($_POST['order']=='Descending') {
     }
 }
 elseif (isset($search)) {
-    require("common.inc.php");
+    //require("common.inc.php");
     $query = file_get_contents(__DIR__ . "/query/search.sql");
     if (isset($query) && !empty($query)) {
         try {
