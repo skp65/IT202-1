@@ -2,8 +2,7 @@
 session_start();
 include("header.php");
 $status = "";
-if (isset($_POST['code']) && $_POST['code'] != "") {
-    $code = $_POST['code'];
+if (isset($_POST['id']) && $_POST['id'] != "") {
     $id = $_POST['id'];
     $stmt = getDB()->prepare ("select * from Products where id= '$id'");
     $stmt->execute ();
@@ -43,15 +42,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 <div>
 <?php
 if (!empty($_SESSION["shopping_cart"])) {
-$cart_count = count(array_keys($_SESSION["shopping_cart"])); ?>
-
-<div class="cart_div">
-    <a href="cart.php"><img src="../images/cart.jpg" alt="cart"/> Cart<span>
-    <?php echo $cart_count; ?></span></a>
-</div>
-<?php
-}
-?>
+$cart_count = count(array_keys($_SESSION["shopping_cart"])) } ;?>
 <?php
 $stmt = getDB()->prepare ("select * from Products");
 $stmt->execute();
@@ -59,8 +50,8 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     echo "<div class='product-wrapper'>
         <form method='post' action=''>
-            <input type='hidden' name='code' value=" . $row['id'] . " />
-            <div class='image'><img src='" . $row['image'] . "' /></div>
+            <input type='hidden' name='id' value=" . $row['id'] . " />
+            <div class='image'><img src='" . $row['image'] ."'/></div>
             <div class='name'>" . $row['name'] . "</div>
             <div class='price'>$" . $row['price'] . "</div>
             <button type='submit' class='buy'>Add to Cart</button>
