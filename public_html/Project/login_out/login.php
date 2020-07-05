@@ -24,10 +24,8 @@ if (isset($_POST["login"])) {
         $password = $_POST["password"];
         $email = $_POST["email"];
         //require("config.php");
-        $connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
         try {
-            $db = new PDO($connection_string, $dbuser, $dbpass);
-            $stmt = $db->prepare("SELECT * FROM Users where email = :email LIMIT 1");
+            $stmt = getDB()->prepare("SELECT * FROM Users where email = :email LIMIT 1");
             $stmt->execute(array(
                 ":email" => $email
             ));
@@ -45,7 +43,7 @@ if (isset($_POST["login"])) {
                             "first_name" => $result["first_name"]
                         );
                         echo var_export($_SESSION, true);
-                        header("Location: home.php");   //redirects to home.php
+                        header("Location: shop.php");   //redirects to shop.php
                     } else {
                         echo "<div>Invalid password!</div>";
                     }
