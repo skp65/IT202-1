@@ -2,20 +2,20 @@
 session_start();
 include("header.php");
 $status = "";
-if (isset($_POST['id']) && $_POST['id'] != "") {
-    $id = $_POST['id'];
-    $stmt = getDB()->prepare ("select * from Products where id= '$id'");
+if (isset($_POST['code']) && $_POST['code'] != "") {
+    $code = $_POST['code'];
+    $stmt = getDB()->prepare ("select * from Products where id= '$code'");
     $stmt->execute ();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $id = $results['id'];
+    $code = $results['code'];
     $name = $results['name'];
     $image = $results['image'];
     $price = $results['price'];
 
     $cartArray = array(
         $code => array(
-            'id' => $id,
             'name' => $name,
+            'code' => $code,
             'image' => $image,
             'price' => $price,
             'quantity' => 1)
@@ -50,7 +50,7 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     echo "<div class='product-wrapper'>
         <form method='post' action=''>
-            <input type='hidden' name='id' value=" . $row['id'] . " />
+            <input type='hidden' name='code' value=" . $row['code'] . " />
             <div class='image'><img src='" . $row['image'] ."'/></div>
             <div class='name'>" . $row['name'] . "</div>
             <div class='price'>$" . $row['price'] . "</div>
