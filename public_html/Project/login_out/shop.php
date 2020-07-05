@@ -47,7 +47,7 @@ $cart_count = count(array_keys($_SESSION["shopping_cart"]));
 <?php
 $stmt = getDB()->prepare ("select * from Products");
 $stmt->execute();
-while($row = $stmt->fetchALL(PDO::FETCH_ASSOC)) {
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<div class='product-wrapper'>
         <form method='post' action=''>
             <input type='hidden' name='code' value=" . $row['code'] . " />
