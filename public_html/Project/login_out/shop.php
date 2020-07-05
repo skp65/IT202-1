@@ -1,14 +1,14 @@
 <?php
-//session_start();
+session_start();
 include("header.php");
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
-    $stmt = getDB()->prepare ("select * from Products where id= '$code'");
+    $stmt = getDB()->prepare ("select * from Products where code= '$code'");
     $stmt->execute ();
-    $results = $stmt->fetchALL(PDO::FETCH_ASSOC);
-    $code = $results['code'];
+    $results = $stmt->fetch(PDO::FETCH_ASSOC);
     $name = $results['name'];
+    $code = $results['code'];
     //$image = $results['image'];
     $price = $results['price'];
 

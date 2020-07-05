@@ -45,7 +45,7 @@ if (isset($_POST["login"])) {
                             "first_name" => $result["first_name"]
                         );
                         echo var_export($_SESSION, true);
-                        header("Location: shop.php");   //redirects to shop.php
+                        header("Location: home.php");   //redirects to home.php
                     } else {
                         echo "<div>Invalid password!</div>";
                     }
