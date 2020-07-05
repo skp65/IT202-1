@@ -39,7 +39,7 @@ if (isset($_POST["register"])) {
             //require("config.php");
             try {
                 $hash = password_hash($password, PASSWORD_BCRYPT);
-                $stmt = getDB()->prepare("UPDATE Users set password = ':password' where email = ':email'");
+                $stmt = getDB()->prepare("UPDATE Users set password = ':password' where id = ':id'");
                 $stmt->execute(array(
                     ':email' => $email,
                     ':password' => $hash //Don't save the raw password $password
