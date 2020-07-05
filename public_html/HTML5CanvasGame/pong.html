@@ -40,7 +40,8 @@
     var paddleHeight = 60;  //4th - same as above
     var ballSize = 5;  //4th - decreased ball size
     var ballSpeed = 5;  //4nd change - changed ball speed
-    var paddleSpeed = 4;//4th
+    var aispeed = 2.5;  //4th change - changing ai paddle speed
+    var pspeed = 4;    //4th change - changing player speed.
     var drawables = [];
     // Key Codes
     var W = 87;
@@ -196,8 +197,10 @@
             let paddleHalf = paddleHeight / 2;
             if (ball.y > rightPaddle.y + paddleHalf) {
                 rightPaddle.y += rightPaddle.s;
+                rightPaddle.y += rightPaddle.s * aispeed;   //4th change
             } else if (ball.y < rightPaddle.y) {
                 rightPaddle.y -= rightPaddle.s;
+                rightPaddle.y += rightPaddle.s * aispeed;   //4th change
             }
         }
         clampToCanvas(rightPaddle);
@@ -205,16 +208,16 @@
 
     function movePaddle() {
         if (keys.W) {
-            leftPaddle.y -= leftPaddle.s;
+            leftPaddle.y -= leftPaddle.s * pspeed;  //4th change
         }
         if (keys.S) {
-            leftPaddle.y += leftPaddle.s;
+            leftPaddle.y += leftPaddle.s * pspeed;  //4th change
         }
         if (keys.UP) {
-            leftPaddle.y -= leftPaddle.s;
+            leftPaddle.y -= leftPaddle.s * pspeed;  //4th change
         }
         if (keys.DOWN) {
-            leftPaddle.y += leftPaddle.s;
+            leftPaddle.y += leftPaddle.s * pspeed;  //4th change
         }
         clampToCanvas(leftPaddle);
     }
