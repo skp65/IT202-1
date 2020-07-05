@@ -6,7 +6,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
     $stmt = getDB()->prepare ("select * from Products where id= '$code'");
     $stmt->execute ();
-    $results = $stmt->fetch(PDO::FETCH_ASSOC);
+    $results = $stmt->fetchALL(PDO::FETCH_ASSOC);
     $code = $results['code'];
     $name = $results['name'];
     //$image = $results['image'];
@@ -51,7 +51,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<div class='product-wrapper'>
         <form method='post' action=''>
             <input type='hidden' name='code' value=" . $row['code'] . " />
-            <!--<div class='image'><img src='" . $row['image'] ."'/></div>-->
+            <div class='image'><img src='" . $row['image'] ."'/></div>
             <div class='name'>" . $row['name'] . "</div>
             <div class='price'>$" . $row['price'] . "</div>
             <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
