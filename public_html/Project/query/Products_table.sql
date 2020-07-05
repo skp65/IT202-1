@@ -1,6 +1,8 @@
 CREATE TABLE Products (
 ID int auto_increment,
 name varchar(100) NOT NULL unique,
+code varchar (100) NOT NULL,
+image varchar (100),
 quantity int default 0,
 price decimal(10,2) default 0.00,
 description TEXT,
