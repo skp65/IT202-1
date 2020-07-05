@@ -95,7 +95,7 @@ if (isset($_GET["action"])){
             $result = $stmt->rowCount();
             if($result > 0) {
 
-                while ($row = mysqli_fetch_array($result)) {
+                while ($row = $stmt->fetchALL($result)) {
 
                     ?>
                     <div class="col-md-3">
