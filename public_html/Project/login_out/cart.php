@@ -49,7 +49,7 @@ if (!empty($_SESSION["shopping_cart"])) {
             <td colspan=5 align="right">
                 <div class="cart_div">
                     <a href="cart.php">
-                        <img src="../images/cart.jpg" style="width: 100px"/> Cart
+                        <img src="../images/cart.jpg" style="width: 25px"/>
                         <span><?php echo $cart_count; ?></span></a>
                 </div>
             </td>
@@ -64,7 +64,7 @@ if (!empty($_SESSION["shopping_cart"])) {
             foreach ($_SESSION["shopping_cart"] as $product) {
                 ?>
                 <tr>
-                    <!--<td><img src='<?php /*echo $product["image"];*/ ?>' width="50" height="40"/></td>-->
+                    <td><img src='<?php echo $product["image"]; ?>' width="50" height="40"/></td>
                     <td><?php echo $product["name"]; ?><br/>
                         <form method='post' action=''>
                             <input type='hidden' name='code' value="<?php echo $product["code"]; ?>"/>
