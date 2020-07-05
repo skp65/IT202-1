@@ -6,7 +6,7 @@ $product_id = -1;
 $result = array();
 if (isset($_GET["product_id"])) {
     $product_id = $_GET["product_id"];
-    $stmt = $db->prepare("SELECT * FROM Products where id = :id");
+    $stmt = $db->prepare("SELECT * FROM products where id = :id");
     $stmt->execute([":id" => $product_id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 } else {
@@ -19,9 +19,6 @@ if (isset($_GET["product_id"])) {
         </label><br>
         <label for="code">Code
             <input type="text" id="code" name="code" value="<?php echo get($result, "code"); ?>"/>
-        </label><br>
-        <label for="q">Quantity
-            <input type="number" id="q" name="quantity" value="<?php echo get($result, "quantity"); ?>"/>
         </label><br>
         <label for="p">Price
             <input type="number" id="p" name="price" value="<?php echo get($result, "price"); ?>"/>
@@ -38,14 +35,13 @@ if (isset($_POST["delete"])) {
     $delete = isset($_POST["delete"]);
     $name = $_POST["name"];
     $code = $_POST["code"];
-    $quantity = $_POST["quantity"];
     $price = $_POST["price"];
     $description = $_POST["description"];
-    if (!empty($name) && !empty($code) && !empty($quantity) && !empty($price) && !empty($description)) {
+    if (!empty($name) && !empty($code) && !empty($price) && !empty($description)) {
         try{
             if($product_id > 0) {
                 if($delete){
-                    $stmt = $db->prepare("DELETE from Products where id=:id");
+                    $stmt = $db->prepare("DELETE from products where id=:id");
                     $result = $stmt->execute(array(
                         ":id" => $product_id
                     ));

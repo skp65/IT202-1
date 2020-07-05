@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 include("header.php");
 $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
@@ -54,7 +54,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <div class='image'><img src='" . $row['image'] ."'/></div>
             <div class='name'>" . $row['name'] . "</div>
             <div class='price'>$" . $row['price'] . "</div>
-            <button type='submit' class='buy'>Add to Cart</button>
+            <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
 }
