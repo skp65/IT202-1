@@ -68,7 +68,7 @@ elseif (isset($search)) {
     <?php foreach($results as $row):?>
             <tr>
                 <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" 
-                alt="Image" style="width:100px; height:100px;">' ?></td>
+                alt="Image" style="width:250px; height:500px;">' ?></td>
                 <td><?php echo get($row, "name") ?></td>
                 <td><?php echo get($row, "price"); ?></td>
                 <td><?php echo get($row, "description");?></td>
