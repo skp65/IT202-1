@@ -42,7 +42,8 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 <div>
 <?php
 if (!empty($_SESSION["shopping_cart"])) {
-$cart_count = count(array_keys($_SESSION["shopping_cart"])) } ;?>
+$cart_count = count(array_keys($_SESSION["shopping_cart"]));
+}?>
 <?php
 $stmt = getDB()->prepare ("select * from Products");
 $stmt->execute();
