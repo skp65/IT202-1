@@ -47,7 +47,7 @@ $cart_count = count(array_keys($_SESSION["shopping_cart"]));
     <div class="cart_div">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 <a href="cart.php">
-                    <img src="../images/cart.jpg" style="width: 25px"/>
+                    <img src="../images/cart.jpg" style="width: 50px"/>
                     <span><?php echo $cart_count; ?></span></a>
     </div>
 <?php
@@ -57,7 +57,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<div class='product-wrapper'>
         <form method='post' action=''>
             <input type='hidden' name='code' value=" . $row['code'] . " />
-            <div class='image'><img src=" . $row['image'] ."/></div>
+            <div class='image'><img src=" . $row['image'] . "/></div>
             <div class='name'>" . $row['name'] . "</div>
             <div class='price'>$" . $row['price'] . "</div>
             <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
