@@ -38,10 +38,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 }
 ?>
 <html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
 <body>
 <div>
     <?php
@@ -62,7 +58,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         echo "<div class='product-wrapper'>
         <form method='post' action='' >
             <input type='hidden' name='code' value=" . $row['code'] . " />
-            <div class='image'><img src='" . $row['image'] . "'/></div>
+            <div class='image'><img src='" . $row['image'] . "' style='width: 150px; height: 150px;'/></div>
             <div class='name'>" . $row['name'] . "</div>
             <div class='price'>$" . $row['price'] . "</div>
             <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
