@@ -58,9 +58,11 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         echo "<div class='product-wrapper'>
         <form method='post' action='' >
             <input type='hidden' name='code' value=" . $row['code'] . " />
-            <div class='image'><img src='" . $row['image'] . "' style='width: 150px; height: 150px;'/></div>
-            <div class='name'>" . $row['name'] . "</div>
-            <div class='price'>$" . $row['price'] . "</div>
+            <div class='row'>
+            <div class='column'>
+            <img src='" . $row['image'] . "' style='width: 150px; height: 150px; '/></div></div>
+            <div class='column'>" . $row['name'] . "</div>
+            <div class='column'>$" . $row['price'] . "</div>
             <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
