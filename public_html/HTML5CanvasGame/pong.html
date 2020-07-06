@@ -40,7 +40,7 @@
     var paddleHeight = 60;  //4th - same as above
     var ballSize = 5;  //4th - decreased ball size
     var ballSpeed = 5;  //4nd change - changed ball speed
-    var paddlespeed = 5;    //4th change
+    var paddleSpeed = 4;//4th
     var drawables = [];
     // Key Codes
     var W = 87;
@@ -197,7 +197,7 @@
             if (ball.y > rightPaddle.y + paddleHalf) {
                 rightPaddle.y += rightPaddle.s;
             } else if (ball.y < rightPaddle.y) {
-                rightPaddle.y += rightPaddle.s;
+                rightPaddle.y -= rightPaddle.s;
             }
         }
         clampToCanvas(rightPaddle);
