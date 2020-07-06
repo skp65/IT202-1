@@ -55,7 +55,7 @@ $stmt = getDB()->prepare ("select * from Products");
 $stmt->execute();
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<div class='product-wrapper'>
-        <form method='post' action='' id='form'>
+        <form method='post' action='' >
             <input type='hidden' name='code' value=" . $row['code'] . " />
             <div class='image'><img src='" . $row['image']."'/></div>
             <div class='name'>" . $row['name'] . "</div>
@@ -67,6 +67,11 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 ?>
 <div style="clear:both;"></div>
 <!DOCTYPE html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </head>
 <div class="message_box" style="margin:10px 0px;">
     <?php echo $status; ?>
 </div>

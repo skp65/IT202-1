@@ -129,10 +129,9 @@ h4{
     text-decoration:underline;
 }
 .image{
-    width: 150px;
-    height: 150px;
-    text-align: center;
+    width: 100px;
+    height: 100px;
 }
-.name .price{
+.name{
     text-align: center;
 }
