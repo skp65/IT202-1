@@ -55,7 +55,7 @@ $stmt = getDB()->prepare ("select * from Products");
 $stmt->execute();
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<div class='product-wrapper'>
-        <form method='post' action=''>
+        <form method='post' action='' id='form'>
             <input type='hidden' name='code' value=" . $row['code'] . " />
             <div class='image'><img src='" . $row['image']."'/></div>
             <div class='name'>" . $row['name'] . "</div>
