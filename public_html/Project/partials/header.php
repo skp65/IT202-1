@@ -3,7 +3,7 @@ require_once (__DIR__."/../includes/common.inc.php");
 $logged_in = Common::is_logged_in(false);
 ?>
 <head>
-    <link rel="stylesheet" type="text/css" href="/../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <style>
     body {

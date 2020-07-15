@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "partials/header.php");
+require_once(__DIR__ . "/partials/header.php");
 $status = "";
 if (isset($_POST['action']) && $_POST['action'] == "remove") {
     if (!empty($_SESSION["shopping_cart"])) {
@@ -13,7 +13,6 @@ if (isset($_POST['action']) && $_POST['action'] == "remove") {
         }
     }
 }
-
 if (isset($_POST['action']) && $_POST['action'] == "change") {
     foreach ($_SESSION["shopping_cart"] as &$value) {
         if ($value['code'] === $_POST["code"]) {

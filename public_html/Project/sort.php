@@ -1,5 +1,4 @@
 <?php
-require_once(__DIR__ . "partials/header.php");
 $search = "";
 if (isset($_POST["search"])) {
     $search = $_POST["search"];
@@ -20,6 +19,7 @@ if (isset($_POST["search"])) {
 
 <?php
 if (isset($search)) {
+    require_once(__DIR__ . "/partials/header.php");
     try {
         $order = $_POST["order"];
         $mapped_col = "name";
