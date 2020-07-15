@@ -5,7 +5,7 @@ include_once(__DIR__."/partials/header.php");
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <style>
-        body {
+        .wrapper {
             background-image: url('/images/1.jpg');
         }
     </style>

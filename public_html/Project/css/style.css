@@ -128,3 +128,6 @@ h4{
 .cart .remove:hover {
     text-decoration:underline;
 }
+body{
+    background-image: url('/../images/1.jpg');
+}
