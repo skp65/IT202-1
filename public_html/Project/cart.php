@@ -27,6 +27,14 @@ if (isset($_REQUEST['Logout']) && $_REQUEST['Logout'] == "logout") {
 }
 ?>
 <html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        body {
+            background-image: url('/../images/1.jpg');
+        }
+    </style>
+</head>
 <body>
 <h2>Shopping Cart</h2>
 <a href="shop.php">

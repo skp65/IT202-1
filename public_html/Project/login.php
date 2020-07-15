@@ -4,6 +4,11 @@ include_once(__DIR__."/partials/header.php");
     <head>
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
+    <style>
+        body {
+            background-image: url('/images/1.jpg');
+        }
+    </style>
     <h4>Login to your Account</h4>
     <div class="wrapper">
         <form method="POST" name="form">
@@ -17,6 +22,8 @@ include_once(__DIR__."/partials/header.php");
             </div>
             <div>
                 <input class="submit" type="submit" name="submit" value="Login"/>
+                <input type="button" class="submit" onclick="window.location.href='changepwd.php'"
+                       value="Change Password"/>
             </div>
         </form>
     </div>

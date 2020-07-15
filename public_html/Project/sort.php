@@ -4,6 +4,14 @@ if (isset($_POST["search"])) {
     $search = $_POST["search"];
 }
 ?>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<style>
+    body {
+        background-image: url('/images/1.jpg');
+    }
+</style>
 <form method="POST">
     <input type="text" name="search" placeholder="Search for Products"
            value="<?php echo $search; ?>"/>

@@ -4,9 +4,22 @@ include_once(__DIR__."/partials/header.php");
     <head>
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
+    <style>
+        body {
+            background-image: url('/images/1.jpg');
+        }
+    </style>
 
     <div class="wrapper">
         <form method="POST">
+            <div>
+                <label for="fname">First Name</label><br>
+                <input type="text" id="fname" name="fname" placeholder="First Name" required/>
+            </div>
+            <div>
+                <label for="lname">Last Name</label><br>
+                <input type="text" id="lname" name="lname" placeholder="Last Name" required/>
+            </div>
             <div>
                 <label for="email">Email</label><br>
                 <input type="email" id="email" name="email" placeholder="Email" required/>

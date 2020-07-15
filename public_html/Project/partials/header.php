@@ -2,14 +2,6 @@
 require_once (__DIR__."/../includes/common.inc.php");
 $logged_in = Common::is_logged_in(false);
 ?>
-<head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-</head>
-<style>
-    body {
-        background-image: url('/../images/1.jpg');
-    }
-</style>
 <nav>
     <ul class="nav">
         <?php if($logged_in):?>
@@ -18,6 +10,9 @@ $logged_in = Common::is_logged_in(false);
             </li>
             <li>
                 <a href="<?php echo Common::url_for("shop");?>">Shop</a>
+            </li>
+            <li>
+                <a href="<?php echo Common::url_for("sort");?>">Search Products</a>
             </li>
         <?php endif; ?>
         <?php if(!$logged_in):?>

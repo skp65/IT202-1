@@ -1,6 +1,14 @@
 <?php
-include("header.php");
+include_once(__DIR__."/partials/header.php");
 ?>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <style>
+        body {
+            background-image: url('/images/1.jpg');
+        }
+    </style>
 
     <div class="wrapper">
         <form method="POST">
@@ -20,7 +28,7 @@ include("header.php");
                 <input class="submit" type="submit" name="register" value="Change Password"/>
                 <input type="button" class="submit"
                        onclick="window.location.href='login.php'"
-                       value="Go to Login"/>
+                       value="Login"/>
             </div>
         </form>
     </div>
@@ -48,13 +56,13 @@ if (isset($_POST["register"])) {
                 if ($e[0] != "00000") {
                     echo var_export($e, true);
                 } else {
-                    echo "<div>Password Changed! </div>";
+                    echo "<div style='text-align: center'>Password Changed! </div>";
                 }
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
         } else {
-            echo "<div>Passwords do not match</div>";
+            echo "<div style='text-align: center'>Passwords do not match</div>";
         }
     }
 }
