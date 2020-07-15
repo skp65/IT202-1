@@ -1,5 +1,5 @@
 <?php
-include("header.php");
+require_once(__DIR__ . "partials/header.php");
 $status = "";
 if (isset($_POST['action']) && $_POST['action'] == "remove") {
     if (!empty($_SESSION["shopping_cart"])) {

@@ -23,7 +23,7 @@ class DBH{
     }
     public static function login($email, $pass){
         try {
-            $query = file_get_contents(__DIR__ . "/../sql/queries/login.sql");
+            $query = file_get_contents(__DIR__ . "/../sql/query/login.sql");
             $stmt = DBH::getDB()->prepare($query);
             $stmt->execute([":email" => $email]);
             DBH::verify_sql($stmt);
@@ -53,7 +53,7 @@ class DBH{
     }
     public static function register($email, $pass){
         try {
-            $query = file_get_contents(__DIR__ . "/../sql/queries/register.sql");
+            $query = file_get_contents(__DIR__ . "/../sql/query/register.sql");
             $stmt = DBH::getDB()->prepare($query);
             $pass = password_hash($pass, PASSWORD_BCRYPT);
             $result = $stmt->execute([":email" => $email, ":password" => $pass]);
