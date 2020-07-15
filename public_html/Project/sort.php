@@ -1,29 +1,17 @@
 <?php
-$search = "";
+//$search = "";
 if (isset($_POST["search"])) {
     $search = $_POST["search"];
 }
 ?>
-<head>
+<!--<head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <style>
     body {
         background-image: url('/images/1.jpg');
     }
-</style>
-<form method="POST">
-    <input type="text" name="search" placeholder="Search for Products"
-           value="<?php echo $search; ?>"/>
-    <select name="col">
-        <option value="name">Name</option>
-    </select>
-    <select name="order">
-        <option value="1">Asc</option>
-        <option value="0">Desc</option>
-    </select>
-    <input type="submit" value="Search"/>
-</form>
+</style>-->
 
 <?php
 if (isset($search)) {
@@ -39,7 +27,7 @@ if (isset($search)) {
             $query .= " DESC";
         }
         $stmt = getDB()->prepare($query);
-        $stmt->execute([":thing"=>$search]);
+        $stmt->execute([":name"=>$search]);
         echo var_export($stmt->errorInfo());
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
@@ -47,6 +35,18 @@ if (isset($search)) {
     }
 }
 ?>
+<form method="POST">
+    <input type="text" name="search" placeholder="Search for Products"
+           value="<?php echo $search; ?>"/>
+    <select name="col">
+        <option value="name">Name</option>
+    </select>
+    <select name="order">
+        <option value="1">Asc</option>
+        <option value="0">Desc</option>
+    </select>
+    <input type="submit" value="Search"/>
+</form>
 
 <?php if (isset($results) && count($results) > 0): ?>
     <table border="1" cellspacing="2" cellpadding="2">
