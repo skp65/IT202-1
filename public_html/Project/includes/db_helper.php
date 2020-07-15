@@ -30,14 +30,7 @@ class DBH{
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($user) {
                 if (password_verify($pass, $user["password"])) {
-                    unset($user["password"]);//TODO remove password before we return results
-                    //TODO get roles
-                    $query = file_get_contents(__DIR__ . "/../sql/queries/get_roles.sql");
-                    $stmt = DBH::getDB()->prepare($query);
-                    $stmt->execute([":user_id"=>$user["id"]]);
-                    DBH::verify_sql($stmt);
-                    $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    $user["roles"] = $roles;
+                    unset($user["password"]); /**TODO remove password before we return results**/
                     return DBH::response($user);
                 } else {
                     return DBH::response(NULL, 403, "Invalid email or password");
