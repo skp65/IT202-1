@@ -1,9 +1,9 @@
 <?php
 include_once(__DIR__."/partials/header.php");
 ?>
-    <head>
+    <!--<head>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-    </head>
+    </head>-->
     <h4>Login to your Account</h4>
     <div class="wrapper">
         <form method="POST" name="form">

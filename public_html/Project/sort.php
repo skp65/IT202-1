@@ -15,7 +15,7 @@ if (isset($_POST["search"])) {
 
 <?php
 if (isset($search)) {
-    require("common.inc.php");
+    require_once(__DIR__ . "/partials/header.php");
     try {
         $order = $_POST["order"];
         $mapped_col = "name";
@@ -28,7 +28,6 @@ if (isset($search)) {
         }
         $stmt = getDB()->prepare($query);
         $stmt->execute([":name"=>$search]);
-        echo var_export($stmt->errorInfo());
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
         echo $e->getMessage();

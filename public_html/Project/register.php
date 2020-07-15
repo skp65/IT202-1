@@ -6,7 +6,7 @@ include_once(__DIR__."/partials/header.php");
     </head>
     <style>
         .wrapper {
-            background-image: url('/images/1.jpg');
+            background-image: url('../images/1.jpg');
         }
     </style>
 
