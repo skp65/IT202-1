@@ -33,7 +33,7 @@ if (isset($_POST["register"])) {
         $email = $_POST["email"];
         if ($password == $cpassword) {
             //echo "<div>Passwords match</div>";
-            //require("config.php");
+            //require("db_helper.php");
             $connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
             try {
                 $db = new PDO($connection_string, $dbuser, $dbpass);

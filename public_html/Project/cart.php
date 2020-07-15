@@ -49,7 +49,7 @@ if (!empty($_SESSION["shopping_cart"])) {
             <td colspan=5 align="right">
                 <div class="cart_div">
                     <a href="cart.php">
-                        <img src="../images/cart.jpg" style="width: 50px"/>
+                        <img src="images/cart.jpg" style="width: 50px"/>
                         <span><?php echo $cart_count; ?></span></a>
                 </div>
             </td>

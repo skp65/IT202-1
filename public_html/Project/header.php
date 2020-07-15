@@ -1,17 +1,17 @@
 <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <nav>
     <ul class="nav">
-        <li><a href="login_out/shop.php">Shop</a></li>
-        <li><a href="login_out/register.php">Sign Up</a></li>
-        <li><a href="login_out/login.php">Login</a></li>
-        <li><a href="login_out/logout.php">Logout</a></li>
+        <li><a href="../shop.php">Shop</a></li>
+        <li><a href="../register.php">Sign Up</a></li>
+        <li><a href="../login.php">Login</a></li>
+        <li><a href="../logout.php">Logout</a></li>
     </ul>
 </nav>
 <style>
     body {
-        background-image: url('images/1.jpg');
+        background-image: url('../images/1.jpg');
     }
 </style>
 <?php

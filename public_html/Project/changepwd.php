@@ -5,30 +5,22 @@ include("header.php");
     <div class="wrapper">
         <form method="POST">
             <div>
-                <label for="fname">First Name</label><br>
-                <input type="text" id="fname" name="fname" placeholder="First Name" required/>
-            </div>
-            <div>
-                <label for="lname">Last Name</label><br>
-                <input type="text" id="lname" name="lname" placeholder="Last Name" required/>
-            </div>
-            <div>
                 <label for="email">Email</label><br>
                 <input type="email" id="email" name="email" placeholder="Email" required/>
             </div>
             <div>
-                <label for="pass">Password</label><br>
+                <label for="pass">New Password</label><br>
                 <input type="password" id="pass" name="password" placeholder="Password" required/>
             </div>
             <div>
-                <label for="cpass">Confirm Password</label><br>
-                <input type="password" id="cpasss" name="cpassword" placeholder="Confirm Password" required/>
+                <label for="cpass">Confirm New Password</label><br>
+                <input type="password" id="cpasss" name="cpassword" placeholder="Confirm New Password" required/>
             </div>
             <div>
-                <input class="submit" type="submit" name="register" value="Register"/>
+                <input class="submit" type="submit" name="register" value="Change Password"/>
                 <input type="button" class="submit"
-                onclick="window.location.href='https://it202-2020.herokuapp.com/public_html/Project/login_out/login.php'"
-                value="Go to Login"/>
+                       onclick="window.location.href='login.php'"
+                       value="Go to Login"/>
             </div>
         </form>
     </div>
@@ -44,20 +36,19 @@ if (isset($_POST["register"])) {
         $email = $_POST["email"];
         if ($password == $cpassword) {
             //echo "<div>Passwords match</div>";
-            //require("config.php");
+            //require("db_helper.php");
             try {
                 $hash = password_hash($password, PASSWORD_BCRYPT);
-                $stmt = getDB()->prepare("INSERT INTO Users (email, first_name, last_name, password)
-                                     VALUES(:email, :fname, :lname, :password)");
+                $stmt = getDB()->prepare("UPDATE Users set password = :password where email = :email");
                 $stmt->execute(array(
                     ":email" => $email,
-                    ":password" => $hash, //Don't save the raw password $password
+                    ":password" => $hash //Don't save the raw password $password
                 ));
                 $e = $stmt->errorInfo();
                 if ($e[0] != "00000") {
                     echo var_export($e, true);
                 } else {
-                    echo "<div>Successfully registered! </div>";
+                    echo "<div>Password Changed! </div>";
                 }
             } catch (Exception $e) {
                 echo $e->getMessage();

@@ -48,7 +48,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <a href="cart.php">
-            <img src="../images/cart.jpg" style="width: 50px"/>
+            <img src="images/cart.jpg" style="width: 50px"/>
             <span><?php echo $cart_count; ?></span></a>
     </div>
     <?php

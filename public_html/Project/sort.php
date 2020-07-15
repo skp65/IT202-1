@@ -1,58 +1,41 @@
 <?php
-include("header.php");
-#$search = "";
+require_once(__DIR__ . "partials/header.php");
+$search = "";
 if (isset($_POST["search"])) {
     $search = $_POST["search"];
 }
 ?>
-    <form method="POST">
-        <input type="text" name="search" placeholder="Search for Product Name"
-               value="<?php echo $search;?>"/>
-        <input type="submit" value="Search"/>
-        <label for="order">Sort By:</label>
-        <select name="order" id="order">
-            <option value="Ascending">Ascending</option>
-            <option value="Descending">Descending</option>
-        </select>
-    </form>
+<form method="POST">
+    <input type="text" name="search" placeholder="Search for Products"
+           value="<?php echo $search; ?>"/>
+    <select name="col">
+        <option value="name">Name</option>
+    </select>
+    <select name="order">
+        <option value="1">Asc</option>
+        <option value="0">Desc</option>
+    </select>
+    <input type="submit" value="Search"/>
+</form>
+
 <?php
-if ($_POST['order'] == 'Ascending') {
-    //require("common.inc.php");
-    $query = file_get_contents(__DIR__ . "/query/asc.sql");
-    if (isset($query) && !empty($query)) {
-        try {
-            $stmt = getDB()->prepare($query);
-            $stmt->execute([":name" => $search]);
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo $e->getMessage();
+if (isset($search)) {
+    try {
+        $order = $_POST["order"];
+        $mapped_col = "name";
+        $query = "SELECT * FROM Products where name like CONCAT('%', :name, '%') ORDER BY $mapped_col";
+        if((int)$order == 1){
+            $query .= " ASC";
         }
-    }
-}
-elseif ($_POST['order']=='Descending') {
-    //require("common.inc.php");
-    $query = file_get_contents(__DIR__ . "/query/desc.sql");
-    if (isset($query) && !empty($query)) {
-        try {
-            $stmt = getDB()->prepare($query);
-            $stmt->execute([":name" => $search]);
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        else{
+            $query .= " DESC";
         }
-    }
-}
-elseif (isset($search)) {
-    //require("common.inc.php");
-    $query = file_get_contents(__DIR__ . "/query/search.sql");
-    if (isset($query) && !empty($query)) {
-        try {
-            $stmt = getDB()->prepare($query);
-            $stmt->execute([":name" => $search]);
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
+        $stmt = getDB()->prepare($query);
+        $stmt->execute([":thing"=>$search]);
+        echo var_export($stmt->errorInfo());
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        echo $e->getMessage();
     }
 }
 ?>
@@ -65,15 +48,14 @@ elseif (isset($search)) {
             <th>Price</th>
             <th>Description</th>
         </tr>
-    <?php foreach($results as $row):?>
+        <?php foreach ($results as $row): ?>
             <tr>
-                <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" 
-                alt="Image" style="width:150px; height:150px;">' ?></td>
+                <td><img alt="product" src='<?php echo $row["image"]; ?>' width="100px" height="100px"/></td>
                 <td><?php echo get($row, "name") ?></td>
                 <td><?php echo get($row, "price"); ?></td>
-                <td><?php echo get($row, "description");?></td>
+                <td><?php echo get($row, "description"); ?></td>
             </tr>
-    <?php endforeach;?>
+        <?php endforeach; ?>
     </table>
 <?php else: ?>
     <p>No Match Found.</p>
