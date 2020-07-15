@@ -1,21 +1,13 @@
 <?php
 //$search = "";
+require_once(__DIR__ . "/partials/header.php");
 if (isset($_POST["search"])) {
     $search = $_POST["search"];
 }
 ?>
-<head>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<style>
-    body {
-        background-image: url('/images/1.jpg');
-    }
-</style>
-
 <?php
 if (isset($search)) {
-    require_once(__DIR__ . "/partials/header.php");
+    require("common.inc.php");
     try {
         $order = $_POST["order"];
         $mapped_col = "name";

@@ -24,18 +24,13 @@ include_once(__DIR__."/partials/header.php");
         </form>
     </div>
 <?php
-//echo var_export($_GET, true);
-//echo var_export($_POST, true);
-//echo var_export($_REQUEST, true);
-
 if (isset($_POST["register"])) {
     if (isset($_POST["password"]) && isset($_POST["cpassword"]) && isset($_POST["email"])) {
         $password = $_POST["password"];
         $cpassword = $_POST["cpassword"];
         $email = $_POST["email"];
         if ($password == $cpassword) {
-            //echo "<div>Passwords match</div>";
-            //require("db_helper.php");
+            require ("common.inc.php");
             try {
                 $hash = password_hash($password, PASSWORD_BCRYPT);
                 $stmt = getDB()->prepare("UPDATE Users set password = :password where email = :email");

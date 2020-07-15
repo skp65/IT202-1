@@ -1,15 +1,7 @@
 <?php
 include_once(__DIR__."/partials/header.php");
 ?>
-    <head>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-    </head>
-    <style>
-        .wrapper {
-            background-image: url('../images/1.jpg');
-        }
-    </style>
-
+    <h4>Register your Account</h4>
     <div class="wrapper">
         <form method="POST">
             <div>
