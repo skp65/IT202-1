@@ -14,6 +14,10 @@ include_once(__DIR__."/partials/header.php");
             </div>
             <div>
                 <input class="submit" type="submit" name="submit" value="Login"/>
+                <input type="button" class="submit" onclick="window.location.href='changemail.php'"
+                       value="Change Email"/>
+            </div>
+            <div>
                 <input type="button" class="submit" onclick="window.location.href='changepwd.php'"
                        value="Change Password"/>
             </div>
