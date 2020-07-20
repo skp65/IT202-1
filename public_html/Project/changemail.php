@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__ . "/partials/header.php");
+include_once(__DIR__."/partials/header.php");
 ?>
     <div class="wrapper">
         <form method="POST">
@@ -19,21 +19,30 @@ include_once(__DIR__ . "/partials/header.php");
 if (isset($_POST["register"])) {
     if (isset($_POST["email"])) {
         $email = $_POST["email"];
-        require("common.inc.php");
-        try {
-            $stmt = getDB()->prepare("SELECT * FROM Users where email = :email LIMIT 1");
-            $stmt->execute(array(
-                ":email" => $email
-            ));
-            if ($stmt->rowCount() > 0) {
-                $error = "Email already exists.";
-            } else {
-                $result = getDB()->prepare("Update Users set email = :email where email = :email")
+            require ("common.inc.php");
+            try {
+                $stmt = getDB()->prepare("SELECT email FROM Users where email = :email");
+                $stmt->execute(array(
+                    ":email" => $email
+                ));
+                if ($stmt->rowCount()>0){
+                    echo "Email exists! Use another Email";
+                }else{
+                    $query = getDB()->prepare("UPDATE Users set email = :email");
+                    $query->execute(array(":email => $email"));
                     echo "<div style='text-align: center'>Email Changed! </div>";
                 }
-        } catch (Exception $e) {
-            echo $e->getMessage();
+                $e = $stmt->errorInfo();
+               /* if ($e[0] != "00000") {
+                    echo var_export($e, true);
+                } else {
+                    echo "<div style='text-align: center'>Email Changed! </div>";
+                }*/
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+        } else {
+            echo "<div style='text-align: center'>Passwords do not match</div>";
         }
-    }
 }
 ?>
