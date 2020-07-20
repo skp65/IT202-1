@@ -26,9 +26,9 @@ if (isset($_POST["register"])) {
                     ":email" => $email
                 ));
                 if ($stmt->rowCount()>0){
-                    echo "Email exists! Use another Email";
+                    echo "<div style='text-align: center'>Email exists! Use another Email</div>";
                 }else{
-                    $query = getDB()->prepare("UPDATE Users set email = :email");
+                    $query = getDB()->prepare("UPDATE Users set email = :email where email = :email" );
                     $query->execute(array(":email => $email"));
                     echo "<div style='text-align: center'>Email Changed! </div>";
                 }
@@ -42,7 +42,7 @@ if (isset($_POST["register"])) {
                 echo $e->getMessage();
             }
         } else {
-            echo "<div style='text-align: center'>Passwords do not match</div>";
+            echo "<div style='text-align: center'>Error </div>";
         }
 }
 ?>
