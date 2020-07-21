@@ -44,13 +44,13 @@ class DBH{
             return DBH::response(NULL, 400, "DB Error: " . $e->getMessage());
         }
     }
-    public static function register($email, $pass){
+    public static function register($email, $fname, $lname, $pass){
         try {
             $query = file_get_contents(__DIR__ . "/../sql/query/register.sql");
             $stmt = DBH::getDB()->prepare($query);
             $pass = password_hash($pass, PASSWORD_BCRYPT);
-            $result = $stmt->execute([":email" => $email, ":first_name"=> $first_name,
-              ":last_name" => $last_name , ":password" => $pass]);
+            $result = $stmt->execute([":email" => $email, ":first_name"=> $fname,
+              ":last_name" => $lname , ":password" => $pass]);
             DBH::verify_sql($stmt);
             if($result){
                 return DBH::response(NULL,200, "Registration successful");

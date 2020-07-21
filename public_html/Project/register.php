@@ -32,14 +32,16 @@ include_once(__DIR__."/partials/header.php");
 <?php
 if (Common::get($_POST, "submit", false)){
     $email = Common::get($_POST, "email", false);
+    $fname = Common::get($_POST, "fname", false);
+    $lname = Common::get($_POST, "lname", false);
     $password = Common::get($_POST, "password", false);
     $confirm_password = Common::get($_POST, "cpassword", false);
     if($password != $confirm_password){
         Common::flash("Passwords must match", "warning");
         die(header("Location: register.php"));
     }
-    if(!empty($email) && !empty($password)){
-        $result = DBH::register($email, $password);
+    if(!empty($email) && !empty($fname) && !empty($lname) && !empty($password)){
+        $result = DBH::register($email, $fname, $lname, $password);
         echo var_export($result, true);
         if(Common::get($result, "status", 400) == 200){
             echo "<div style='text-align: center'>Successfully Registered, Please Login</div>";
