@@ -45,7 +45,7 @@ if (Common::get($_POST, "submit", false)){
         echo var_export($result, true);
         if(Common::get($result, "status", 400) == 200){
             echo "<div style='text-align: center'>Successfully Registered, Please Login</div>";
-            die(header("Location: " . Common::url_for("login")));
+            //die(header("Location: " . Common::url_for("login")));
         }
     }
     else{
