@@ -18,11 +18,11 @@ include_once(__DIR__."/partials/header.php");
             </div>
             <div>
                 <label for="pass">Password</label><br>
-                <input type="password" id="pass" name="password" placeholder="Password" required/>
+                <input type="password" id="pass" name="password" placeholder="Password"/>
             </div>
             <div>
                 <label for="cpass">Confirm Password</label><br>
-                <input type="password" id="cpasss" name="cpassword" placeholder="Confirm Password" required/>
+                <input type="password" id="cpasss" name="cpassword" placeholder="Confirm Password"/>
             </div>
             <div>
                 <input class="submit" type="submit" name="submit" value="Register"/>
@@ -42,12 +42,12 @@ if (Common::get($_POST, "submit", false)){
         $result = DBH::register($email, $password);
         echo var_export($result, true);
         if(Common::get($result, "status", 400) == 200){
-            Common::flash("Successfully registered, please login", "success");
+            echo "<div style='text-align: center'>Successfully Registered, Please Login</div>";
             die(header("Location: " . Common::url_for("login")));
         }
     }
     else{
-        Common::flash("Email and password must not be empty", "warning");
+        echo "<div style='text-align: center'>Email and Password must not be empty!</div>";
         die(header("Location: register.php"));
     }
 }

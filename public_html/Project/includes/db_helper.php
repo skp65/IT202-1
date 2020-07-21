@@ -33,10 +33,10 @@ class DBH{
                     unset($user["password"]); /**TODO remove password before we return results**/
                     return DBH::response($user);
                 } else {
-                    return DBH::response(NULL, 403, "Invalid email or password");
+                    echo "<div style='text-align: center'>Invalid Email or Password</div>";
                 }
             } else {
-                return DBH::response(NULL, 403, "Invalid email or password");
+                echo "<div style='text-align: center'>Invalid Email or Password</div>";
             }
         }
         catch(Exception $e){
@@ -49,7 +49,8 @@ class DBH{
             $query = file_get_contents(__DIR__ . "/../sql/query/register.sql");
             $stmt = DBH::getDB()->prepare($query);
             $pass = password_hash($pass, PASSWORD_BCRYPT);
-            $result = $stmt->execute([":email" => $email, ":password" => $pass]);
+            $result = $stmt->execute([":email" => $email, ":first_name"=> $first_name,
+              ":last_name" => $last_name , ":password" => $pass]);
             DBH::verify_sql($stmt);
             if($result){
                 return DBH::response(NULL,200, "Registration successful");
@@ -60,7 +61,7 @@ class DBH{
         }
         catch(Exception $e){
             error_log($e->getMessage());
-            return DBH::response(NULL, 400, "DB Error: " . $e->getMessage());
+            echo "<div style='text-align: center'>Email already exists</div>";
         }
     }
 }

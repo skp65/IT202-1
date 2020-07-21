@@ -1,1 +1,1 @@
-INSERT INTO Users (email, password) VALUES (:email, :password)
+INSERT INTO Users (email, first_name, last_name, password) VALUES (:email, :first_name, :last_name, :password)
