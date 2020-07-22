@@ -17,18 +17,20 @@ include_once(__DIR__."/partials/header.php");
     </div>
 <?php
 if (isset($_POST["register"])) {
-    if (isset($_POST["email"])) {
+    if (isset($_POST["email"]) && isset($_GET["id"])) {
         $email = $_POST["email"];
+        $id = $_GET["id"];
             require ("common.inc.php");
             try {
-                $stmt = getDB()->prepare("SELECT email FROM Users where email = :email");
+                $stmt = getDB()->prepare("SELECT email FROM Users where id = :id  ");
                 $stmt->execute(array(
-                    ":email" => $email
+                    ":email" => $email,
+                    ":id" => $id
                 ));
                 if ($stmt->rowCount()>0){
                     echo "<div style='text-align: center'>Email exists! Use another Email</div>";
                 }else{
-                    $query = getDB()->prepare("UPDATE Users set email = :email where email = :email" );
+                    $query = getDB()->prepare("UPDATE Users set email = :email where id = :id" );
                     $query->execute(array(":email => $email"));
                     echo "<div style='text-align: center'>Email Changed! </div>";
                 }
