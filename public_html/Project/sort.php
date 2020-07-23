@@ -41,7 +41,7 @@ if (isset($search)) {
 </form>
 
 <?php if (isset($results) && count($results) > 0): ?>
-    <table border="1" cellspacing="2" cellpadding="2" style="margin-left: 25%">
+    <table border="1" cellspacing="2" cellpadding="2" style="margin: auto">
         <tr>
             <th>Image</th>
             <th>Product Name</th>
