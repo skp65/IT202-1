@@ -1,6 +1,6 @@
 <?php
 include_once(__DIR__."/partials/header.php");
-$product_id = -1;
+$id = -1;
 $result = array();
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
