@@ -47,52 +47,75 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     } ?>
     <div class="cart_div">
         <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <a href="cart.php">
             <img src="images/cart.jpg" style="width: 50px"/>
             <span><?php echo $cart_count; ?></span></a>
     </div>
     <?php
-    if(isset($_GET['page'])){
-        $page = $_GET['page'];
-    } else{
-        $page = 1;
+    $start = 0;
+    $per_page = 1;
+    $page_counter = 0;
+    $next = $page_counter + 1;
+    $previous = $page_counter - 1;
+
+    if(isset($_GET['start'])) {
+        $start = $_GET['start'];
+        $page_counter = $_GET['start'];
+        $start = $start * $per_page;
+        $next = $page_counter + 1;
+        $previous = $page_counter - 1;
     }
-    $num_per_page = 1;
-    $offset = ($page - 1) * $num_per_page;
 
-    $result = getDB()->prepare("SELECT COUNT(*) FROM Products")
-    $total_rows = $result->fetch(PDO::FETCH_ASSOC)[0];
-    $total_pages = ceil($total_rows / $num_per_page);
-
-
-    $stmt = getDB()->prepare("SELECT * FROM Products LIMIT $offset, $num_per_page");
+    $stmt = getDB()->prepare("SELECT * FROM Products LIMIT $start, $per_page");
     $stmt->execute();
+
+    if($stmt->rowCount() > 0){
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    $count_query = "SELECT * FROM Products";
+    $query = $db->prepare($count_query);
+    $query->execute();
+    $count = $query->rowCount();
+    $page = ceil($count / $per_page);
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo "<div class='product-wrapper'>
-        <form method='post' action='' >
+        <form method='post' action='' style='text-align: center' >
             <input type='hidden' name='code' value=" . $row['code'] . " />
             <div class='row'>
-            <div class='column'>
-            <img src='" . $row['image'] . "' style='width: 150px; height: 150px; '/></div></div>
-            <div class='column'>" . $row['name'] . "</div>
-            <div class='column'>$" . $row['price'] . "</div>
-            <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
+                <div class='column'>
+                    <img src='" . $row['image'] . "' style='width: 150px; height: 150px; '/></div></div>
+                    <div class='column'>" . $row['name'] . "</div>
+                    <div class='column'>$" . $row['price'] . "</div>
+                    <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
     }
     ?>
-    <ul>
-        <li><a href="?page=1">First</a></li>
-        <li class="<?php if($page <= 1){ echo 'disabled'; } ?>">
-            <a href="<?php if($page <= 1){ echo '#'; } else { echo "?page=".($page - 1); } ?>">Prev</a>
-        </li>
-        <li class="<?php if($page >= $total_pages){ echo 'disabled'; } ?>">
-            <a href="<?php if($page >= $total_pages){ echo '#'; } else { echo "?page=".($page + 1); } ?>">Next</a>
-        </li>
-        <li><a href="?page=<?php echo $total_pages; ?>">Last</a></li>
-    </ul>
+    <center>
+        <ul class="pagination">
+            <?php
+            if($page_counter == 0){
+                echo "<li><a href=?start='0' class='active'>0</a></li>";
+                for($i = 1; $i < $page; $i++) {
+                    echo "<li><a href=?start=$i>".$i."</a></li>";
+                }
+            }else{
+                echo "<li><a href=?start=$previous>Previous</a></li>";
+                for($i = 0; $i < $page; $i++) {
+                    if($i == $page_counter) {
+                        echo "<li><a href=?start=$i class='active'>".$i."</a></li>";
+                    }else{
+                        echo "<li><a href=?start=$i>".$i."</a></li>";
+                    }
+                }if($i != $page_counter+1)
+                    echo "<li><a href=?start=$next>Next</a></li>";
+            }
+            ?>
+        </ul>
+    </center>
 
     <div style="clear:both;"></div>
     <!DOCTYPE html>
