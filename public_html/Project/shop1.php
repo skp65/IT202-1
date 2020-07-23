@@ -48,7 +48,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     <div class="cart_div">
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <a href="cart.php">
             <img src="images/cart.jpg" style="width: 50px"/>
             <span><?php echo $cart_count; ?></span></a>
@@ -86,10 +85,10 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             <input type='hidden' name='code' value=" . $row['code'] . " />
             <div class='row'>
                 <div class='column'>
-                    <img src='" . $row['image'] . "' style='width: 150px; height: 150px; '/></div></div>
-                    <div class='column'>" . $row['name'] . "</div>
-                    <div class='column'>$" . $row['price'] . "</div>
-                    <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
+                <img src='" . $row['image'] . "' style='width: 150px; height: 150px; '/></div></div>
+                <div class='column'>" . $row['name'] . "</div>
+                <div class='column'>$" . $row['price'] . "</div>
+                <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
     }
