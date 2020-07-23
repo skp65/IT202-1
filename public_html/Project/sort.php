@@ -58,7 +58,7 @@ if (isset($search)) {
         <?php endforeach; ?>
     </table>
 <?php else: ?>
-    <p>No Match Found.</p>
+    <p style="text-align: center">No Match Found.</p>
 <?php endif; ?>
 
 
