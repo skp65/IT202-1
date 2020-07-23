@@ -53,16 +53,8 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             <span><?php echo $cart_count; ?></span></a>
     </div>
     <?php
-    if(isset($_GET ['page'])){
-        $page = $_GET['page'];
-    }
-    else{
-        $page = 1;
-    }
-    $no_per_page = 1;
-    $start = ($page - 1) * 1;
 
-    $stmt = getDB()->prepare("select * from Products LIMIT $start,$no_per_page");
+    $stmt = getDB()->prepare("select * from Products");
     $stmt->execute();
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -78,17 +70,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         </form>
         </div>";
     }
-    ?>
-    <?php
-        $query = getDB()->prepare("SELECT * FROM Products");
-        $query->execute();
-        $page_result = $query->fetchColumn();
-        $total_pages = ($page_result/$no_per_page);
-
-        for($i = 1;$i <= $total_pages; $i++)
-        {
-            echo"<a href ='shop.php?page= ".$i."' class='btn btn-success'>$i</a>"
-        }
     ?>
     <div style="clear:both;"></div>
     <!DOCTYPE html>
