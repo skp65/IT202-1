@@ -32,11 +32,11 @@ if (isset($_POST["update"])) {
         $id = $_GET["id"];
             require ("common.inc.php");
             try {
-                /*$stmt = getDB()->prepare("SELECT email FROM Users where id = :id  ");
+                $stmt = getDB()->prepare("SELECT email FROM Users where id = :id  ");
                 $stmt->execute(array(
                     ":email" => $email,
                     ":id" => $id
-                ));*/
+                ));
 
                 if ($stmt->rowCount()>0){
                     echo "<div style='text-align: center'>Email exists! Use another Email</div>";
