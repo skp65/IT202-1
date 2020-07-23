@@ -1,15 +1,5 @@
 <?php
 include_once(__DIR__."/partials/header.php");
-$id = -1;
-$result = array();
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-    $stmt = $db->prepare("SELECT email FROM Users where id = :id");
-    $stmt->execute([":id" => $id]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-} else {
-    echo "No id provided in url, don't forget this or email won't change.";
-}
 ?>
     <div class="wrapper">
         <form method="POST">
@@ -48,11 +38,11 @@ if (isset($_POST["update"])) {
                     echo "<div style='text-align: center'>Email Changed! </div>";
                 }
                 $e = $stmt->errorInfo();
-               /* if ($e[0] != "00000") {
+                if ($e[0] != "00000") {
                     echo var_export($e, true);
                 } else {
-                    echo "<div style='text-align: center'>Email Changed! </div>";
-                }*/
+                    echo "<div style='text-align: center'>Email Changed!</div>";
+                }
             } catch (Exception $e) {
                 echo $e->getMessage();
             }

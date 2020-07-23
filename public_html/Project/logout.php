@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "/partials/header.php");
-include("common.inc.php");
+//include("common.inc.php");
 //session_start();
 session_unset();
 session_destroy();

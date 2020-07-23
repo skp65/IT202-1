@@ -34,7 +34,7 @@ if (isset($_POST["updated"])) {
     $code = $_POST["code"];
     $price = $_POST["price"];
     $description = $_POST["description"];
-    if (!empty($name) && !empty(code) && !empty($price) && !empty($description)) {
+    if (!empty($name) && !empty($code) && !empty($price) && !empty($description)) {
         try {
             $stmt = $db->prepare("UPDATE Products set name = :name, code = :code, price = :price, 
                 description = :description where id= :id");
