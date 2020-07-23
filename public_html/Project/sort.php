@@ -26,7 +26,8 @@ if (isset($search)) {
     }
 }
 ?>
-<form method="POST">
+<br>
+<form method="POST" style="text-align: center">
     <input type="text" name="search" placeholder="Search for Products"
            value="<?php echo $search; ?>"/>
     <select name="col">
@@ -40,7 +41,7 @@ if (isset($search)) {
 </form>
 
 <?php if (isset($results) && count($results) > 0): ?>
-    <table border="1" cellspacing="2" cellpadding="2">
+    <table border="1" cellspacing="2" cellpadding="2" style="margin-left: 25%">
         <tr>
             <th>Image</th>
             <th>Product Name</th>
@@ -50,9 +51,9 @@ if (isset($search)) {
         <?php foreach ($results as $row): ?>
             <tr>
                 <td><img alt="product" src='<?php echo $row["image"]; ?>' width="100px" height="100px"/></td>
-                <td><?php echo get($row, "name") ?></td>
-                <td><?php echo get($row, "price"); ?></td>
-                <td><?php echo get($row, "description"); ?></td>
+                <td style="text-align: center"><?php echo get($row, "name") ?></td>
+                <td style="text-align: center"><?php echo get($row, "price"); ?></td>
+                <td style="text-align: center"><?php echo get($row, "description"); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>

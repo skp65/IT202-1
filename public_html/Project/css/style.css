@@ -131,3 +131,6 @@ h4{
 body{
     background-image: url('/../images/1.jpg');
 }
+#search{
+    text-align: center;
+}
