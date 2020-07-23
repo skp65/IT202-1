@@ -38,7 +38,7 @@ if (isset($_REQUEST['Logout']) && $_REQUEST['Logout'] == "logout") {
 <body>
 <h2>Shopping Cart</h2>
 <a href="shop.php">
-    <h2> Return to Home</h2></a>
+    <h2> Return to Shop</h2></a>
 <?php
 if (!empty($_SESSION["shopping_cart"])) {
     $cart_count = count(array_keys($_SESSION["shopping_cart"]));
