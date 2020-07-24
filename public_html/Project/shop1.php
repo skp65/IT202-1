@@ -68,11 +68,11 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         $previous = $page_counter - 1;
     }
 
-    $result = getDB()->prepare("SELECT * FROM Products LIMIT $start, $per_page");
-    $result->execute();
+    $query = getDB()->prepare("SELECT * FROM Products LIMIT $start, $per_page");
+    $query->execute();
 
-    if($result->rowCount() > 0){
-        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+    if($query->rowCount() > 0){
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
     }
     $count_query = "SELECT * FROM Products";
     $query = getDB()->prepare($count_query);
