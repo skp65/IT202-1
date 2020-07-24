@@ -30,9 +30,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         if (in_array($code, $array_keys)) {
             $status = "<div class='box' style='color:red;'>Product is already added to your cart</div>";
         } else {
-            $_SESSION["shopping_cart"] = array_merge(
-                $_SESSION["shopping_cart"], $cartArray
-            );
+            $_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"], $cartArray);
             $status = "<div class='box'>Product is added to your cart</div>";
         }
     }
@@ -83,8 +81,8 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
                 <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
-    }?>
-    <?php endwhile;
+    }endwhile; ?>
+    <?php
     for ($page=1; $page <= $total_pages ; $page++)?>
 
     <a href='<?php echo "?page=$page"; ?>' class="links"><?php  echo $page; ?></a>

@@ -11,7 +11,7 @@ $logged_in = Common::is_logged_in(false);
     }
 </style>
 <nav>
-    <ul class="nav">
+    <ul class="head">
         <?php if($logged_in):?>
             <li>
                 <a href="<?php echo Common::url_for("home");?>">Home</a>
