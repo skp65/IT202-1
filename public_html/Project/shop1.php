@@ -80,7 +80,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $count = $query->rowCount();
     $page = ceil($count / $per_page);
 
-    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
         echo "<div class='product-wrapper'>
         <form method='post' action='' style='text-align: center' >
             <input type='hidden' name='code' value=" . $row['code'] . " />
