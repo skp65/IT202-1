@@ -80,7 +80,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $count = $query->rowCount();
     $page = ceil($count / $per_page);
 
-    while ($row = $res) {
+    foreach($res as $row) {
         echo "<div class='product-wrapper'>
         <br>
         <form method='post' action='' style='text-align: center' >
