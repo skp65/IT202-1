@@ -2,7 +2,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <nav>
-    <ul class="nav">
+    <ul class="head">
         <li><a href="home.php">Home</a></li>
         <li><a href="shop.php">Products</a></li>
         <li><a href="sort.php">Search Products</a></li>

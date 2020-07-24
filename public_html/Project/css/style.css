@@ -43,15 +43,15 @@ a{
     text-decoration: none;
     font-weight:bold;
 }
-.nav li{
+.head li{
     display:inline;
 }
-.nav a{
+.head a{
     display:inline-block;
     padding:10px;
 }
 
-.nav li a:hover {
+.head li a:hover {
     background-color: lightseagreen;
     text-decoration: underline;
 }

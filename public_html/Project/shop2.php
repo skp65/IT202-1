@@ -47,30 +47,48 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     } ?>
     <div class="cart_div">
         <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <a href="cart.php">
             <img src="images/cart.jpg" style="width: 50px"/>
             <span><?php echo $cart_count; ?></span></a>
     </div>
     <?php
+    $limit = 2;
+    $stmt = getDB()->prepare("SELECT count(*) FROM Products");
+    $total_results = $stmt->fetchColumn();
+    $total_pages = ceil($total_results/$limit);
 
-    $stmt = getDB()->prepare("select * from Products");
-    $stmt->execute();
+    if (!isset($_GET['page'])) {
+        $page = 1;
+    } else{
+        $page = $_GET['page'];
+    }
+    $start = ($page - 1) * $limit;
+    $show = "SELECT * FROM Products ORDER BY id DESC LIMIT ?,?";
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $query = $db->prepare($show);
+    $query->execute([$start, $limit]);
+
+    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+    <?php
         echo "<div class='product-wrapper'>
-        <form method='post' action='' style='text-align: center'>
+        <form method='post' action='' style='text-align: center' >
             <input type='hidden' name='code' value=" . $row['code'] . " />
             <div class='row'>
-            <div class='column'>
-            <img src='" . $row['image'] . "' style='width: 150px; height: 150px; '/></div></div>
-            <div class='column'>" . $row['name'] . "</div>
-            <div class='column'>$" . $row['price'] . "</div>
-            <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
+                <div class='column'>
+                <img src='" . $row['image'] . "' style='width: 150px; height: 150px; '/></div></div>
+                <div class='column'>" . $row['name'] . "</div>
+                <div class='column'>$" . $row['price'] . "</div>
+                <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
-    }
-    ?>
+    }?>
+    <?php endwhile;
+    for ($page=1; $page <= $total_pages ; $page++)?>
+
+    <a href='<?php echo "?page=$page"; ?>' class="links"><?php  echo $page; ?></a>
+    <?php endfor;?>
     <div style="clear:both;"></div>
     <!DOCTYPE html>
     <div class="message_box" style="margin:10px 0px;">

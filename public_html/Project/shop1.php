@@ -48,6 +48,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     <div class="cart_div">
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <a href="cart.php">
             <img src="images/cart.jpg" style="width: 50px"/>
             <span><?php echo $cart_count; ?></span></a>
@@ -67,11 +68,11 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         $previous = $page_counter - 1;
     }
 
-    $stmt = getDB()->prepare("SELECT * FROM Products LIMIT $start, $per_page");
-    $stmt->execute();
+    $result = getDB()->prepare("SELECT * FROM Products LIMIT $start, $per_page");
+    $result->execute();
 
-    if($stmt->rowCount() > 0){
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if($result->rowCount() > 0){
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
     }
     $count_query = "SELECT * FROM Products";
     $query = $db->prepare($count_query);
@@ -79,7 +80,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $count = $query->rowCount();
     $page = ceil($count / $per_page);
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         echo "<div class='product-wrapper'>
         <form method='post' action='' style='text-align: center' >
             <input type='hidden' name='code' value=" . $row['code'] . " />
