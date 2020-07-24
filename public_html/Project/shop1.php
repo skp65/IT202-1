@@ -75,7 +75,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
     }
     $count_query = "SELECT * FROM Products";
-    $query = $getDB()->prepare($count_query);
+    $query = getDB()->prepare($count_query);
     $query->execute();
     $count = $query->rowCount();
     $page = ceil($count / $per_page);
