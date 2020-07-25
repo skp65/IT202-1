@@ -34,7 +34,7 @@ if (isset($search)) {
 }
 ?>
 <br>
-<form method="POST" style="text-align: center" action="sort.php?product_id=<?php echo get($result, "id")?>">
+<form method="POST" style="text-align: center" action="sort.php?product_id=<?php echo get($results, "id")?>">
     <input type="text" name="search" placeholder="Search for Products"
            value="<?php echo $search; ?>"/>
     <select name="col">
