@@ -4,6 +4,13 @@ require_once(__DIR__ . "/partials/header.php");
 if (isset($_POST["search"])) {
     $search = $_POST["search"];
 }
+$product_id = -1;
+$result = array();
+if(isset($_GET["thingId"])) {
+$product_id = $_GET["product_id"];
+$stmt = $db->prepare("SELECT * FROM Products where id = :id");
+$stmt->execute([":id" => $product_id]);
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <?php
 if (isset($search)) {
@@ -27,7 +34,7 @@ if (isset($search)) {
 }
 ?>
 <br>
-<form method="POST" style="text-align: center">
+<form method="POST" style="text-align: center" action="sort.php?product_id=<?php echo get($result, "id")?>">
     <input type="text" name="search" placeholder="Search for Products"
            value="<?php echo $search; ?>"/>
     <select name="col">
@@ -40,7 +47,7 @@ if (isset($search)) {
     <input type="submit" value="Search"/>
 </form>
 
-<?php if (isset($results) && count($results) > 0): ?>
+<?php if (isset($result) && count($result) > 0): ?>
     <table border="1" cellspacing="2" cellpadding="2" style="margin: auto">
         <tr>
             <th>Image</th>
@@ -48,12 +55,14 @@ if (isset($search)) {
             <th>Price</th>
             <th>Description</th>
         </tr>
-        <?php foreach ($results as $row): ?>
+        <?php foreach ($result as $row): ?>
             <tr>
                 <td><img alt="product" src='<?php echo $row["image"]; ?>' width="100px" height="100px"/></td>
                 <td style="text-align: center"><?php echo get($row, "name") ?></td>
                 <td style="text-align: center"><?php echo get($row, "price"); ?></td>
                 <td style="text-align: center"><?php echo get($row, "description"); ?></td>
+                <td style="text-align: center"><a href="sort.php?product_id=<?php echo get($row, "id");?>">View</a></td>
+
             </tr>
         <?php endforeach; ?>
     </table>
