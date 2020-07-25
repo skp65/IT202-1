@@ -22,6 +22,14 @@ if (isset($search)) {
         echo $e->getMessage();
     }
 }
+$product_id = -1;
+$result = array();
+if(isset($_GET["product_id"])) {
+    $product_id = $_GET["product_id"];
+    $stmt = $db->prepare("SELECT * FROM Products where id = :id");
+    $stmt->execute([":id" => $product_id]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+}
 ?>
 <br>
 <form method="POST" style="text-align: center">
@@ -39,7 +47,6 @@ if (isset($search)) {
 
 
 <?php
-}
 if (isset($results) && count($results) > 0): ?>
     <table border="1" cellspacing="2" cellpadding="2" style="margin: auto">
         <tr>
