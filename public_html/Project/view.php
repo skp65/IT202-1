@@ -7,9 +7,9 @@ $product_id = -1;
 $result = array();
 if (isset($_GET["product_id"])) {
     $product_id = $_GET["product_id"];
-    $stmt = $db->prepare("SELECT * FROM Products where id = :id");
+    $stmt = getDB()->prepare("SELECT * FROM Products where id = :id");
     $stmt->execute([":id" => $product_id]);
-    $result = $stmt->fetchALL(PDO::FETCH_ASSOC);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
     <!--
