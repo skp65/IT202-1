@@ -9,7 +9,7 @@ if (isset($_GET["product_id"])) {
     $product_id = $_GET["product_id"];
     $stmt = $db->prepare("SELECT * FROM Products where id = :id");
     $stmt->execute([":id" => $product_id]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchALL(PDO::FETCH_ASSOC);
 ?>
     <!--
 <form method='post' style='text-align: center' action="view.php?product_id=<//?php echo get($result, "id")?>">
