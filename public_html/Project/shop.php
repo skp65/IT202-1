@@ -43,8 +43,8 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             );
             $status = "<div class='box'>Product is added to your cart</div>";
         }
-    }
-}*/
+    }*/
+}
 ?>
 <html>
 <body>
@@ -90,7 +90,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $page = ceil($count / $per_page); ?>
 
 <?php
-}
     foreach($res as $row) {
         echo "<div class='product-wrapper'>
         <br>
