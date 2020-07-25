@@ -6,27 +6,25 @@ if (isset($_POST["search"])) {
 }
 $product_id = -1;
 $result = array();
-if(isset($_GET["thingId"])) {
+if (isset($_GET["product_id"])) {
 $product_id = $_GET["product_id"];
-$stmt = $db->prepare("SELECT * FROM Products where id = :id");
+$stmt = getDB()->prepare("SELECT * FROM Products where id = :id");
 $stmt->execute([":id" => $product_id]);
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-?>
-<?php
+
 if (isset($search)) {
     require("common.inc.php");
     try {
         $order = $_POST["order"];
         $mapped_col = "name";
         $query = "SELECT * FROM Products where name like CONCAT('%', :name, '%') ORDER BY $mapped_col";
-        if((int)$order == 1){
+        if ((int)$order == 1) {
             $query .= " ASC";
-        }
-        else{
+        } else {
             $query .= " DESC";
         }
         $stmt = getDB()->prepare($query);
-        $stmt->execute([":name"=>$search]);
+        $stmt->execute([":name" => $search]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
         echo $e->getMessage();
@@ -34,7 +32,7 @@ if (isset($search)) {
 }
 ?>
 <br>
-<form method="POST" style="text-align: center" action="sort.php?product_id=<?php echo get($results, "id")?>">
+<form method="POST" style="text-align: center" action="sort.php?product_id=<?php echo get($results, "id") ?>">
     <input type="text" name="search" placeholder="Search for Products"
            value="<?php echo $search; ?>"/>
     <select name="col">
@@ -47,7 +45,10 @@ if (isset($search)) {
     <input type="submit" value="Search"/>
 </form>
 
-<?php if (isset($results) && count($results) > 0): ?>
+
+<?php
+}
+if (isset($results) && count($results) > 0): ?>
     <table border="1" cellspacing="2" cellpadding="2" style="margin: auto">
         <tr>
             <th>Image</th>
@@ -61,7 +62,8 @@ if (isset($search)) {
                 <td style="text-align: center"><?php echo get($row, "name") ?></td>
                 <td style="text-align: center"><?php echo get($row, "price"); ?></td>
                 <td style="text-align: center"><?php echo get($row, "description"); ?></td>
-                <td style="text-align: center"><a href="sort.php?product_id=<?php echo get($row, "id");?>">View</a></td>
+                <td style="text-align: center"><a href="sort.php?product_id=<?php echo get($row, "id"); ?>">View</a>
+                </td>
             </tr>
         <?php endforeach; ?>
     </table>
