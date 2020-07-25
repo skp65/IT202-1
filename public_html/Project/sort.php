@@ -4,14 +4,6 @@ require_once(__DIR__ . "/partials/header.php");
 if (isset($_POST["search"])) {
     $search = $_POST["search"];
 }
-$product_id = -1;
-$result = array();
-if (isset($_GET["product_id"])) {
-$product_id = $_GET["product_id"];
-$stmt = getDB()->prepare("SELECT * FROM Products where id = :id");
-$stmt->execute([":id" => $product_id]);
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
-
 if (isset($search)) {
     require("common.inc.php");
     try {
@@ -32,7 +24,7 @@ if (isset($search)) {
 }
 ?>
 <br>
-<form method="POST" style="text-align: center" action="sort.php?product_id=<?php echo get($results, "id") ?>">
+<form method="POST" style="text-align: center">
     <input type="text" name="search" placeholder="Search for Products"
            value="<?php echo $search; ?>"/>
     <select name="col">
@@ -62,7 +54,7 @@ if (isset($results) && count($results) > 0): ?>
                 <td style="text-align: center"><?php echo get($row, "name") ?></td>
                 <td style="text-align: center"><?php echo get($row, "price"); ?></td>
                 <td style="text-align: center"><?php echo get($row, "description"); ?></td>
-                <td style="text-align: center"><a href="sort.php?product_id=<?php echo get($row, "id"); ?>">View</a>
+                <td style="text-align: center"><a href="view.php?product_id=<?php echo get($row, "id"); ?>">View</a>
                 </td>
             </tr>
         <?php endforeach; ?>
