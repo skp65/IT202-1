@@ -47,7 +47,7 @@ if (isset($search)) {
     <input type="submit" value="Search"/>
 </form>
 
-<?php if (isset($result) && count($result) > 0): ?>
+<?php if (isset($results) && count($results) > 0): ?>
     <table border="1" cellspacing="2" cellpadding="2" style="margin: auto">
         <tr>
             <th>Image</th>
@@ -55,14 +55,13 @@ if (isset($search)) {
             <th>Price</th>
             <th>Description</th>
         </tr>
-        <?php foreach ($result as $row): ?>
+        <?php foreach ($results as $row): ?>
             <tr>
                 <td><img alt="product" src='<?php echo $row["image"]; ?>' width="100px" height="100px"/></td>
                 <td style="text-align: center"><?php echo get($row, "name") ?></td>
                 <td style="text-align: center"><?php echo get($row, "price"); ?></td>
                 <td style="text-align: center"><?php echo get($row, "description"); ?></td>
                 <td style="text-align: center"><a href="sort.php?product_id=<?php echo get($row, "id");?>">View</a></td>
-
             </tr>
         <?php endforeach; ?>
     </table>
