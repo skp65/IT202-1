@@ -21,12 +21,12 @@ if (isset($_GET["product_id"])) {
         <div class='column'><//?php echo get($result, "description");?></div>
     </div>
 </form>-->
-    <?php foreach ($result as $row): ?>
+    <table>
         <tr>
-            <td><img alt="product" src='<?php echo $row["image"]; ?>' width="200px" height="200px"/></td>
-            <td style="text-align: center"><?php echo get($row, "name") ?></td>
-            <td style="text-align: center"><?php echo get($row, "price"); ?></td>
-            <td style="text-align: center"><?php echo get($row, "description"); ?></td>
+            <td><img alt="product" src='<?php echo $result["image"]; ?>' width="200px" height="200px"/></td>
+            <td style="text-align: center"><?php echo get($result, "name") ?></td>
+            <td style="text-align: center"><?php echo get($result, "price"); ?></td>
+            <td style="text-align: center"><?php echo get($result, "description"); ?></td>
         </tr>
-    <?php endforeach; ?>
+    </table>
 <?php } ?>
