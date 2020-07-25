@@ -12,22 +12,22 @@ if (isset($_GET["product_id"])) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
-    <!--
-<form method='post' style='text-align: center' action="view.php?product_id=<//?php echo get($result, "id")?>">
-    <div class='row'>
-        <div class='column'>
-            <img src='<//?php echo get($result, "image");?>'/></div>
-        <div class='column'><//?php echo get($result, "name");?></div>
-        <div class='column'>$<//?php echo get($result, "price");?></div>
-        <div class='column'><//?php echo get($result, "description");?></div>
-    </div>
-</form>-->
-    <table>
-        <tr>
-            <td><img alt="product" src='<?php echo $result["image"]; ?>' width="200px" height="200px"/></td>
-            <td style="text-align: center"><?php echo get($result, "name") ?></td>
-            <td style="text-align: center"><?php echo get($result, "price"); ?></td>
-            <td style="text-align: center"><?php echo get($result, "description"); ?></td>
-        </tr>
+<style>
+    .products tr{
+        text-align: center;
+        font-size: 20px;
+    }
+    .products img{
+        width: 200px;
+        height: 200px;
+        padding-left: 75%;
+        padding-top: 10%;
+    }
+</style>
+    <table class="products">
+            <tr><img alt="product" src='<?php echo $result["image"]; ?>'/></tr>
+            <tr>Product Name - <?php echo get($result, "name") ?></tr>
+            <tr>$<?php echo get($result, "price"); ?></tr>
+            <tr>Description - <?php echo get($result, "description"); ?></tr>
     </table>
 
