@@ -116,16 +116,15 @@ if (!empty($_SESSION["shopping_cart"])) {
     ?>
     <?php
     if(isset($_POST['order'])) {
-        if ($product_id != -1) {
             if (isset($_SESSION['user'])) {
                 if ($_POST['order']) {
                     $user_id = $_SESSION["user"]["id"];
-                    $product_id = $_GET["product_id"];
+                   // $product_id = $_GET["product_id"];
                     $price = $total;
                     $stmt = getDB()->prepare("SELECT COUNT(*) AS rows FROM Orders where user_id = :user_id and product_id = :product_id");
                     $stmt->execute([":user_id" => $user_id,
                                     ":product_id" => $product_id]);
-                    $rows = $stmt["rows"];
+                    $rows = (int)$stmt["rows"];
                     if($rows == 0){
                         $stmt = getDB()->prepare("INSERT INTO Orders (user_id, price) 
                         VALUES (:user_id, :price)");
@@ -139,9 +138,14 @@ if (!empty($_SESSION["shopping_cart"])) {
                 }
             }
         }
-    }
-
     ?>
+</div>
+</div>
+
+<div style="clear:both;"></div>
+
+<div class="message_box" style="margin:10px 0px;">
+    <?php echo $status; ?>
 </div>
 </body>
 </html>

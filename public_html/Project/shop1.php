@@ -119,5 +119,10 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         </ul>
     </center>
 </div>
+<div style="clear:both;"></div>
+
+<div class="message_box" style="margin:10px 0px;">
+    <?php echo $status; ?>
+</div>
 </body>
 </html>
