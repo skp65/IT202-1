@@ -17,7 +17,7 @@ $logged_in = Common::is_logged_in(false);
                 <a href="<?php echo Common::url_for("home");?>">Home</a>
             </li>
             <li>
-                <a href="<?php echo Common::url_for("shop1");?>">Shop</a>
+                <a href="<?php echo Common::url_for("shop1");?>">Products</a>
             </li>
             <li>
                 <a href="<?php echo Common::url_for("sort");?>">Search Products</a>

@@ -22,7 +22,7 @@ if ($product_id != -1) {
                                     and product_id = :product_id");
             $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            $num = (int)$result["num"];
+            $num = (int)$result["row"];
             if ($num == 0) {
                 $stmt = getDB()->prepare("INSERT INTO cart (product_id, user_id, quantity, price) 
                         VALUES (:product_id, :user_id, :quantity, :price)");

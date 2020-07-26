@@ -10,9 +10,6 @@ if(isset($_GET["product_id"])) {
     $stmt->execute([":id" => $product_id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 }
-if(){
-
-}
 
 if (isset($_POST['action']) && $_POST['action'] == "remove") {
     if (!empty($_SESSION["shopping_cart"])) {
