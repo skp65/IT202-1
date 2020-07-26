@@ -12,22 +12,10 @@ if (isset($_GET["product_id"])) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
-<style>
-    .products tr{
-        text-align: center;
-        font-size: 20px;
-    }
-    .products img{
-        width: 200px;
-        height: 200px;
-        padding-left: 75%;
-        padding-top: 10%;
-    }
-</style>
     <table class="products">
-            <tr><img alt="product" src='<?php echo $result["image"]; ?>'/></tr>
-            <tr>Product Name - <?php echo get($result, "name") ?></tr>
-            <tr>$<?php echo get($result, "price"); ?></tr>
+            <tr><img alt="product" src='<?php echo $result["image"]; ?>'/></tr><br><br>
+            <tr>Product Name - <?php echo get($result, "name") ?></tr><br><br>
+            <tr>$<?php echo get($result, "price"); ?></tr><br><br>
             <tr>Description - <?php echo get($result, "description"); ?></tr>
     </table>
 
