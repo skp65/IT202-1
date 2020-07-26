@@ -102,10 +102,10 @@ if (!empty($_SESSION["shopping_cart"])) {
                     <strong>TOTAL: <?php echo "$" . $total; ?></strong>
                 </td>
             </tr>
-            <tr>
+            <tr><td>
                 <form method="post" action="">
                     <button type="submit" class="order">Place Order</button>
-                </form>
+                </form></td>
             </tr>
             </tbody>
         </table>
@@ -128,7 +128,7 @@ if (!empty($_SESSION["shopping_cart"])) {
                     $result = $stmt->fetch(PDO::FETCH_ASSOC);
                     if(!$result){
                         $stmt = getDB()->prepare("INSERT INTO Orders (product_id, user_id, price) 
-                        VALUES (:product_id, :user_id, :q, :st)");
+                        VALUES (:product_id, :user_id, :price)");
                         $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id, ":price" => $price]);
                     }
                     else{
