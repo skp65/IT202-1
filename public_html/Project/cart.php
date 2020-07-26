@@ -1,6 +1,16 @@
 <?php
 require_once(__DIR__ . "/partials/header.php");
 $status = "";
+
+$product_id = -1;
+$result = array();
+if(isset($_GET["product_id"])) {
+    $product_id = $_GET["product_id"];
+    $stmt = $db->prepare("SELECT * FROM Products where id = :id");
+    $stmt->execute([":id" => $product_id]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 if (isset($_POST['action']) && $_POST['action'] == "remove") {
     if (!empty($_SESSION["shopping_cart"])) {
         foreach ($_SESSION["shopping_cart"] as $key => $value) {
@@ -92,12 +102,44 @@ if (!empty($_SESSION["shopping_cart"])) {
                     <strong>TOTAL: <?php echo "$" . $total; ?></strong>
                 </td>
             </tr>
+            <tr>
+                <form method="post" action="">
+                    <button type="submit" class="order">Place Order</button>
+                </form>
+            </tr>
             </tbody>
         </table>
         <?php
     } else {
         echo "<h3>Your cart is empty</h3>";
     }
+    ?>
+    <?php
+    if(isset($_POST['order'])) {
+        if ($product_id != -1) {
+            if (isset($_SESSION['user'])) {
+                if ($_POST['order']) {
+                    $user_id = $_SESSION["user"]["id"];
+                    $product_id = $_GET["product_id"];
+                    $price = $total;
+                    $stmt = getDB()->prepare("SELECT COUNT(*) FROM Orders where user_id = :user_id and product_id = :product_id");
+                    $stmt->execute([":user_id" => $user_id,
+                                    ":product_id" => $product_id]);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if(!$result){
+                        $stmt = getDB()->prepare("INSERT INTO Orders (product_id, user_id, price) 
+                        VALUES (:product_id, :user_id, :q, :st)");
+                        $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id, ":price" => $price]);
+                    }
+                    else{
+                        ?>
+                        <p style="text-align: center"><?php echo "No order placed!"?></p><?php;
+                    }
+                }
+            }
+        }
+    }
+
     ?>
 </div>
 </body>
