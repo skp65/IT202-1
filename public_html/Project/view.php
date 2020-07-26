@@ -14,10 +14,10 @@ if (isset($_GET["product_id"])) {
 ?>
     <table style="text-align: center; font-size: 20px">
             <tr><img alt="product" src="<?php echo $result["image"] ;?>" style="display: block; margin-left: auto;
-             margin-right: auto; width: 50%; border-radius: 8px"
+             margin-right: auto; margin-top: 2%; width: 40%; border-radius: 8px"
                     /></tr>
-        <tr><h2 style="padding-left:20%; font-size: 22px">Product Name - <?php echo get($result, "name") ?></h2></tr>
-        <tr><h2 style="padding-left:20%; font-size: 22px">Price - $<?php echo get($result, "price"); ?></h2></tr>
-        <tr><h2 style="padding-left:20%; font-size: 22px">Description - <?php echo get($result, "description"); ?></h2></tr>
+        <tr><h2 style="padding-left:30%; font-size: 22px">Product Name - <?php echo get($result, "name") ?></h2></tr>
+        <tr><h2 style="padding-left:30%; font-size: 22px">Price - $<?php echo get($result, "price"); ?></h2></tr>
+        <tr><h2 style="padding-left:30%; font-size: 22px">Description - <?php echo get($result, "description"); ?></h2></tr>
     </table>
 

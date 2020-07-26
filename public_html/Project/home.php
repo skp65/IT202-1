@@ -5,7 +5,8 @@ if(Common::is_logged_in()){
 }
 ?>
 <div>
-    <p>Welcome, <?php echo Common::get_username();?></p>
+    <h3 style="text-align: center; color: darkorchid; font-weight: bold; font-size: 22px">
+        Welcome to Way of the Food, <?php echo Common::get_username();?></h3>
 </div>
 
 

@@ -14,31 +14,19 @@ if (isset($_POST['action']) && $_POST['action'] == "remove") {
     }
 }
 if (isset($_POST['action']) && $_POST['action'] == "change") {
-    foreach ($_SESSION["shopping_cart"] as &$value) {
+    foreach ($_SESSION["shopping_cart"] as $value) {
         if ($value['code'] === $_POST["code"]) {
             $value['quantity'] = $_POST["quantity"];
             break;
         }
     }
 }
-if (isset($_REQUEST['Logout']) && $_REQUEST['Logout'] == "logout") {
-    unset($_SESSION['Logged']);
-    header("location:login.php?Msg=You are successfully Logout ");
-}
 ?>
 <html>
-<!--<head>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <style>
-        body {
-            background-image: url('images/1.jpg');
-        }
-    </style>
-</head>-->
 <body>
 <h2>Shopping Cart</h2>
-<a href="shop.php">
-    <h2> Return to Shop</h2></a>
+<a href="shop1.php">
+    <h2> Return to Products</h2></a>
 <?php
 if (!empty($_SESSION["shopping_cart"])) {
     $cart_count = count(array_keys($_SESSION["shopping_cart"]));
@@ -111,12 +99,6 @@ if (!empty($_SESSION["shopping_cart"])) {
         echo "<h3>Your cart is empty</h3>";
     }
     ?>
-</div>
-
-<div style="clear:both;"></div>
-<div class="message_box" style="margin:10px 0px;">
-    <?php echo $status; ?>
-</div>
 </div>
 </body>
 </html>

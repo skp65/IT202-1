@@ -88,9 +88,10 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             <div class='row'>
                 <div class='column'>
                 <img src='" . $row['image'] . "' style='width: 150px; height: 150px; '/></div></div>
-                <div class='column'>" . $row['name'] . "</div>
-                <div class='column'>$" . $row['price'] . "</div>
-                <button type='submit' class='buy'><a href='cart.php'></a> Add to Cart</button>
+                <div class='column' style='font-weight: bold; padding-right: 5%'>" . $row['name'] . "</div>
+                <div class='column' style='font-weight: bold; padding-right: 5%'>$" . $row['price'] . "</div>
+                <button type='submit' class='buy' style='font-weight: bold; margin-right: 5%'>
+                <a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
     }
