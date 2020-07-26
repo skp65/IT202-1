@@ -46,7 +46,7 @@ if (!empty($_SESSION["shopping_cart"])) {
 ?>
 <div class="cart">
     <?php
-    if (isset($_SESSION["shopping_cart"])) {
+    if (isset($_SESSION["user"])) {
         $total_price = 0;
         ?>
         <table class="table" width="80%">
