@@ -8,7 +8,17 @@ if (isset($search)) {
     require("common.inc.php");
     try {
         $order = $_POST["order"];
+        $col = $_POST["col"];
         $mapped_col = "name";
+        if($col == "name"){
+            $mapped_col = "name";
+        }
+        else if($col == "created"){
+            $mapped_col = "created";
+        }
+        else if($col == "price"){
+            $mapped_col = "price";
+        }
         $query = "SELECT * FROM Products where name like CONCAT('%', :name, '%') ORDER BY $mapped_col";
         if ((int)$order == 1) {
             $query .= " ASC";
@@ -37,6 +47,8 @@ if(isset($_GET["product_id"])) {
            value="<?php echo $search; ?>"/>
     <select name="col">
         <option value="name">Name</option>
+        <option value="price">Price</option>
+        <option value="created">Date Added</option>
     </select>
     <select name="order">
         <option value="1">Asc</option>
