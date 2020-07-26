@@ -4,7 +4,7 @@
 <nav>
     <ul class="head">
         <li><a href="home.php">Home</a></li>
-        <li><a href="shop.php">Products</a></li>
+        <li><a href="shop1.php">Products</a></li>
         <li><a href="sort.php">Search Products</a></li>
         <li><a href="logout.php">Logout</a></li>
     </ul>
