@@ -3,13 +3,45 @@ session_start();
 include("header.php");
 $status = "";
 
-/*$product_id = -1;
+$product_id = -1;
 $result = array();
-if(isset($_GET["product_id"])) {
+if (isset($_GET["product_id"])) {
 $product_id = $_GET["product_id"];
 $stmt = $db->prepare("SELECT * FROM Products where id = :id");
 $stmt->execute([":id" => $product_id]);
-$result = $stmt->fetch(PDO::FETCH_ASSOC);*/
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (isset($_POST['buy'])) {
+if ($product_id != -1) {
+    if (isset($_SESSION["user"])) {
+        if ($_POST["buy"]) {
+            $user_id = $_SESSION['user']['id'];
+            $product_id = $_GET['product_id'];
+            $price = get($result, 'price');
+            $stmt = getDB()->prepare("SELECT COUNT(*) AS row from Cart where user_id = :user_id 
+                                    and product_id = :product_id");
+            $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $num = (int)$result["num"];
+            if ($num == 0) {
+                $stmt = getDB()->prepare("INSERT INTO cart (product_id, user_id, quantity, price) 
+                        VALUES (:product_id, :user_id, :quantity, :price)");
+                $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id, ":quantity" => 1,
+                    ":price" => $price]);
+            } else {
+                $stmt = getDB()->prepare("UPDATE cart set quantity += quantity, price = :price * quantity
+                    where product_id = :product_id and user_id = :user_id");
+                $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id, ":quantity" => 1,
+                    ":price" => $price]);
+            }
+        }
+    } else {
+        ?>
+        <p><?php echo "No items added" ?></p>
+        <?php
+    }
+}
+}
 
 if (isset($_POST['code']) && $_POST['code'] != "") {
     $code = $_POST['code'];
@@ -30,7 +62,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             'quantity' => 1)
     );
 
-    /*if (empty($_SESSION["shopping_cart"])) {
+    if (empty($_SESSION["shopping_cart"])) {
         $_SESSION["shopping_cart"] = $cartArray;
         $status = "<div class='box'>Product is added to your cart</div>";
     } else {
@@ -43,7 +75,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             );
             $status = "<div class='box'>Product is added to your cart</div>";
         }
-    }*/
+    }
 }
 ?>
 <html>
@@ -56,7 +88,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     <div class="cart_div">
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <a href="cart.php">
             <img src="images/cart.jpg" style="width: 50px"/>
             <span><?php echo $cart_count; ?></span></a>
@@ -69,28 +101,28 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $next = $page_counter + 1;
     $previous = $page_counter - 1;
 
-    if(isset($_GET['start'])) {
+    if (isset($_GET['start'])) {
         $start = $_GET['start'];
         $page_counter = $_GET['start'];
         $start = $start * $per_page;
         $next = $page_counter + 1;
         $previous = $page_counter - 1;
     }
-
     $query = getDB()->prepare("SELECT * FROM Products LIMIT $start, $per_page");
     $query->execute();
 
-    if($query->rowCount() > 0){
+    if ($query->rowCount() > 0) {
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
     }
     $count_query = "SELECT * FROM Products";
     $query = getDB()->prepare($count_query);
     $query->execute();
     $count = $query->rowCount();
-    $page = ceil($count / $per_page); ?>
-
-<?php
-    foreach($res as $row) {
+    $page = ceil($count / $per_page);
+    ?>
+    <?php
+    }
+    foreach ($res as $row) {
         echo "<div class='product-wrapper'>
         <br>
         <form method='post' action='' style='text-align: center' >
@@ -108,20 +140,25 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     <center>
         <ul class="pagination">
             <?php
-            if($page_counter == 0){
+            if ($page_counter == 0) {
                 echo "<li><a href=?start='0' class='active'>0</a></li>";
-                for($i = 1; $i < $page; $i++) {
-                    echo "<li><a href=?start=$i>".$i."</a></li>";
+                for ($i = 1;
+                     $i < $page;
+                     $i++) {
+                    echo "<li><a href=?start=$i>" . $i . "</a></li>";
                 }
-            }else{
+            } else {
                 echo "<li><a href=?start=$previous>Previous</a></li>";
-                for($i = 0; $i < $page; $i++) {
-                    if($i == $page_counter) {
-                        echo "<li><a href=?start=$i class='active'>".$i."</a></li>";
-                    }else{
-                        echo "<li><a href=?start=$i>".$i."</a></li>";
+                for ($i = 0;
+                     $i < $page;
+                     $i++) {
+                    if ($i == $page_counter) {
+                        echo "<li><a href=?start=$i class='active'>" . $i . "</a></li>";
+                    } else {
+                        echo "<li><a href=?start=$i>" . $i . "</a></li>";
                     }
-                }if($i != $page_counter+1)
+                }
+                if ($i != $page_counter + 1)
                     echo "<li><a href=?start=$next>Next</a></li>";
             }
             ?>
