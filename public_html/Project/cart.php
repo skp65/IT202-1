@@ -46,7 +46,7 @@ if (!empty($_SESSION["shopping_cart"])) {
 ?>
 <div class="cart">
     <?php
-    if (isset($_SESSION["user"])) {
+    if (isset($_SESSION["shopping_cart"])) {
         $total_price = 0;
         ?>
         <table class="table" width="80%">
@@ -102,7 +102,7 @@ if (!empty($_SESSION["shopping_cart"])) {
                     <strong>TOTAL: <?php echo "$" . $total; ?></strong>
                 </td>
             </tr>
-            <tr><td>
+            <tr><td colspan="5" align="right">
                 <form method="post" action="">
                     <button type="submit" class="order">Place Order</button>
                 </form></td>

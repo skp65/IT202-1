@@ -51,7 +51,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <a href="cart.php">
             <img src="images/cart.jpg" style="width: 50px"/>
-            <span><?php echo $cart_count; ?></span></a>
+            <span style="color: black"><?php echo $cart_count; ?></span></a>
     </div>
     <?php
     $start = 0;
@@ -100,7 +100,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         <ul class="pagination">
             <?php
             if($page_counter == 0){
-                echo "<li><a href=?start='0' class='active'>0</a></li>";
+                echo "<li><a href=?start='0' class='active'>1</a></li>";
                 for($i = 1; $i < $page; $i++) {
                     echo "<li><a href=?start=$i>".$i."</a></li>";
                 }
