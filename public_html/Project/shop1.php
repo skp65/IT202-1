@@ -9,7 +9,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $stmt = getDB()->prepare("SELECT * FROM Products WHERE code = '$code'");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
-    //$productid = $results['pid'];
+    $produc_tid = $results['pid'];
     $name = $results['name'];
     $code = $results['code'];
     $image = $results['image'];
@@ -17,7 +17,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 
     $cartArray = array(
         $code => array(
-            // 'pid' => $productid,
+            'pid' => $product_id,
             'name' => $name,
             'code' => $code,
             'image' => $image,
@@ -41,25 +41,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     }
 }
     ?>
-    <?php
-    if (isset($_POST["buy"])) {
-        if (isset($_SESSION["user"])) {
-            $userid = $_SESSION["user"]["id"];
-            $price = ["price"];
-            $code = ["code"];
-            $stmt = getDB()->prepare("INSERT INTO cart (code,quantity, user_id, price) 
-            VALUES(:code, :quantity, :user_id, :price)");
-            $stmt->execute([
-                    "code" => $code, "user_id" => $userid, "quantity" => 1, "price" => $price
-                ]
-            );
-        } else {
-            ?>
-            <b><?php echo "Login to add items"; ?></b>
-            <?php
-        }
-    }
-?>
 
 <html>
 <body>
@@ -111,12 +92,31 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             <div class='row'>
                 <div class='column'>
                 <img alt='image' src='" . $row ["image"]. "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
-                <div class='column' style='font-weight: bold; padding-right: 5%' name='name'>".$row["name"]." </div>
-                <div class='column' style='font-weight: bold; padding-right: 5%' name='price'>". $row ["price"] . "</div>
+                <div class='column' style='font-weight: bold; padding-right: 5%'>".$row["name"]." </div>
+                <div class='column' style='font-weight: bold; padding-right: 5%'>". $row ["price"] . "</div>
                 <button type='submit' class='buy' name='buy' style='font-weight: bold; margin-right: 5%'>
                 <a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
+    }
+    ?>
+    <?php
+    if (isset($_POST["buy"])) {
+        if (isset($_SESSION["user"])) {
+            $user_id = $_SESSION["user"]["id"];
+            $price = $row["price"];
+            $code = $row["code"];
+            $stmt = getDB()->prepare("INSERT INTO cart (product_id, code,quantity, user_id, price) 
+            VALUES(:pid, :code, :quantity, :user_id, :price)");
+            $stmt->execute([
+                    "pid"=>$product_id ,"code" => $code, "user_id" => $user_id, "quantity" => 1, "price" => $price
+                ]
+            );
+        } else {
+            ?>
+            <b><?php echo "Login to add items"; ?></b>
+            <?php
+        }
     }
     ?>
     <center>
