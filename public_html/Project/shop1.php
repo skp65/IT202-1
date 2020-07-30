@@ -17,7 +17,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 
     $cartArray = array(
         $code => array(
-           // 'pid' => $productid,
+            // 'pid' => $productid,
             'name' => $name,
             'code' => $code,
             'image' => $image,
@@ -39,27 +39,29 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             $status = "<div class='box'>Product is added to your cart</div>";
         }
     }
-}
-?>
-<?php
-if (isset($_POST["buy"])) {
-    if (isset($_SESSION["user"])) {
+
+    ?>
+    <?php
+    if (isset($_POST["buy"])) {
+        if (isset($_SESSION["user"])) {
             $userid = $_SESSION["user"]["id"];
-            $price = get($row, "price");
-            $code = $_GET['code'];
+            $price = get($reults, "price");
+            $code = get($results, "code");
             $stmt = getDB()->prepare("INSERT INTO cart (code,quantity, user_id, price) 
             VALUES(:code, :quantity, :user_id, :price)");
             $stmt->execute([
-                    "code"=>$code,"user_id" => $userid, "quantity" => 1, "price" => $price
+                    "code" => $code, "user_id" => $userid, "quantity" => 1, "price" => $price
                 ]
             );
+        } else {
+            ?>
+            <b><?php echo "Login to add items"; ?></b>
+            <?php
         }
-    else{?>
-        <b><?php echo"Login to add items";?></b>
-    <?php
     }
 }
 ?>
+
 <html>
 <body>
 <div>
