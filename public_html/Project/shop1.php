@@ -40,21 +40,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     }
 }
 ?>
-<?php
-if (isset($_POST["buy"])) {
-    if (isset($_SESSION["user"])) {
-        $userid = $_SESSION["user"]["id"];
-        $productid = $_GET["pid"];
-        $price = $_GET["price"];
-        $stmt=getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
-        VALUES(:product_id, :quantity, :user_id, :price)");
-        $stmt->execute([
-                "user_id"=>$userid, "quantity"=> 1, "product_id"=>$productid, "price"=>$price
-            ]
-        );
-    }
-}
-?>
 <html>
 <body>
 <div>
@@ -111,6 +96,23 @@ if (isset($_POST["buy"])) {
                 <a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
+    }
+    ?>
+    <?php
+    if (isset($_POST["buy"])) {
+        if (isset($_SESSION["user"])) {
+            if ($_POST["buy"]) {
+                $userid = $_SESSION["user"]["id"];
+                $productid = $_GET["pid"];
+                $price = $_GET["price"];
+                $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
+        VALUES(:product_id, :quantity, :user_id, :price)");
+                $stmt->execute([
+                        "user_id" => $userid, "quantity" => 1, "product_id" => $productid, "price" => $price
+                    ]
+                );
+            }
+        }
     }
     ?>
     <center>
