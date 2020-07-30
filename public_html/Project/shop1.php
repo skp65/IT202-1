@@ -38,6 +38,9 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     }
 }
 ?>
+<?php
+    
+?>
 <html>
 <body>
 <div>
@@ -87,7 +90,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             <input type='hidden' name='code' value=" . $row['code'] . " />
             <div class='row'>
                 <div class='column'>
-                <img src='" . $row['image'] . "' style='width: 150px; height: 150px; '/></div></div>
+                <img src='" . $row['image'] . "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
                 <div class='column' style='font-weight: bold; padding-right: 5%'>" . $row['name'] . "</div>
                 <div class='column' style='font-weight: bold; padding-right: 5%'>$" . $row['price'] . "</div>
                 <button type='submit' class='buy' style='font-weight: bold; margin-right: 5%'>
@@ -100,7 +103,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         <ul class="pagination">
             <?php
             if($page_counter == 0){
-                echo "<li><a href=?start='0' class='active'>1</a></li>";
+                echo "<li><a href=?start='0' class='active'>0</a></li>";
                 for($i = 1; $i < $page; $i++) {
                     echo "<li><a href=?start=$i>".$i."</a></li>";
                 }

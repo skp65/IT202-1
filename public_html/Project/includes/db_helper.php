@@ -53,8 +53,7 @@ class DBH{
               ":last_name" => $lname , ":password" => $pass]);
             DBH::verify_sql($stmt);
             if($result){
-                //return DBH::response( "<b>Registration successful</b>");
-                echo "<div style='text-align: center'>Successfully Registered, Please Login</div>";
+                return DBH::response( "Registration successful");
 
             }
             else{

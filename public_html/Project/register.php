@@ -37,14 +37,14 @@ if (Common::get($_POST, "submit", false)){
     $password = Common::get($_POST, "password", false);
     $confirm_password = Common::get($_POST, "cpassword", false);
     if($password != $confirm_password){
-        Common::flash("<b style='text-align: center'>Passwords must match</b>", "warning");
+        Common::flash("<b>Passwords must match</b>", "warning");
         die(header("Location: register.php"));
     }
     if(!empty($email) && !empty($fname) && !empty($lname) && !empty($password)){
         $result = DBH::register($email, $fname, $lname, $password);
         echo var_export($result, true);
         if(Common::get($result, "status", 400) == 200){
-            //echo "<div style='text-align: center'>Successfully Registered, Please Login</div>";
+            echo "<div style='text-align: center'>Successfully Registered, Please Login</div>";
             die(header("Location: " . Common::url_for("login")));
         }
     }
