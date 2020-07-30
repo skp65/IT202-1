@@ -3,14 +3,14 @@ session_start();
 include("header.php");
 $status = "";
 
-if (isset($_POST['code']) && $_POST['code'] != "") {
+if (isset($_POST['pid']) && $_POST['pid'] != "") {
     $productid = $_POST['pid'];
-    $stmt = getDB()->prepare("SELECT * FROM Products WHERE id = '$productid'");
+    $stmt = getDB()->prepare("SELECT * FROM Products WHERE id = $productid");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
     $productid = $results['pid'];
     $name = $results['name'];
-    //$code = $results['code'];
+    $code = $results['code'];
     $image = $results['image'];
     $price = $results['price'];
 
@@ -18,7 +18,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         $productid => array(
             'pid' => $productid,
             'name' => $name,
-            //'code' => $code,
+           // 'code' => $code,
             'image' => $image,
             'price' => $price,
             'quantity' => 1)
@@ -37,6 +37,26 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             );
             $status = "<div class='box'>Product is added to your cart</div>";
         }
+    }
+}
+?>
+<?php
+if (isset($_POST["buy"])) {
+    if (isset($_SESSION["user"])) {
+        if ($_POST["buy"]) {
+            $userid = $_SESSION["user"]["id"];
+            $productid = $_GET["pid"];
+            $price = $_GET["price"];
+            $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
+        VALUES(:product_id, :quantity, :user_id, :price)");
+            $stmt->execute([
+                    "user_id" => $userid, "quantity" => 1, "product_id" => $productid, "price" => $price
+                ]
+            );
+        }
+    }
+    else{
+        echo"Login to add items";
     }
 }
 ?>
@@ -96,23 +116,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
                 <a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
-    }
-    ?>
-    <?php
-    if (isset($_POST["buy"])) {
-        if (isset($_SESSION["user"])) {
-            if ($_POST["buy"]) {
-                $userid = $_SESSION["user"]["id"];
-                $productid = $_GET["pid"];
-                $price = $_GET["price"];
-                $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
-        VALUES(:product_id, :quantity, :user_id, :price)");
-                $stmt->execute([
-                        "user_id" => $userid, "quantity" => 1, "product_id" => $productid, "price" => $price
-                    ]
-                );
-            }
-        }
     }
     ?>
     <center>

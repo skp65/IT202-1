@@ -2,14 +2,14 @@
 require_once(__DIR__ . "/partials/header.php");
 $status = "";
 
-$product_id = -1;
+/**$product_id = -1;
 $result = array();
 if(isset($_GET["product_id"])) {
     $product_id = $_GET["product_id"];
     $stmt = $db->prepare("SELECT * FROM Products where id = :id");
     $stmt->execute([":id" => $product_id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-}
+}**/
 
 if (isset($_POST['action']) && $_POST['action'] == "remove") {
     if (!empty($_SESSION["shopping_cart"])) {
