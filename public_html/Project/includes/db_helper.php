@@ -52,12 +52,12 @@ class DBH{
             $result = $stmt->execute([":email" => $email, ":first_name"=> $fname,
               ":last_name" => $lname , ":password" => $pass]);
             DBH::verify_sql($stmt);
-            if($result){
-                return DBH::response( "Registration successful");
+            /*if($result){
+                return DBH::response( "<b>Registration successful</b>");
             }
             else{
                 return DBH::response("Registration unsuccessful");
-            }
+            }*/
         }
         catch(Exception $e){
             error_log($e->getMessage());
