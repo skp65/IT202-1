@@ -4,7 +4,7 @@ include("header.php");
 $status = "";
 
 if (isset($_POST['code']) && $_POST['code'] != "") {
-    $code = $_POST['code'];
+    $productid = $_POST['pid'];
     $stmt = getDB()->prepare("SELECT * FROM Products WHERE id = '$productid'");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -15,7 +15,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $price = $results['price'];
 
     $cartArray = array(
-        $code => array(
+        $productid => array(
             'pid' => $productid,
             'name' => $name,
             //'code' => $code,
