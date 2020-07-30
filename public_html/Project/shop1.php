@@ -111,8 +111,12 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             <div class='row'>
                 <div class='column'>
                 <img alt='image' src='" . $row ["image"]. "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
-                <div class='column' style='font-weight: bold; padding-right: 5%'>" . $row ["name"]. "</div>
-                <div class='column' style='font-weight: bold; padding-right: 5%' >$" . $row ["price"] . "</div>
+                <div class='column' style='font-weight: bold; padding-right: 5%'>
+                    <input name='name' value=".$row["name"]."/>
+                 </div>
+                <div class='column' style='font-weight: bold; padding-right: 5%' >
+                    <input name='price' value=". $row ["price"] . "/>
+                </div>
                 <button type='submit' class='buy' name='buy' style='font-weight: bold; margin-right: 5%'>
                 <a href='cart.php'></a> Add to Cart</button>
         </form>
