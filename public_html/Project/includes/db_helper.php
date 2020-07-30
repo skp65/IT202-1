@@ -61,7 +61,7 @@ class DBH{
             }
         }
         catch(Exception $e){
-            error_log($e->getMessage());
+            //error_log($e->getMessage());
             echo "<div style='text-align: center'>Email already exists</div>";
         }
     }

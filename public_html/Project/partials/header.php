@@ -37,7 +37,7 @@ $logged_in = Common::is_logged_in(false);
         <?php endif; ?>
     </ul>
 </nav>
-<div id="messages">
+<div>
     <?php $flash_messages = Common::getFlashMessages();?>
     <?php if(isset($flash_messages) && count($flash_messages) > 0):?>
         <?php foreach($flash_messages as $msg):?>
