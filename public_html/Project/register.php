@@ -44,8 +44,8 @@ if (Common::get($_POST, "submit", false)){
         $result = DBH::register($email, $fname, $lname, $password);
         echo var_export($result, true);
         if(Common::get($result, "status", 400) == 200){
-            echo "<div style='text-align: center'>Successfully Registered, Please Login</div>";
-            //die(header("Location: " . Common::url_for("login")));
+            //echo "<div style='text-align: center'>Successfully Registered, Please Login</div>";
+            die(header("Location: " . Common::url_for("login")));
         }
     }
     else{
