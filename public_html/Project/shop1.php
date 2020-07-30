@@ -46,12 +46,12 @@ if (isset($_POST["buy"])) {
     if (isset($_SESSION["user"])) {
         if ($_POST["buy"]) {
             $userid = $_SESSION["user"]["id"];
-            $code = $_GET["code"];
+            $productid = $_GET["pid"];
             $price = $_GET["price"];
             $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
         VALUES(:product_id, :quantity, :user_id, :price)");
             $stmt->execute([
-                    "user_id" => $userid, "quantity" => 1, "code" => $code, "price" => $price
+                    "user_id" => $userid, "quantity" => 1, "productid" => $productid, "price" => $price
                 ]
             );
         }
