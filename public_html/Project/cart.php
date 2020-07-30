@@ -25,7 +25,7 @@ if (isset($_POST['action']) && $_POST['action'] == "remove") {
 }
 if (isset($_POST['action']) && $_POST['action'] == "change") {
     foreach ($_SESSION["shopping_cart"] as &$value) {
-        if ($value['pid'] === $_POST["pid"]) {
+        if ($value['code'] === $_POST["code"]) {
             $value['quantity'] = $_POST["quantity"];
             break;
         }
@@ -72,14 +72,14 @@ if (!empty($_SESSION["shopping_cart"])) {
                     <td><img src='<?php echo $product["image"]; ?>' width="70" height="70"/></td>
                     <td><?php echo $product["name"]; ?><br/>
                         <form method='post' action=''>
-                            <input type='hidden' name='pid' value="<?php echo $product["pid"]; ?>"/>
+                            <input type='hidden' name='code' value="<?php echo $product["code"]; ?>"/>
                             <input type='hidden' name='action' value="remove"/>
                             <button type='submit' class='remove'>Remove Item</button>
                         </form>
                     </td>
                     <td>
                         <form method='post' action=''>
-                            <input type='hidden' name='pid' value="<?php echo $product["pid"]; ?>"/>
+                            <input type='hidden' name='code' value="<?php echo $product["code"]; ?>"/>
                             <input type='hidden' name='action' value="change"/>
                             <select name='quantity' class='quantity' onchange="this.form.submit()">
                                 <option <?php if ($product["quantity"] == 1) echo "selected"; ?> value="1">1</option>
@@ -115,7 +115,7 @@ if (!empty($_SESSION["shopping_cart"])) {
     }
     ?>
     <?php
-    if(isset($_POST['order'])) {
+    /**if(isset($_POST['order'])) {
             if (isset($_SESSION['user'])) {
                 if ($_POST['order']) {
                     $user_id = $_SESSION["user"]["id"];
@@ -137,7 +137,7 @@ if (!empty($_SESSION["shopping_cart"])) {
                     }
                 }
             }
-        }
+        }**/
     ?>
 </div>
 </div>

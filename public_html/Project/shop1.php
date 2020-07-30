@@ -3,9 +3,10 @@ session_start();
 include("header.php");
 $status = "";
 
-if (isset($_POST['pid']) && $_POST['pid'] != "") {
-    $productid = $_POST['pid'];
-    $stmt = getDB()->prepare("SELECT * FROM Products WHERE id = $productid");
+if (isset($_POST['code']) && $_POST['code'] != "") {
+    //$productid = $_POST['pid'];
+    $code = $_POST['code'];
+    $stmt = getDB()->prepare("SELECT * FROM Products WHERE code = $code");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
     $productid = $results['pid'];
@@ -16,9 +17,9 @@ if (isset($_POST['pid']) && $_POST['pid'] != "") {
 
     $cartArray = array(
         $productid => array(
-            'pid' => $productid,
+           // 'pid' => $productid,
             'name' => $name,
-           // 'code' => $code,
+            'code' => $code,
             'image' => $image,
             'price' => $price,
             'quantity' => 1)
@@ -45,12 +46,12 @@ if (isset($_POST["buy"])) {
     if (isset($_SESSION["user"])) {
         if ($_POST["buy"]) {
             $userid = $_SESSION["user"]["id"];
-            $productid = $_GET["pid"];
+            $code = $_GET["code"];
             $price = $_GET["price"];
             $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
         VALUES(:product_id, :quantity, :user_id, :price)");
             $stmt->execute([
-                    "user_id" => $userid, "quantity" => 1, "product_id" => $productid, "price" => $price
+                    "user_id" => $userid, "quantity" => 1, "code" => $code, "price" => $price
                 ]
             );
         }
@@ -106,7 +107,7 @@ if (isset($_POST["buy"])) {
         echo "<div class='product-wrapper'>
         <br>
         <form method='post' action='' style='text-align: center' >
-            <input type='hidden' name='pid' value=" . $row['pid'] . " />
+            <input type='hidden' name='code' value=" . $row['code'] . " />
             <div class='row'>
                 <div class='column'>
                 <img src='" . $row['image'] . "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
