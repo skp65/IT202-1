@@ -8,7 +8,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $stmt = getDB()->prepare("SELECT * FROM Products WHERE id = '$productid'");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
-    $productid = $results['id'];
+    $productid = $results['pid'];
     $name = $results['name'];
     //$code = $results['code'];
     $image = $results['image'];
@@ -16,7 +16,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 
     $cartArray = array(
         $code => array(
-            'id' => $productid,
+            'pid' => $productid,
             'name' => $name,
             //'code' => $code,
             'image' => $image,
@@ -44,7 +44,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 if (isset($_POST["buy"])) {
     if (isset($_SESSION["user"])) {
         $userid = $_SESSION["user"]["id"];
-        $productid = $_GET["id"];
+        $productid = $_GET["pid"];
         $price = $_GET["price"];
         $stmt=getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
         VALUES(:product_id, :quantity, :user_id, :price)");
@@ -101,7 +101,7 @@ if (isset($_POST["buy"])) {
         echo "<div class='product-wrapper'>
         <br>
         <form method='post' action='' style='text-align: center' >
-            <input type='hidden' name='id' value=" . $row['id'] . " />
+            <input type='hidden' name='pid' value=" . $row['pid'] . " />
             <div class='row'>
                 <div class='column'>
                 <img src='" . $row['image'] . "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
