@@ -9,14 +9,14 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $stmt = getDB()->prepare("SELECT * FROM Products WHERE code = $code");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
-    $productid = $results['pid'];
+    //$productid = $results['pid'];
     $name = $results['name'];
     $code = $results['code'];
     $image = $results['image'];
     $price = $results['price'];
 
     $cartArray = array(
-        $productid => array(
+        $code => array(
            // 'pid' => $productid,
             'name' => $name,
             'code' => $code,
@@ -51,7 +51,7 @@ if (isset($_POST["buy"])) {
             $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
         VALUES(:product_id, :quantity, :user_id, :price)");
             $stmt->execute([
-                    "user_id" => $userid, "quantity" => 1, "productid" => $productid, "price" => $price
+                    "user_id" => $userid, "quantity" => 1, "product_id" => $productid, "price" => $price
                 ]
             );
         }
