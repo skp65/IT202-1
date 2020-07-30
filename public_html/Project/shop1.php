@@ -45,7 +45,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 if (isset($_POST["buy"])) {
     if (isset($_SESSION["user"])) {
             $userid = $_SESSION["user"]["id"];
-            $price = $_GET['price'];
+            $price = get($row, "price");
             $code = $_GET['code'];
             $stmt = getDB()->prepare("INSERT INTO cart (code,quantity, user_id, price) 
             VALUES(:code, :quantity, :user_id, :price)");
@@ -106,12 +106,12 @@ if (isset($_POST["buy"])) {
         echo "<div class='product-wrapper'>
         <br>
         <form method='post' action='' style='text-align: center' >
-            <input type='hidden' name='code' value=" . $row['code'] . " />
+            <input type='hidden' name='code' value=" . get($row, "code") . " />
             <div class='row'>
                 <div class='column'>
-                <img src='" . $row['image'] . "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
-                <div class='column' style='font-weight: bold; padding-right: 5%'>" . $row['name'] . "</div>
-                <div class='column' style='font-weight: bold; padding-right: 5%'>$" . $row['price'] . "</div>
+                <img src='" . get($row, "image") . "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
+                <div class='column' style='font-weight: bold; padding-right: 5%'>" . get($row, "price") . "</div>
+                <div class='column' style='font-weight: bold; padding-right: 5%'>$" . get($row, "price") . "</div>
                 <button type='submit' class='buy' name='buy' style='font-weight: bold; margin-right: 5%'>
                 <a href='cart.php'></a> Add to Cart</button>
         </form>
