@@ -39,14 +39,14 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             $status = "<div class='box'>Product is added to your cart</div>";
         }
     }
-
+}
     ?>
     <?php
     if (isset($_POST["buy"])) {
         if (isset($_SESSION["user"])) {
             $userid = $_SESSION["user"]["id"];
-            $price = get($reults, "price");
-            $code = get($results, "code");
+            $price = get($row, "price");
+            $code = get($row, "code");
             $stmt = getDB()->prepare("INSERT INTO cart (code,quantity, user_id, price) 
             VALUES(:code, :quantity, :user_id, :price)");
             $stmt->execute([
@@ -59,7 +59,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             <?php
         }
     }
-}
 ?>
 
 <html>
@@ -112,7 +111,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             <div class='row'>
                 <div class='column'>
                 <img src='" . get($row, "image") . "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
-                <div class='column' style='font-weight: bold; padding-right: 5%'>" . get($row, "price") . "</div>
+                <div class='column' style='font-weight: bold; padding-right: 5%'>" . get($row, "name") . "</div>
                 <div class='column' style='font-weight: bold; padding-right: 5%'>$" . get($row, "price") . "</div>
                 <button type='submit' class='buy' name='buy' style='font-weight: bold; margin-right: 5%'>
                 <a href='cart.php'></a> Add to Cart</button>
