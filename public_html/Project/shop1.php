@@ -6,7 +6,7 @@ $status = "";
 if (isset($_POST['code']) && $_POST['code'] != "") {
     //$productid = $_POST['pid'];
     $code = $_POST['code'];
-    $stmt = getDB()->prepare("SELECT * FROM Products WHERE code = $code");
+    $stmt = getDB()->prepare("SELECT * FROM Products WHERE code = '$code'");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
     //$productid = $results['pid'];
@@ -44,20 +44,18 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
 <?php
 if (isset($_POST["buy"])) {
     if (isset($_SESSION["user"])) {
-        if ($_POST["buy"]) {
             $userid = $_SESSION["user"]["id"];
-            $productid = $_GET["pid"];
             $price = $_GET["price"];
-            $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
-        VALUES(:product_id, :quantity, :user_id, :price)");
+            $stmt = getDB()->prepare("INSERT INTO cart (quantity, user_id, price) 
+            VALUES(:quantity, :user_id, :price)");
             $stmt->execute([
-                    "user_id" => $userid, "quantity" => 1, "product_id" => $productid, "price" => $price
+                    "user_id" => $userid, "quantity" => 1, "price" => $price
                 ]
             );
         }
-    }
-    else{
-        echo"Login to add items";
+    else{?>
+        <b><?php>echo"Login to add items";?></b>
+    <?php
     }
 }
 ?>
