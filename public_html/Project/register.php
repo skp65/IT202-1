@@ -37,7 +37,7 @@ if (Common::get($_POST, "submit", false)){
     $password = Common::get($_POST, "password", false);
     $confirm_password = Common::get($_POST, "cpassword", false);
     if($password != $confirm_password){
-        Common::flash("Passwords must match", "warning");
+        Common::flash("<b>Passwords must match</b>", "warning");
         die(header("Location: register.php"));
     }
     if(!empty($email) && !empty($fname) && !empty($lname) && !empty($password)){

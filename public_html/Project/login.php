@@ -35,12 +35,12 @@ if (Common::get($_POST, "submit", false)){
             die(header("Location: " . Common::url_for("home")));
         }
         else{
-            Common::flash(Common::get($result, "message", "Error logging in"));
+            Common::flash(Common::get($result, "message", "<b>Error logging in</b>"));
             die(header("Location: " . Common::url_for("login")));
         }
     }
     else{
-        Common::flash("Email and password must not be empty", "warning");
+        Common::flash("<b>Email and password must not be empty</b>", "warning");
         die(header("Location: " . Common::url_for("login")));
     }
 }

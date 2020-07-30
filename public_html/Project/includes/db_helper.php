@@ -53,10 +53,10 @@ class DBH{
               ":last_name" => $lname , ":password" => $pass]);
             DBH::verify_sql($stmt);
             if($result){
-                return DBH::response(200, "Registration successful");
+                return DBH::response( "Registration successful");
             }
             else{
-                return DBH::response(NULL, 400, "Registration unsuccessful");
+                return DBH::response("Registration unsuccessful");
             }
         }
         catch(Exception $e){
