@@ -54,7 +54,7 @@ if (isset($_POST["buy"])) {
             );
         }
     else{?>
-        <b><?php>echo"Login to add items";?></b>
+        <b><?php echo"Login to add items";?></b>
     <?php
     }
 }
