@@ -106,7 +106,7 @@ if (!empty($_SESSION["shopping_cart"])) {
             <tr>
                 <td colspan="5" align="right">
                     <form method="post" action="">
-                        <button type="submit" class="order">Place Order</button>
+                        <button type="submit" name ="order">Place Order</button>
                     </form>
                 </td>
             </tr>
