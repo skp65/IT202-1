@@ -27,21 +27,25 @@ if (isset($_POST["update"])) {
         $id = $_GET["id"];
         require("common.inc.php");
         try {
-/**            $stmt = getDB()->prepare("SELECT email FROM Users where id = :id  ");
+            $stmt = getDB()->prepare("SELECT email FROM Users where id = :id  ");
             $stmt->execute(array(
                 ":email" => $email,
                 ":id" => $id
-            ));**/
-
+            ));
             if ($cemail != $email) {
-                $query = getDB()->prepare("UPDATE Users set email = :email where email = :cemail");
-                $query->execute(array(":email" => $email,
-                    ":cemail" => $cemail
-                ));
-                echo "<b><div style='text-align: center'>Email Changed!</div></b>";
+                if ($stmt->rowCount()> 0){
+                    echo "<b><div style='text-align: center'>Email exists! Use another Email</div></b>";
+                }
+                else {
+                    $query = getDB()->prepare("UPDATE Users set email = :email where email = :cemail");
+                    $query->execute(array(":email" => $email,
+                        ":cemail" => $cemail
+                    ));
+                    echo "<b><div style='text-align: center'>Email Changed!</div></b>";
+                }
             }
             else{
-                echo "<b><div style='text-align: center'>Email Already exists!</div></b>";
+                echo"<b>Error Changing email.</b>";
             }
         } catch (Exception $e) {
             echo $e->getMessage();
