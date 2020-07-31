@@ -41,7 +41,25 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     }
 }
 ?>
-
+<?php
+if (isset($_POST["buy"])) {
+    if (isset($_SESSION["user"])) {
+        if ($_POST["buy"]) {
+            $user_id = $_SESSION["user"]["id"];
+            $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
+            VALUES(:product_id,:quantity, :user_id, :price)");
+            $stmt->execute([
+                    "product_id"=>$product_id ,"user_id" => $user_id, "quantity" => 1, "price" => $price
+                ]
+            );
+        }
+    } else {
+        ?>
+        <b><?php echo "Login to add items"; ?></b>
+        <?php
+    }
+}
+?>
 <html>
 <body>
 <div>
@@ -91,34 +109,13 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             <input type='hidden' name='code' value=" . $row ["code"] . " />
             <div class='row'>
                 <div class='column'>
-                <img alt='image' src='" . $row ["image"]. "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
-                <div class='column' style='font-weight: bold; padding-right: 5%'>".$row["name"]." </div>
-                <div class='column' style='font-weight: bold; padding-right: 5%'>". $row ["price"] . "</div>
+                <img alt='image' src='" . $row ["image"] . "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
+                <div class='column' style='font-weight: bold; padding-right: 5%'>" . $row["name"] . " </div>
+                <div class='column' style='font-weight: bold; padding-right: 5%'>" . $row ["price"] . "</div>
                 <button type='submit' class='buy' name='buy' style='font-weight: bold; margin-right: 5%'>
                 <a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
-    }
-    ?>
-    <?php
-    if (isset($_POST["buy"])) {
-        if (isset($_SESSION["user"])) {
-            if($_POST["buy"]) {
-                $user_id = $_SESSION["user"]["id"];
-                //$product_id = $row["id"];
-                $price = $row["price"];
-                $stmt = getDB()->prepare("INSERT INTO cart (quantity, user_id, price) 
-            VALUES(:quantity, :user_id, :price)");
-                $stmt->execute([
-                        "user_id" => $user_id, "quantity" => 1, "price" => $price
-                    ]
-                );
-            }
-        } else {
-            ?>
-            <b><?php echo "Login to add items"; ?></b>
-            <?php
-        }
     }
     ?>
     <center>
