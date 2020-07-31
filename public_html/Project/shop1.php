@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once(__DIR__ . "/partials/header.php");
+include("header.php");
 $status = "";
 
 if (isset($_POST['code']) && $_POST['code'] != "") {
