@@ -104,15 +104,19 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         if (isset($_SESSION["user"])) {
             if ($_POST["buy"]) {
                 $user_id = $_SESSION["user"]["id"];
-                $product_id = $row['pid'];
-                $price = $row['price'];
-                $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
-            VALUES(:product_id,:quantity, :user_id, :price)");
-                $stmt->execute([
-                        "product_id"=>$product_id ,"user_id" => $user_id, "quantity" => 1, "price" => $price
-                    ]
-                );
-            }
+                $stm = getDB()->prepare("SELECT * FROM Products WHERE user_id = :user_id");
+                $stm->execute([":user_id" => $user_id]);
+                $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($result as $row1):
+                    $product_id = $row1("product_id");
+                    $quantity = $row1("quantity");
+                    $price = $row1("price");
+                    $stmts = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id) 
+                        VALUES (:user_id, :product_id, :quantity)");
+                    $stmts->execute([":user_id" => $user_id, ":product_id" => $product_id,
+                        "quantity" => $quantity]);
+                    echo "Added to cart";
+                endforeach;
         } else {
             ?>
             <b><?php echo "Login to add items"; ?></b>

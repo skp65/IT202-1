@@ -106,7 +106,7 @@ if (!empty($_SESSION["shopping_cart"])) {
             <tr>
                 <td colspan="5" align="right">
                     <form method="post" action="">
-                        <button type="submit" name ="order">Place Order</button>
+                        <button type="submit" name="order">Place Order</button>
                     </form>
                 </td>
             </tr>
@@ -122,14 +122,19 @@ if (!empty($_SESSION["shopping_cart"])) {
         if (isset($_SESSION['user'])) {
             if ($_POST['order']) {
                 $user_id = $_SESSION["user"]["id"];
-                $product_id = $_POST["pid"];
-                $quantity = $_POST["quantity"];
-                $price = $_POST["price"];
-                $stmt = getDB()->prepare("INSERT INTO Orders (user_id, product_id, quantity, price) 
+                $stmt = getDB()->prepare("SELECT * FROM Cart WHERE user_id = :user_id");
+                $stmt->execute([":user_id" => $user_id]);
+                $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($res as $row):
+                    $product_id = $row("product_id");
+                    $quantity = $row("quantity");
+                    $price = $row("price");
+                    $stmt = getDB()->prepare("INSERT INTO Orders (user_id, product_id, quantity, price) 
                         VALUES (:user_id, :product_id, :quantity, :price)");
-                $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id,
-                    "quantity" => $quantity, ":price" => $price]);
-                echo "Order Placed";
+                    $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id,
+                        "quantity" => $quantity, ":price" => $price]);
+                    echo "Order Placed";
+                endforeach;
             } else {
                 ?>
                 <p style="text-align: center"><?php echo "No order placed!" ?></p><?php ;
