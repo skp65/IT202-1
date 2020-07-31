@@ -40,27 +40,6 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     }
 }
 ?>
-<?php
-if (isset($_POST["buy"])) {
-    if (isset($_SESSION["user"])) {
-        if ($_POST["buy"]) {
-            $user_id = $_SESSION["user"]["id"];
-            $product_id = $_POST['pid'];
-            $price = $_POST['price'];
-            $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
-            VALUES(:product_id,:quantity, :user_id, :price)");
-            $stmt->execute([
-                    "product_id"=>$product_id ,"user_id" => $user_id, "quantity" => 1, "price" => $price
-                ]
-            );
-        }
-    } else {
-        ?>
-        <b><?php echo "Login to add items"; ?></b>
-        <?php
-    }
-}
-?>
 <html>
 <body>
 <div>
@@ -118,6 +97,27 @@ if (isset($_POST["buy"])) {
                 <a href='cart.php'></a> Add to Cart</button>
         </form>
         </div>";
+    }
+    ?>
+    <?php
+    if (isset($_POST["buy"])) {
+        if (isset($_SESSION["user"])) {
+            if ($_POST["buy"]) {
+                $user_id = $_SESSION["user"]["id"];
+                $product_id = $row['pid'];
+                $price = $row['price'];
+                $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
+            VALUES(:product_id,:quantity, :user_id, :price)");
+                $stmt->execute([
+                        "product_id"=>$product_id ,"user_id" => $user_id, "quantity" => 1, "price" => $price
+                    ]
+                );
+            }
+        } else {
+            ?>
+            <b><?php echo "Login to add items"; ?></b>
+            <?php
+        }
     }
     ?>
     <center>
