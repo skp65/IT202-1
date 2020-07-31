@@ -122,9 +122,9 @@ if (!empty($_SESSION["shopping_cart"])) {
         if (isset($_SESSION['user'])) {
             if ($_POST['order']) {
                 $user_id = $_SESSION["user"]["id"];
-                $product_id = $_GET["pid"];
-                $quantity = $product["quantity"];
-                $price = $product["price"];
+                $product_id = $_POST["pid"];
+                $quantity = $_POST["quantity"];
+                $price = $_POST["price"];
                 $stmt = getDB()->prepare("INSERT INTO Orders (user_id, product_id, quantity, price) 
                         VALUES (:user_id, :product_id, :quantity, :price)");
                 $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id,
@@ -137,7 +137,6 @@ if (!empty($_SESSION["shopping_cart"])) {
         }
     }
     ?>
-</div>
 </div>
 
 <div style="clear:both;"></div>
