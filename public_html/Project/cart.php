@@ -126,9 +126,9 @@ if (!empty($_SESSION["shopping_cart"])) {
                 $stmt->execute([":user_id" => $user_id]);
                 $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($res as $row):
-                    $product_id = $row("product_id");
-                    $quantity = $row("quantity");
-                    $price = $row("price");
+                    $product_id = $row["product_id"];
+                    $quantity = $row["quantity"];
+                    $price = $row["price"];
                     $stmt = getDB()->prepare("INSERT INTO Orders (user_id, product_id, quantity, price) 
                         VALUES (:user_id, :product_id, :quantity, :price)");
                     $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id,
