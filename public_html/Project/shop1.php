@@ -3,22 +3,22 @@ session_start();
 include("header.php");
 $status = "";
 
-if (isset($_POST['code']) && $_POST['code'] != "") {
-    $code = $_POST['code'];
-    $stmt = getDB()->prepare("SELECT * FROM Products WHERE code = '$code'");
+if (isset($_POST['pid']) && $_POST['pid'] != "") {
+    $product_id = $_POST['pid'];
+    $stmt = getDB()->prepare("SELECT * FROM Products WHERE product_id = '$product_id'");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
     $product_id = $results['pid'];
     $name = $results['name'];
-    $code = $results['code'];
+    //$code = $results['code'];
     $image = $results['image'];
     $price = $results['price'];
 
     $cartArray = array(
-        $code => array(
+        $product_id => array(
             'pid' => $product_id,
             'name' => $name,
-            'code' => $code,
+            //'code' => $code,
             'image' => $image,
             'price' => $price,
             'quantity' => 1)
@@ -29,7 +29,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         $status = "<div class='box'>Product is added to your cart</div>";
     } else {
         $array_keys = array_keys($_SESSION["shopping_cart"]);
-        if (in_array($code, $array_keys)) {
+        if (in_array($product_id, $array_keys)) {
             $status = "<div class='box' style='color:red;'>Product is already added to your cart</div>";
         } else {
             $_SESSION["shopping_cart"] = array_merge(
@@ -107,7 +107,7 @@ if (isset($_POST["buy"])) {
         echo "<div class='product-wrapper'>
         <br>
         <form method='post' action='' style='text-align: center' >
-            <input type='hidden' name='code' value=" . $row ["code"] . " />
+            <input type='hidden' name='pid' value=" . $row ["pid"] . " />
             <div class='row'>
                 <div class='column'>
                 <img alt='image' src='" . $row ["image"] . "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
