@@ -101,18 +101,14 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     ?>
     <?php
     if (isset($_POST["buy"])) {
-        if (isset($_SESSION["user"])) {
-            if ($_POST["buy"]) {
-                $user_id = $_SESSION["user"]["id"];
-                foreach ($results as $row1):
-                    $product_id = $row1["pid"];
-                    $quantity = $row1["quantity"];
-                    $stmts = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id) 
+    if (isset($_SESSION["user"])) {
+        if ($_POST["buy"]) {
+            $user_id = $_SESSION["user"]["id"];
+            $stmts = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id) 
                         VALUES (:user_id, :product_id, :quantity)");
-                    $stmts->execute([":user_id" => $user_id, ":product_id" => $product_id,
-                        "quantity" => $quantity]);
-                    echo "Added to cart";
-                endforeach;
+            $stmts->execute([":user_id" => $user_id, ":product_id" => $product_id,
+                "quantity" => 1]);
+            echo "Added to cart";
         } else {
             ?>
             <b><?php echo "Login to add items"; ?></b>
