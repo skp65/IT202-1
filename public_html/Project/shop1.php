@@ -9,7 +9,7 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     $stmt = getDB()->prepare("SELECT * FROM Products WHERE code = '$code'");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
-    $produc_tid = $results['pid'];
+    $product_id = $results['pid'];
     $name = $results['name'];
     $code = $results['code'];
     $image = $results['image'];
