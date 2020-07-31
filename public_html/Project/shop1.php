@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("header.php");
+require_once(__DIR__ . "/partials/header.php");
 $status = "";
 
 if (isset($_POST['code']) && $_POST['code'] != "") {
@@ -45,8 +45,8 @@ if (isset($_POST["buy"])) {
     if (isset($_SESSION["user"])) {
         if ($_POST["buy"]) {
             $user_id = $_SESSION["user"]["id"];
-            $product_id = $results['pid'];
-            $price = $results['price'];
+            $product_id = $_GET['pid'];
+            $price = $_GET['price'];
             $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
             VALUES(:product_id,:quantity, :user_id, :price)");
             $stmt->execute([
@@ -108,6 +108,7 @@ if (isset($_POST["buy"])) {
         <br>
         <form method='post' action='' style='text-align: center' >
             <input type='hidden' name='code' value=" . $row ["code"] . " />
+            <input type='hidden' name='pid' value=" . $row ["pid"] . " />
             <div class='row'>
                 <div class='column'>
                 <img alt='image' src='" . $row ["image"] . "' style='width: 150px; height: 150px; border-radius: 8px'/></div></div>
