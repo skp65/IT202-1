@@ -1,10 +1,10 @@
 <?php
-include_once(__DIR__."/partials/header.php");
+include_once(__DIR__ . "/partials/header.php");
 ?>
     <div class="wrapper">
         <form method="POST">
             <div>
-                <label for="email">New Email</label><br>
+                <label for="email">Current Email</label><br>
                 <input type="email" id="cemail" name="cemail" placeholder="Current Email" required/>
             </div>
             <div>
@@ -25,28 +25,29 @@ if (isset($_POST["update"])) {
         $email = $_POST["email"];
         $cemail = $_POST["cemail"];
         $id = $_GET["id"];
-            require ("common.inc.php");
-            try {
-                $stmt = getDB()->prepare("SELECT email FROM Users where id = :id  ");
-                $stmt->execute(array(
-                    ":email" => $email,
-                    ":id" => $id
-                ));
+        require("common.inc.php");
+        try {
+/**            $stmt = getDB()->prepare("SELECT email FROM Users where id = :id  ");
+            $stmt->execute(array(
+                ":email" => $email,
+                ":id" => $id
+            ));**/
 
-                if ($email == $cemail){
-                    echo "<div style='text-align: center'>Email exists! Use another Email</div>";
-                }else {
-                    $query = getDB()->prepare("UPDATE Users set email = :email where email = :cemail" );
-                    $query->execute(array(":email" => $email,
-                                          ":cemail" => $cemail
-                    ));
-                    echo "<div style='text-align: center'>Email Changed! </div>";
-                }
-            } catch (Exception $e) {
-                echo $e->getMessage();
+            if ($cemail != $email) {
+                $query = getDB()->prepare("UPDATE Users set email = :email where email = :cemail");
+                $query->execute(array(":email" => $email,
+                    ":cemail" => $cemail
+                ));
+                echo "<b><div style='text-align: center'>Email Changed!</div></b>";
             }
-        } else {
-            echo "<div style='text-align: center'>Error Changing email </div>";
+            else{
+                echo "<b><div style='text-align: center'>Email Already exists!</div></b>";
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
+    } else {
+        echo "<b><div style='text-align: center'>Error Changing email </div></b>";
+    }
 }
 ?>
