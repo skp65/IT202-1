@@ -46,6 +46,8 @@ if (isset($_POST["buy"])) {
     if (isset($_SESSION["user"])) {
         if ($_POST["buy"]) {
             $user_id = $_SESSION["user"]["id"];
+            $product_id = $_GET['pid'];
+            $price = $_GET[$results['price']];
             $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
             VALUES(:product_id,:quantity, :user_id, :price)");
             $stmt->execute([
