@@ -103,16 +103,18 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     <?php
     if (isset($_POST["buy"])) {
         if (isset($_SESSION["user"])) {
-            $user_id = $_SESSION["user"]["id"];
-            $product_id = $results['id'];
-            $price = $results["price"];
-            $code = $results["code"];
-            $stmt = getDB()->prepare("INSERT INTO cart (product_id, code, quantity, user_id, price) 
+            if($_POST["buy"]) {
+                $user_id = $_SESSION["user"]["id"];
+                $product_id = get($row, "id");
+                $price = get($row, "price");
+                $code = get($row, "code");
+                $stmt = getDB()->prepare("INSERT INTO cart (product_id, code, quantity, user_id, price) 
             VALUES(:pid, :code, :quantity, :user_id, :price)");
-            $stmt->execute([
-                    "pid"=>$product_id ,"code" => $code, "user_id" => $user_id, "quantity" => 1, "price" => $price
-                ]
-            );
+                $stmt->execute([
+                        "pid" => $product_id, "code" => $code, "user_id" => $user_id, "quantity" => 1, "price" => $price
+                    ]
+                );
+            }
         } else {
             ?>
             <b><?php echo "Login to add items"; ?></b>
