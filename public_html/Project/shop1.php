@@ -104,16 +104,27 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
         if (isset($_SESSION["user"])) {
             if ($_POST["buy"]) {
                 $user_id = $_SESSION["user"]["id"];
-                $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id) 
+                $stm = getDB()->prepare("SELECT * FROM Products WHERE user_id = :user_id");
+                $stm->execute([":user_id" => $user_id]);
+                $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($result as $row):
+                    $product_id = $row["pid"];
+                    $quantity = $row["quantity"];
+                    $price = $row["price"];
+                    $stmts = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id) 
                         VALUES (:user_id, :product_id, :quantity)");
-                $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id,
-                    "quantity" => 1]);
-                echo "Added to cart";
-            } else {
-                ?>
-                <b><?php echo "Login to add items"; ?></b>
-                <?php
+                    $stmts->execute([":user_id" => $user_id, ":product_id" => $product_id,
+                        "quantity" => 1]);
+                    echo "Added to cart";
+                endforeach;
+                else{
+                    echo"Not added";
+                }
             }
+        } else {
+            ?>
+            <b><?php echo "Login to add items"; ?></b>
+            <?php
         }
     }
     ?>
@@ -122,12 +133,16 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
             <?php
             if ($page_counter == 0) {
                 echo "<li><a href=?start='0' class='active'>0</a></li>";
-                for ($i = 1; $i < $page; $i++) {
+                for ($i = 1;
+                     $i < $page;
+                     $i++) {
                     echo "<li><a href=?start=$i>" . $i . "</a></li>";
                 }
             } else {
                 echo "<li><a href=?start=$previous>Previous</a></li>";
-                for ($i = 0; $i < $page; $i++) {
+                for ($i = 0;
+                     $i < $page;
+                     $i++) {
                     if ($i == $page_counter) {
                         echo "<li><a href=?start=$i class='active'>" . $i . "</a></li>";
                     } else {
