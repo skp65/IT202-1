@@ -5,6 +5,10 @@ include_once(__DIR__."/partials/header.php");
         <form method="POST">
             <div>
                 <label for="email">New Email</label><br>
+                <input type="email" id="cemail" name="cemail" placeholder="Current Email" required/>
+            </div>
+            <div>
+                <label for="email">New Email</label><br>
                 <input type="email" id="email" name="email" placeholder="New Email" required/>
             </div>
             <div>
@@ -19,6 +23,7 @@ include_once(__DIR__."/partials/header.php");
 if (isset($_POST["update"])) {
     if (isset($_POST["email"])) {
         $email = $_POST["email"];
+        $cemail = $_POST["cemail"];
         $id = $_GET["id"];
             require ("common.inc.php");
             try {
@@ -28,20 +33,14 @@ if (isset($_POST["update"])) {
                     ":id" => $id
                 ));
 
-                if ($stmt->rowCount()>0){
+                if ($email == $cemail){
                     echo "<div style='text-align: center'>Email exists! Use another Email</div>";
-                }else{
-                    $query = getDB()->prepare("UPDATE Users set email = :email where id = :id" );
+                }else {
+                    $query = getDB()->prepare("UPDATE Users set email = :email where email = :cemail" );
                     $query->execute(array(":email" => $email,
-                                          ":id" => $id
+                                          ":cemail" => $cemail
                     ));
                     echo "<div style='text-align: center'>Email Changed! </div>";
-                }
-                $e = $stmt->errorInfo();
-                if ($e[0] != "00000") {
-                    echo var_export($e, true);
-                } else {
-                    echo "<div style='text-align: center'>Email Changed!</div>";
                 }
             } catch (Exception $e) {
                 echo $e->getMessage();
