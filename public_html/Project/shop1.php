@@ -4,9 +4,8 @@ include("header.php");
 $status = "";
 
 if (isset($_POST['code']) && $_POST['code'] != "") {
-    $product_id = $_GET['pid'];
     $code = $_POST['code'];
-    $stmt = getDB()->prepare("SELECT * FROM Products WHERE code = '$code' AND product_id = '$product_id'");
+    $stmt = getDB()->prepare("SELECT * FROM Products WHERE code = '$code'");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
     $product_id = $results['pid'];
@@ -46,7 +45,7 @@ if (isset($_POST["buy"])) {
     if (isset($_SESSION["user"])) {
         if ($_POST["buy"]) {
             $user_id = $_SESSION["user"]["id"];
-            $product_id = $_GET['pid'];
+            $product_id = $results['pid'];
             $price = $results['price'];
             $stmt = getDB()->prepare("INSERT INTO cart (product_id, quantity, user_id, price) 
             VALUES(:product_id,:quantity, :user_id, :price)");
