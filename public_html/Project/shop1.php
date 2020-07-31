@@ -104,9 +104,10 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
     if (isset($_POST["buy"])) {
         if (isset($_SESSION["user"])) {
             $user_id = $_SESSION["user"]["id"];
-            $price = $row["price"];
-            $code = $row["code"];
-            $stmt = getDB()->prepare("INSERT INTO cart (product_id, code,quantity, user_id, price) 
+            $product_id = $results['id'];
+            $price = $results["price"];
+            $code = $results["code"];
+            $stmt = getDB()->prepare("INSERT INTO cart (product_id, code, quantity, user_id, price) 
             VALUES(:pid, :code, :quantity, :user_id, :price)");
             $stmt->execute([
                     "pid"=>$product_id ,"code" => $code, "user_id" => $user_id, "quantity" => 1, "price" => $price
