@@ -107,11 +107,10 @@ if (isset($_POST['code']) && $_POST['code'] != "") {
                 $user_id = $_SESSION["user"]["id"];
                 //$product_id = $row["id"];
                 $price = $row["price"];
-                $code = $row["code"];
-                $stmt = getDB()->prepare("INSERT INTO cart (code, quantity, user_id, price) 
-            VALUES( :code, :quantity, :user_id, :price)");
+                $stmt = getDB()->prepare("INSERT INTO cart (quantity, user_id, price) 
+            VALUES(:quantity, :user_id, :price)");
                 $stmt->execute([
-                        "code" => $code, "user_id" => $user_id, "quantity" => 1, "price" => $price
+                        "user_id" => $user_id, "quantity" => 1, "price" => $price
                     ]
                 );
             }
