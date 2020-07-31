@@ -5,7 +5,7 @@ $status = "";
 
 if (isset($_POST['pid']) && $_POST['pid'] != "") {
     $product_id = $_POST['pid'];
-    $stmt = getDB()->prepare("SELECT * FROM Products WHERE product_id = '$product_id'");
+    $stmt = getDB()->prepare("SELECT * FROM Products WHERE id = '$product_id'");
     $stmt->execute();
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
     $product_id = $results['pid'];
