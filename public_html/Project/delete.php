@@ -53,9 +53,8 @@ if (isset($_POST["delete"])) {
                 echo var_export($e, true);
             }
             else{
-                echo var_export($result, true);
                 if ($result){
-                    echo "Successfully interacted with product: " . $name;
+                    echo "Successfully deleted " . $name;
                 }
                 else{
                     echo "Error interacting record";
