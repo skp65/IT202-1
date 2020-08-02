@@ -12,9 +12,8 @@ if (Common::is_logged_in()) {
 $id = $_SESSION["user"]["id"];
 $stmt = getDB()->prepare("SELECT * FROM Users where id = '$id'");
 $stmt->execute();
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-while ($result) {
+while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
     ?>
     <div>Your Profile</div>
     <table>
